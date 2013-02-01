@@ -7,6 +7,11 @@ public class KbpConstants {
 
 	public static final String processedDocPath = rootPath + "09nwa/";;
 
+	// Location of the corpus files containing only sentences with locations
+	// and organizations/people.
+	public static final String truncatedRootPath = "data/";
+	public static final String truncatedDocPath = truncatedRootPath + "corpus/";;
+
 	// knowledge base
 	public static final String kbPath = KbpConstants.rootPath + "TAC09KBPEvalRefKB/data/";
 	public static final int kbFileStart = 1;

@@ -28,12 +28,12 @@ public class SFConstants {
 	public static final String[] dataTypes = {META,TEXT, TOKENS, TOKEN_SPANS, STANFORDPOS, CJ, DEPS_STANFORD_CC_PROCESSED, STANFORDNER};
 
 	// slot filling queries
-	public static final String queryFile = KbpConstants.rootPath + "sf/tac_2010_kbp_evaluation_slot_filling_queries.xml";
+	public static final String queryFile = KbpConstants.truncatedRootPath + "sf/tac_2010_kbp_evaluation_slot_filling_queries.xml";
 
 	// slot filling output file
-	public static final String outFile = KbpConstants.rootPath + "sf/sf.pred";
+	public static final String outFile = KbpConstants.truncatedRootPath + "sf/sf.pred";
 
-	public static final String labelFile = KbpConstants.rootPath + "sf/sf.gold";
+	public static final String labelFile = KbpConstants.truncatedRootPath + "sf/sf.gold";
 
 
 }

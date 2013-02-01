@@ -22,14 +22,35 @@ import tackbp.KbpConstants;
  * 
  */
 public class ProcessedCorpus implements Iterator<Map<String, String>>, AutoCloseable {
+	/**
+	 * Creates a ProcessedCorpus for the complete dataset.
+	 */
 	public ProcessedCorpus() throws Exception {
-		dataTypes = SFConstants.dataTypes;
-		init();
+		this( KbpConstants.processedDocPath );
 	}
 
-	public ProcessedCorpus(String[] dts) throws Exception {
+	/**
+	 * Creates a ProcessedCorpus for the dataset at the given path,
+	 * that contains all data types.
+	 *
+	 * @param path a directory, ending with a slash, that contains
+	 *             the datafiles.
+	 */
+	public ProcessedCorpus( String path ) throws Exception {
+		this( path, SFConstants.dataTypes );
+	}
+
+	/**
+	 * Creates a ProcessedCorpus for the dataset at the given path,
+	 * containing only the given data types.
+	 *
+	 * @param path a directory, ending with a slash, that contains
+	 *             the datafiles.
+	 * @param dts a list of data type names.
+	 */
+	public ProcessedCorpus( String path, String[] dts ) throws Exception {
 		dataTypes = dts;
-		init();
+		init( path );
 	}
 
 	protected String[] dataTypes = null;
@@ -41,7 +62,7 @@ public class ProcessedCorpus implements Iterator<Map<String, String>>, AutoClose
 	// caching the line when hasNext is called.
 	protected String cache = null;
 
-	public void init() throws Exception {
+	private void init( String path ) throws Exception {
 		dataReaders = new HashMap<String, BufferedReader>();
 		cur = new HashMap<String, String>();
 		if (dataTypes.length == 0) {
@@ -49,8 +70,7 @@ public class ProcessedCorpus implements Iterator<Map<String, String>>, AutoClose
 		}
 		for (String dataType : dataTypes) {
 			try {
-				String filename = KbpConstants.processedDocPath
-						+ SFConstants.prefix + "." + dataType;
+				String filename = path + SFConstants.prefix + "." + dataType;
 				if (new File(filename).exists()) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(

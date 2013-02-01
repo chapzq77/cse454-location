@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Map;
 
+import tackbp.KbpConstants;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.SFEntity.SingleAnswer;
@@ -58,10 +59,7 @@ public class Assignment1 {
 			// initialize the corpus
 			// FIXME replace the list by a generic class with an input of slot
 			// name and an output of all the relevant files from the answer file
-			ProcessedCorpus corpus;
-
-			try {
-				corpus = new ProcessedCorpus();
+			try( ProcessedCorpus corpus = new ProcessedCorpus( KbpConstants.truncatedDocPath ) ) {
 				Map<String, String> annotations = null;
 				int c = 0;
 				while (corpus.hasNext()) {
