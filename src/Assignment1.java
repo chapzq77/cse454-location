@@ -7,8 +7,10 @@ import sf.SFEntity;
 import sf.SFEntity.SingleAnswer;
 import sf.eval.SFScore;
 import sf.filler.Filler;
-import sf.filler.regex.RegexPerDateOfBirthFiller;
 import sf.filler.regex.RegexPerCountryOfBirthFiller;
+import sf.filler.regex.RegexPerCountryOfDeathFiller;
+import sf.filler.regex.RegexPerStateOrProvinceOfDeathFiller;
+import sf.filler.regex.RegexPerCityOfDeathFiller;
 import sf.retriever.ProcessedCorpus;
 import util.FileUtil;
 
@@ -52,8 +54,10 @@ public class Assignment1 {
 			queryReader.readFrom(SFConstants.queryFile);
 
 			// initialize the filler
-			//Filler filler = new RegexPerDateOfBirthFiller();
-			Filler filler = new RegexPerCountryOfBirthFiller();
+			//Filler filler = new RegexPerCountryOfBirthFiller();
+			//Filler filler = new RegexPerCountryOfDeathFiller();
+			//Filler filler = new RegexPerStateOrProvinceOfDeathFiller();
+			Filler filler = new RegexPerCityOfDeathFiller();
 
 			StringBuilder answersString = new StringBuilder();
 			// initialize the corpus

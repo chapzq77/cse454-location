@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.filler.Filler;
@@ -15,8 +18,10 @@ import tackbp.KbEntity.EntityType;
  *
  */
 public class RegexPerStateOrProvinceOfDeathFiller extends Filler {
-
-	private String STATES = "Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|District of Columbia|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming";
+	private static final String DATA_DIR = "data/";
+	//private static final String COUNTRIES_FILE = DATA_DIR + "countries.txt";
+	private static final String STATES_FILE = DATA_DIR + "states.txt";
+	private static final String PROVINCES_FILE = DATA_DIR + "provinces.txt";
 
 	public RegexPerStateOrProvinceOfDeathFiller() {
 		slotName = "per:stateorprovince_of_death";
@@ -30,41 +35,102 @@ public class RegexPerStateOrProvinceOfDeathFiller extends Filler {
 			return;
 		}
 
-		// check if the entity is mentioned.
+		// check if the person's last name is mentioned.
 		String tokens = annotations.get(SFConstants.TOKENS);
-		if (!tokens.contains(mention.mentionString)) {
+		String[] names = mention.mentionString.split(" ");
+		String lastName = names[names.length - 1];
+		if (!tokens.contains(lastName)) {
 			return;
+		}
+		
+		// check if a location is mentioned.
+		String[] namedEnts = annotations.get(SFConstants.STANFORDNER).split("\\s+"); // splitting by \t wasnt working...
+		int locStartIdx = -1;
+		int locEndIdx = -1;
+		for (int i = 0; i < namedEnts.length; i++) {
+			if (namedEnts[i].equals("LOCATION")) {
+				locStartIdx = i;
+				locEndIdx = i;
+				while (++i < namedEnts.length && namedEnts[i].equals("LOCATION")) { // Ex, "United States" -> "LOCATION LOCATION"
+					locEndIdx++;
+				}
+				break;
+			}
+		}
+		if (locStartIdx == -1) {
+			return;
+		}
+		
+		// Extract location from tokens
+		String location = "";
+		String[] tokensArr = tokens.split("\\s+");
+		for (int i = locStartIdx; i <= locEndIdx; i++) {
+			if (location.length() > 0) {
+				location += " ";
+			}
+			location += tokensArr[i];
 		}
 
 		// get the filename of this sentence.
 		String[] meta = annotations.get(SFConstants.META).split("\t");
 		String filename = meta[2];
-
-		String[] names = mention.mentionString.split(" ");
-		String first = names[0];
-		String last = null;
-		if (names.length > 1) {
-			last = names[names.length - 1];
-		} else {
-			last = first;
-		}
-
-		// check for us states
-		Pattern patternLocation = Pattern.compile("(" + STATES + ")");
-
-		Pattern patternDied = Pattern.compile("died|attacked|killed|murdered");
-
-		// todo: reference parrot sketch
-		if(!patternDied.matcher(tokens).find())
+		
+		// check if death is mentioned
+		Pattern deathPat = Pattern.compile("death|died|dead |passed away|assassinated|killed|murdered");
+		if(!deathPat.matcher(tokens).find()) {
 			return;
-
-		Matcher matcher = patternLocation.matcher(tokens);
-		if(matcher.find()) {
-			SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
-			ans.answer = matcher.group(1).trim();
-			ans.doc = filename;
-			mention.answers.put(slotName, ans);
 		}
+		
+		// read in list of countries
+		// String countries = "";
+		// try {
+			// String line;
+			// BufferedReader br = new BufferedReader(new FileReader(COUNTRIES_FILE));
+			// while ((line = br.readLine()) != null) {
+				// if (countries.length() > 0) {
+					// countries += "|";
+				// }
+				// countries += Pattern.quote(line.toLowerCase());
+			// }
+		// } catch (Exception e) {
+			// throw new RuntimeException(e);
+		// }
+		
+		// read in list of states/provinces
+		String stateProvs = "";
+		try {
+			String line;
+			BufferedReader br = new BufferedReader(new FileReader(STATES_FILE));
+			while ((line = br.readLine()) != null) {
+				if (stateProvs.length() > 0) {
+					stateProvs += "|";
+				}
+				stateProvs += Pattern.quote(line.toLowerCase());
+			}
+			br = new BufferedReader(new FileReader(PROVINCES_FILE));
+			while ((line = br.readLine()) != null) {
+				stateProvs += "|";
+				stateProvs += Pattern.quote(line.toLowerCase());
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+		// check if location is a country
+		// if (!countries.contains(location.toLowerCase())) {
+			// return;
+		// }
+		
+		// check if location is a state/province
+		if (!stateProvs.contains(location.toLowerCase())) {
+			return;
+		}
+		
+		// sentence contains last name, death, and a state/province. winner
+		SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
+		ans.answer = location;
+		ans.doc = filename;
+		mention.answers.put(slotName, ans);
 	}
 	
 }
