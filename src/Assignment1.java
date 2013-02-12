@@ -7,10 +7,17 @@ import sf.SFEntity;
 import sf.SFEntity.SingleAnswer;
 import sf.eval.SFScore;
 import sf.filler.Filler;
+
 import sf.filler.regex.RegexPerCountryOfBirthFiller;
+import sf.filler.regex.RegexPerStateOrProvinceOfBirthFiller;
+import sf.filler.regex.RegexPerCityOfBirthFiller;
 import sf.filler.regex.RegexPerCountryOfDeathFiller;
 import sf.filler.regex.RegexPerStateOrProvinceOfDeathFiller;
 import sf.filler.regex.RegexPerCityOfDeathFiller;
+import sf.filler.regex.RegexOrgCountryOfHeadquartersFiller;
+import sf.filler.regex.RegexOrgStateOrProvinceOfHeadquartersFiller;
+import sf.filler.regex.RegexOrgCityOfHeadquartersFiller;
+
 import sf.retriever.ProcessedCorpus;
 import util.FileUtil;
 
@@ -55,9 +62,14 @@ public class Assignment1 {
 
 			// initialize the filler
 			//Filler filler = new RegexPerCountryOfBirthFiller();
+			//Filler filler = new RegexPerStateOrProvinceOfBirthFiller();
+			//Filler filler = new RegexPerCityOfBirthFiller();
 			//Filler filler = new RegexPerCountryOfDeathFiller();
 			//Filler filler = new RegexPerStateOrProvinceOfDeathFiller();
-			Filler filler = new RegexPerCityOfDeathFiller();
+			//Filler filler = new RegexPerCityOfDeathFiller();
+			//Filler filler = new RegexOrgCountryOfHeadquartersFiller();
+			//Filler filler = new RegexOrgStateOrProvinceOfHeadquartersFiller();
+			Filler filler = new RegexOrgCityOfHeadquartersFiller();
 
 			StringBuilder answersString = new StringBuilder();
 			// initialize the corpus

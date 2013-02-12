@@ -34,6 +34,13 @@ public class SFConstants {
 	public static final String outFile = KbpConstants.truncatedRootPath + "sf/sf.pred";
 
 	public static final String labelFile = KbpConstants.truncatedRootPath + "sf/sf.gold";
-
-
+	
+	public static final String DATA_DIR = "data/";
+	public static final String COUNTRIES_FILE = DATA_DIR + "countries.txt";
+	public static final String STATES_FILE = DATA_DIR + "states.txt";
+	public static final String PROVINCES_FILE = DATA_DIR + "provinces.txt";
+	
+	public static final String BIRTH_REGEX = "born|originally from";
+	public static final String DEATH_REGEX = "death|died|dead |passed away|assassinated|killed|murdered";
+	public static final String HQ_REGEX = "headquarter|located|based";
 }
