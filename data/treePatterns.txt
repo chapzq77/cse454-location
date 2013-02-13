@@ -1,0 +1,41 @@
+// matches adjectives in front of nouns
+// *Malaysian* national news agency Bernama
+JJ >> S >, NP [ $ NNP | $ NNPS ] !>> VP
+
+// parenthetical information
+// Cheryl Danson , *chair England Netball* ,
+NP $++ /,/ $-- /,/
+
+// finds noun phrases following organization noun phrases
+// Rex Systems , Inc. , of *Chippewa Falls*
+NP > (PP  $- ( NP <# ( NNP < /(Corporation|Company|Inc|Enterprise)/ )))
+
+// finds pairs of nouns separated by a comma
+// in *Pensacola , Fla.*
+NP < (NP $. /,/ !$, /,/) < (NP $, /,/ !$. /,/) $, IN
+
+// proper nouns after "from"
+// ambassador from neighboring *Venezuela*
+NNP > (NP $, (IN <<: /^from$/))
+
+// possesive proper nouns
+// owned by *Spain* 's Grupo Santander
+NNP $. POS >, (NP < NNP)
+
+
+// for these, extract the LOCATION NNPs (proper nouns)
+
+// born in
+NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /born/))))
+
+// died in
+NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /died/)))
+
+// lived in
+NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /lived/))))
+
+// residences (grew up in)
+NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /grew/))))
+
+// headquarters
+NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP)
