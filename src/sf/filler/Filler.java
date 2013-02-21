@@ -1,6 +1,10 @@
 package sf.filler;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +35,7 @@ public abstract class Filler {
 	protected boolean containsName(SFEntity mention, String tokens) {
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
-		return tokens.contains(lastName);
+		return mentionsRegex(tokens, "(?i)\\b" + lastName + "\\b");
 	}
 	
 	protected boolean containsOrg(SFEntity mention, String tokens) {
@@ -81,15 +85,12 @@ public abstract class Filler {
 	}
 	
 	protected boolean isCountry(String location) {
-		String countries = "";
+		Set<String> countries = new HashSet<String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.COUNTRIES_FILE));
 			while ((line = br.readLine()) != null) {
-				if (countries.length() > 0) {
-					countries += "|";
-				}
-				countries += Pattern.quote(line.toLowerCase());
+				countries.add(line.toLowerCase());
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -98,25 +99,66 @@ public abstract class Filler {
 	}
 	
 	protected boolean isStateProv(String location) {
-		String stateProvs = "";
+		Set<String> stateProvs = new HashSet<String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATES_FILE));
 			while ((line = br.readLine()) != null) {
-				if (stateProvs.length() > 0) {
-					stateProvs += "|";
-				}
-				stateProvs += Pattern.quote(line.toLowerCase());
+				stateProvs.add(line.toLowerCase());
 			}
 			br = new BufferedReader(new FileReader(SFConstants.PROVINCES_FILE));
 			while ((line = br.readLine()) != null) {
-				stateProvs += "|";
-				stateProvs += Pattern.quote(line.toLowerCase());
+				stateProvs.add(line.toLowerCase());
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return stateProvs.contains(location);
 	}
-
+	
+	// adds answer/count to ongoing list.
+	// TODO: can probably improve on this design.
+	protected void addAnswer(SFEntity mention, Map<String, String> annotations, String location) {
+		
+		// at least one answer exists for this slot
+		if (mention.answers.containsKey(slotName)) {
+			
+			// this Answer is already in list, increment count and add the doc
+			boolean found = false;
+			for (SFEntity.SingleAnswer ans : mention.answers.get(slotName)) {
+				if (ans.answer.equals(location)) {
+					ans.doc.add(getFilename(annotations));
+					ans.count++;
+					found = true;
+					break;
+				}
+			}
+			
+			// this Answer is not in list, add it with a count of 1
+			if (!found) {
+				SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
+				ans.answer = location;
+				ans.doc = new HashSet<String>();
+				ans.doc.add(getFilename(annotations));
+				ans.count = 1;
+				mention.answers.get(slotName).add(ans);
+			}
+			
+		// no answers exist for this slot yet
+		} else {
+			// create SingleAnswer
+			SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
+			ans.answer = location;
+			ans.doc = new HashSet<String>();
+			ans.doc.add(getFilename(annotations));
+			ans.count = 1;
+			
+			// create List of Answers containing SingleAnswer
+			List<SFEntity.SingleAnswer> answers = new ArrayList<SFEntity.SingleAnswer>();
+			answers.add(ans);
+			
+			// put in Map
+			mention.answers.put(slotName, answers);
+		}
+	}
 }

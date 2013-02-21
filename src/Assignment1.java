@@ -102,12 +102,15 @@ public class Assignment1 {
 						// information is learnable for this slot. Or, 
 						// a single docid which supports the slot value
 						// Column 5: a slot value
-						SingleAnswer ans = (SingleAnswer) query.answers
-								.get(filler.slotName);
+						SingleAnswer ans = query.answers.get(filler.slotName).get(0);
+						for (SingleAnswer a : query.answers.get(filler.slotName)) {
+							if (a.count > ans.count) // choose answer with highest count
+								ans = a;
+						}
 						answersString.append(String.format(
 								"%s\t%s\t%s\t%s\t%s\n", query.queryId,
 								filler.slotName, filler
-										.getClass().getName(), ans.doc,
+										.getClass().getName(), ans.doc.toArray()[0],
 								ans.answer));
 					} else {
 						answersString.append(String.format(

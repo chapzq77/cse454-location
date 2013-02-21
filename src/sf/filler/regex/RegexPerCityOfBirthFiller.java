@@ -42,10 +42,8 @@ public class RegexPerCityOfBirthFiller extends Filler {
 		if (isCountry(location.toLowerCase()) || isStateProv(location.toLowerCase()))
 			return;
 		
-		SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
-		ans.answer = location;
-		ans.doc = getFilename(annotations);
-		mention.answers.put(slotName, ans);
+		// add to answers
+		addAnswer(mention, annotations, location);
 	}
 	
 }

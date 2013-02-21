@@ -43,10 +43,8 @@ public class RegexOrgStateOrProvinceOfHeadquartersFiller extends Filler {
 			return;
 		}
 		
-		SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
-		ans.answer = location;
-		ans.doc = getFilename(annotations);
-		mention.answers.put(slotName, ans);
+		// add to answers
+		addAnswer(mention, annotations, location);
 	}
 	
 }

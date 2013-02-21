@@ -20,11 +20,11 @@ SF218	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	
 SF219	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF220	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF221	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
-SF222	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	LTW_ENG_20070106.0068.LDC2009T13	Agoura Hills
+SF222	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	LTW_ENG_20070320.0168.LDC2009T13	Fremont
 SF223	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF224	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF225	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	APW_ENG_20070413.1297.LDC2009T13	U.S.
-SF226	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	AFP_ENG_20070830.0299.LDC2009T13	Kansas City
+SF226	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	LTW_ENG_20070106.0068.LDC2009T13	Irvine
 SF227	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF228	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	AFP_ENG_20070523.0369.LDC2009T13	Colorado Springs
 SF229	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
@@ -45,7 +45,7 @@ SF243	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	
 SF244	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF245	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF246	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
-SF247	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	APW_ENG_20070207.0513.LDC2009T13	Kuala Lumpur
+SF247	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	XIN_ENG_20070214.0111.LDC2009T13	Dubai
 SF248	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF249	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF250	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
@@ -54,7 +54,7 @@ SF252	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	
 SF253	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF254	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF255	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
-SF256	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	APW_ENG_20080519.0488.LDC2009T13	Glenview
+SF256	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	APW_ENG_20080519.0269.LDC2009T13	Glenview
 SF257	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	APW_ENG_20070413.1500.LDC2009T13	Weirton
 SF258	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF259	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import tackbp.KbEntity;
 import el.EntityMention;
@@ -27,7 +28,9 @@ public class SFEntity extends EntityMention {
 	// An <code>Answer</code> object should be either
 	// list-valued(<code>ListAnswer</code>)
 	// or single-valued (<code>SingleAnswer</code>).
-	public Map<String, Answer> answers = new HashMap<String, Answer>();
+	
+	// TODO: this is specific to SingleAnswer answers right now
+	public Map<String, List<SingleAnswer>> answers = new HashMap<String, List<SingleAnswer>>();
 
 	public static abstract class Answer {
 
@@ -49,7 +52,8 @@ public class SFEntity extends EntityMention {
 		// answer
 		public String answer = null;
 		// The document from which the answer is extracted.
-		public String doc = null;
+		public Set<String> doc = null;
+		public int count = 0;
 		@Override
 		public String toString() {
 			return answer;
