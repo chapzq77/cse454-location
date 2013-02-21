@@ -45,7 +45,7 @@ SF243	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	
 SF244	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF245	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF246	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
-SF247	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	XIN_ENG_20070214.0111.LDC2009T13	Dubai
+SF247	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	XIN_ENG_20071008.0176.LDC2009T13	Malaysian
 SF248	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF249	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF250	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
@@ -60,7 +60,7 @@ SF258	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	
 SF259	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF260	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF261	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
-SF262	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
+SF262	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	CNA_ENG_20080523.0047.LDC2009T13	Kaohsiung City
 SF263	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF264	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	
 SF265	org:city_of_headquarters	sf.filler.regex.RegexOrgCityOfHeadquartersFiller	NIL	

@@ -35,43 +35,32 @@ public abstract class Filler {
 	protected boolean containsName(SFEntity mention, String tokens) {
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
-		return mentionsRegex(tokens, "(?i)\\b" + lastName + "\\b");
+		// do case-insensitive match only if name is long
+		// (otherwise White and white, Rose and rose, etc match)
+		String regex = (lastName.length() > 5 ? "(?i)" : "") + "\\b" + lastName + "\\b";
+		return mentionsRegex(tokens, regex);
 	}
 	
 	protected boolean containsOrg(SFEntity mention, String tokens) {
 		return tokens.contains(mention.mentionString);
 	}
 	
-	protected String extractLocation(Map<String, String> annotations, String tokens) {
-		// check if a location is mentioned.
+	protected List<String> extractLocations(Map<String, String> annotations, String tokens) {
+		List<String> locs = new ArrayList<String>();
 		String[] namedEnts = annotations.get(SFConstants.STANFORDNER).split("\\s+"); // splitting by \t wasnt working...
-		int locStartIdx = -1;
-		int locEndIdx = -1;
+		String[] tokensArr = tokens.split("\\s+");
+		
 		for (int i = 0; i < namedEnts.length; i++) {
 			if (namedEnts[i].equals("LOCATION")) {
-				locStartIdx = i;
-				locEndIdx = i;
+				String location = tokensArr[i];
 				while (++i < namedEnts.length && namedEnts[i].equals("LOCATION")) { // Ex, "United States" -> "LOCATION LOCATION"
-					locEndIdx++;
+					location += " " + tokensArr[i];
 				}
-				break;
+				locs.add(location);
 			}
 		}
-		if (locStartIdx == -1) {
-			return null;
-		}
 		
-		// Extract location from tokens
-		String location = "";
-		String[] tokensArr = tokens.split("\\s+");
-		for (int i = locStartIdx; i <= locEndIdx; i++) {
-			if (location.length() > 0) {
-				location += " ";
-			}
-			location += tokensArr[i];
-		}
-		
-		return location;
+		return locs;
 	}
 	
 	protected String getFilename(Map<String, String> annotations) {

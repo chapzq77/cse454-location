@@ -1,6 +1,7 @@
 package sf.filler.regex;
 
 import java.util.Map;
+import java.util.List;
 
 import sf.SFConstants;
 import sf.SFEntity;
@@ -29,22 +30,20 @@ public class RegexOrgCountryOfHeadquartersFiller extends Filler {
 		if (!containsOrg(mention, tokens))
 			return;
 			
-		// find location, if it exists, in tokens
-		String location = extractLocation(annotations, tokens);
-		if (location == null)
+		// find locations, if any exist, in tokens
+		List<String> locations = extractLocations(annotations, tokens);
+		if (locations.size() == 0)
 			return;
 		
 		// check if headquarters is mentioned
 		if (!mentionsRegex(tokens, SFConstants.HQ_REGEX))
 			return;
 		
-		// check if location is a country
-		if (!isCountry(location.toLowerCase())) {
-			return;
+		// Add country locations to answers
+		for (String location : locations) {
+			if (isCountry(location.toLowerCase()))
+				addAnswer(mention, annotations, location);
 		}
-		
-		// add to answers
-		addAnswer(mention, annotations, location);
 	}
 	
 }
