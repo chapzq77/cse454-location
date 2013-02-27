@@ -28,6 +28,7 @@ Bosnia and Herzegovina
 Botswana
 Bouvet Island
 Brazil
+Britain
 British Indian Ocean Territory
 Brunei
 Bulgaria
@@ -44,7 +45,8 @@ Chad
 Chile
 China
 Christmas Island
-Cocos (Keeling) Islands
+Cocos Islands
+Keeling Islands
 Colombia
 Comoros
 Congo
@@ -67,7 +69,8 @@ Equatorial Guinea
 Eritrea
 Estonia
 Ethiopia
-Falkland Islands (Malvinas)
+Falkland Islands
+Malvinas
 Faroe Islands
 Fiji
 Finland
@@ -81,6 +84,7 @@ Georgia
 Germany
 Ghana
 Gibraltar
+Great Britain
 Greece
 Greenland
 Grenada
@@ -93,7 +97,8 @@ Guinea-Bissau
 Guyana
 Haiti
 Heard Island and Mcdonald Islands
-Holy See (Vatican City State)
+Holy See
+Vatican City
 Honduras
 Hong Kong
 Hungary
@@ -191,6 +196,7 @@ Samoa
 San Marino
 Sao Tome and Principe
 Saudi Arabia
+Scotland
 Senegal
 Serbia
 Seychelles
@@ -228,8 +234,17 @@ Tuvalu
 Uganda
 Ukraine
 United Arab Emirates
+UAE
+U.A.E.
 United Kingdom
+UK
+U.K.
 United States
+US
+U.S.
+United States of America
+USA
+U.S.A.
 Uruguay
 Uzbekistan
 Vanuatu
@@ -237,6 +252,7 @@ Vatican City
 Venezuela
 Viet Nam
 Virgin Islands
+Wales
 Wallis and Futuna
 Western Sahara
 Yemen
