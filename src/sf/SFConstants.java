@@ -43,4 +43,8 @@ public class SFConstants {
 	public static final String BIRTH_REGEX = "(?i)born|originally from";
 	public static final String DEATH_REGEX = "(?i)death|died|dead |passed away|assassinated|killed|murdered";
 	public static final String HQ_REGEX = "(?i)headquarter|located|based";
+	
+	public static final String[] slotNames = {"per:country_of_birth","per:stateorprovince_of_birth","per:city_of_birth",
+											"per:country_of_death","per:stateorprovince_of_death","per:city_of_death",
+											"org:country_of_headquarters","org:stateorprovince_of_headquarters","org:city_of_headquarters"};
 }

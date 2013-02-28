@@ -107,7 +107,7 @@ public abstract class Filler {
 	
 	// adds answer/count to ongoing list.
 	// TODO: can probably improve on this design.
-	protected void addAnswer(SFEntity mention, Map<String, String> annotations, String location) {
+	protected void addAnswer(SFEntity mention, Map<String, String> annotations, String location, String slotName) {
 		
 		// at least one answer exists for this slot
 		if (mention.answers.containsKey(slotName)) {
@@ -149,5 +149,9 @@ public abstract class Filler {
 			// put in Map
 			mention.answers.put(slotName, answers);
 		}
+	}
+	
+	protected void addAnswer(SFEntity mention, Map<String, String> annotations, String location) {
+		addAnswer(mention, annotations, location, this.slotName);
 	}
 }
