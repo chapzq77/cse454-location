@@ -9,15 +9,6 @@ import sf.eval.SFScore;
 import sf.filler.Filler;
 
 import sf.filler.regex.RegexLocationFiller;
-import sf.filler.regex.RegexPerCountryOfBirthFiller;
-import sf.filler.regex.RegexPerStateOrProvinceOfBirthFiller;
-import sf.filler.regex.RegexPerCityOfBirthFiller;
-import sf.filler.regex.RegexPerCountryOfDeathFiller;
-import sf.filler.regex.RegexPerStateOrProvinceOfDeathFiller;
-import sf.filler.regex.RegexPerCityOfDeathFiller;
-import sf.filler.regex.RegexOrgCountryOfHeadquartersFiller;
-import sf.filler.regex.RegexOrgStateOrProvinceOfHeadquartersFiller;
-import sf.filler.regex.RegexOrgCityOfHeadquartersFiller;
 
 import sf.retriever.ProcessedCorpus;
 import util.FileUtil;
@@ -63,15 +54,6 @@ public class Assignment1 {
 
 			// initialize the filler
 			Filler filler = new RegexLocationFiller();
-			//Filler filler = new RegexPerCountryOfBirthFiller();
-			//Filler filler = new RegexPerStateOrProvinceOfBirthFiller();
-			//Filler filler = new RegexPerCityOfBirthFiller();
-			//Filler filler = new RegexPerCountryOfDeathFiller();
-			//Filler filler = new RegexPerStateOrProvinceOfDeathFiller();
-			//Filler filler = new RegexPerCityOfDeathFiller();
-			//Filler filler = new RegexOrgCountryOfHeadquartersFiller();
-			//Filler filler = new RegexOrgStateOrProvinceOfHeadquartersFiller();
-			//Filler filler = new RegexOrgCityOfHeadquartersFiller();
 
 			StringBuilder answersString = new StringBuilder();
 			// initialize the corpus
@@ -93,39 +75,10 @@ public class Assignment1 {
 						filler.predict(query, annotations);
 					}
 				}
-				if (filler.slotName.equals("regex_all_loc")) { // using RegexLocationFiller
-					for (String slotName : SFConstants.slotNames) {
-						// for each query, print out the answer, or NIL if nothing is found
-						for (SFEntity query : queryReader.queryList) {
-							if (query.answers.containsKey(slotName)) {
-								// The output file format
-								// Column 1: query id
-								// Column 2: the slot name
-								// Column 3: a unique run id for the submission
-								// Column 4: NIL, if the system believes no
-								// information is learnable for this slot. Or, 
-								// a single docid which supports the slot value
-								// Column 5: a slot value
-								SingleAnswer ans = query.answers.get(slotName).get(0);
-								for (SingleAnswer a : query.answers.get(slotName)) {
-									if (a.count > ans.count) // choose answer with highest count
-										ans = a;
-								}
-								answersString.append(String.format(
-										"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-										slotName, filler.getClass().getName(), ans.doc.toArray()[0],
-										ans.answer));
-							} else {
-								answersString.append(String.format(
-										"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-										slotName, filler.getClass().getName(), "NIL", ""));
-							}
-						}
-					}
-				} else {
+				for (String slotName : SFConstants.slotNames) {
 					// for each query, print out the answer, or NIL if nothing is found
 					for (SFEntity query : queryReader.queryList) {
-						if (query.answers.containsKey(filler.slotName)) {
+						if (query.answers.containsKey(slotName)) {
 							// The output file format
 							// Column 1: query id
 							// Column 2: the slot name
@@ -134,22 +87,51 @@ public class Assignment1 {
 							// information is learnable for this slot. Or, 
 							// a single docid which supports the slot value
 							// Column 5: a slot value
-							SingleAnswer ans = query.answers.get(filler.slotName).get(0);
-							for (SingleAnswer a : query.answers.get(filler.slotName)) {
+							SingleAnswer ans = query.answers.get(slotName).get(0);
+							for (SingleAnswer a : query.answers.get(slotName)) {
 								if (a.count > ans.count) // choose answer with highest count
 									ans = a;
 							}
 							answersString.append(String.format(
 									"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-									filler.slotName, filler.getClass().getName(), ans.doc.toArray()[0],
+									slotName, filler.getClass().getName(), ans.doc,
 									ans.answer));
 						} else {
 							answersString.append(String.format(
 									"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-									filler.slotName, filler.getClass().getName(), "NIL", ""));
+									slotName, filler.getClass().getName(), "NIL", ""));
 						}
 					}
 				}
+				
+				// Old version that uses filler.slotName
+				
+				// // for each query, print out the answer, or NIL if nothing is found
+				// for (SFEntity query : queryReader.queryList) {
+					// if (query.answers.containsKey(filler.slotName)) {
+						// // The output file format
+						// // Column 1: query id
+						// // Column 2: the slot name
+						// // Column 3: a unique run id for the submission
+						// // Column 4: NIL, if the system believes no
+						// // information is learnable for this slot. Or, 
+						// // a single docid which supports the slot value
+						// // Column 5: a slot value
+						// SingleAnswer ans = query.answers.get(filler.slotName).get(0);
+						// for (SingleAnswer a : query.answers.get(filler.slotName)) {
+							// if (a.count > ans.count) // choose answer with highest count
+								// ans = a;
+						// }
+						// answersString.append(String.format(
+								// "%s\t%s\t%s\t%s\t%s\n", query.queryId,
+								// filler.slotName, filler.getClass().getName(), ans.doc,
+								// ans.answer));
+					// } else {
+						// answersString.append(String.format(
+								// "%s\t%s\t%s\t%s\t%s\n", query.queryId,
+								// filler.slotName, filler.getClass().getName(), "NIL", ""));
+					// }
+				// }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
