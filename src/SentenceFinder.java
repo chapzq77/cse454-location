@@ -1,18 +1,10 @@
 import java.io.PrintStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Map;
 
 import sf.SFConstants;
-import sf.SFEntity;
-import sf.SFEntity.SingleAnswer;
-import sf.eval.SFScore;
-import sf.filler.Filler;
-import sf.filler.regex.RegexPerDateOfBirthFiller;
-import sf.filler.regex.RegexPerCountryOfBirthFiller;
 import sf.retriever.ProcessedCorpus;
-import util.FileUtil;
 
 /**
  * CSE 454 Assignment 1 main class. Java 7 required.

@@ -6,7 +6,6 @@ import java.util.List;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.filler.Filler;
-import tackbp.KbEntity.EntityType;
 
 /**
  * Needs "tokens", "meta",
@@ -16,7 +15,7 @@ import tackbp.KbEntity.EntityType;
 public class RegexLocationFiller extends Filler {
 
 	public RegexLocationFiller() {
-		slotName = "regex_all_loc";
+		slotNames.add("regex_all_loc");
 	}
 	
 	@Override

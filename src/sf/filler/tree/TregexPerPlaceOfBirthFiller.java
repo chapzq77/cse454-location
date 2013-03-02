@@ -34,6 +34,7 @@ public class TregexPerPlaceOfBirthFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String filename = getFilename(annotations);
 		Tree t = null;
 		
 		try {
@@ -55,11 +56,11 @@ public class TregexPerPlaceOfBirthFiller extends Filler {
 		// TODO also check for LOCATION tags
 		for(String place : possiblePlaces) {
 			if(isCountry(place)) {
-				addAnswer(mention, annotations, place, countryOfBirth);
+				mention.addAnswer(countryOfBirth, place, filename);
 			} else if(isStateProv(place)) {
-				addAnswer(mention, annotations, place, stateOfBirth);
+				mention.addAnswer(stateOfBirth, place, filename);
 			} else {
-				addAnswer(mention, annotations, place, cityOfBirth);
+				mention.addAnswer(cityOfBirth, place, filename);
 			}
 		}
 	}

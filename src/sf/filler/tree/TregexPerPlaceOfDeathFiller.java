@@ -34,6 +34,7 @@ public class TregexPerPlaceOfDeathFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String filename = getFilename(annotations);
 		Tree t = null;
 		
 		try {
@@ -55,11 +56,11 @@ public class TregexPerPlaceOfDeathFiller extends Filler {
 		// TODO also check for LOCATION tags
 		for(String place : possiblePlaces) {
 			if(isCountry(place)) {
-				addAnswer(mention, annotations, place, countryOfDeath);
+				mention.addAnswer(countryOfDeath, place, filename);
 			} else if(isStateProv(place)) {
-				addAnswer(mention, annotations, place, stateOfDeath);
+				mention.addAnswer(stateOfDeath, place, filename);
 			} else {
-				addAnswer(mention, annotations, place, cityOfDeath);
+				mention.addAnswer(cityOfDeath, place, filename);
 			}
 		}
 	}

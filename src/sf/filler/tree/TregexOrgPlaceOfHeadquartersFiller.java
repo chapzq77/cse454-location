@@ -35,6 +35,7 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String filename = getFilename(annotations);
 		Tree t = null;
 		
 		try {
@@ -56,11 +57,11 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 		// also check for LOCATION tags
 		for(String place : possiblePlaces) {
 			if(isCountry(place)) {
-				addAnswer(mention, annotations, place, countryOfHeadquarters);
+				mention.addAnswer(countryOfHeadquarters, place, filename);
 			} else if(isStateProv(place)) {
-				addAnswer(mention, annotations, place, stateOfHeadquarters);
+				mention.addAnswer(stateOfHeadquarters, place, filename);
 			} else {
-				addAnswer(mention, annotations, place, cityOfHeadquarters);
+				mention.addAnswer(cityOfHeadquarters, place, filename);
 			}
 		}
 	}

@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.io.BufferedReader;
@@ -21,15 +20,15 @@ import tackbp.KbEntity.EntityType;
  */
 
 public abstract class Filler {
-	public String slotName = null;
+	public List<String> slotNames = new ArrayList<String>();
 	public abstract void predict(SFEntity mention, Map<String, String> annotations);
 	
 	protected boolean isPER(SFEntity mention) {
-		return (!mention.ignoredSlots.contains(slotName) && mention.entityType == EntityType.PER);
+		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.PER);
 	}
 	
 	protected boolean isORG(SFEntity mention) {
-		return (!mention.ignoredSlots.contains(slotName) && mention.entityType == EntityType.ORG);
+		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.ORG);
 	}
 	
 	protected boolean containsName(SFEntity mention, String tokens) {
