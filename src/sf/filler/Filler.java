@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.io.BufferedReader;
@@ -21,15 +20,15 @@ import tackbp.KbEntity.EntityType;
  */
 
 public abstract class Filler {
-	public String slotName = null;
+	public List<String> slotNames = new ArrayList<String>();
 	public abstract void predict(SFEntity mention, Map<String, String> annotations);
 	
 	protected boolean isPER(SFEntity mention) {
-		return (!mention.ignoredSlots.contains(slotName) && mention.entityType == EntityType.PER);
+		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.PER);
 	}
 	
 	protected boolean isORG(SFEntity mention) {
-		return (!mention.ignoredSlots.contains(slotName) && mention.entityType == EntityType.ORG);
+		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.ORG);
 	}
 	
 	protected boolean containsName(SFEntity mention, String tokens) {
@@ -103,55 +102,5 @@ public abstract class Filler {
 			throw new RuntimeException(e);
 		}
 		return stateProvs.contains(location);
-	}
-	
-	// adds answer/count to ongoing list.
-	// TODO: can probably improve on this design.
-	protected void addAnswer(SFEntity mention, Map<String, String> annotations, String location, String slotName) {
-		
-		// at least one answer exists for this slot
-		if (mention.answers.containsKey(slotName)) {
-			
-			// this Answer is already in list, increment count and add the doc
-			boolean found = false;
-			for (SFEntity.SingleAnswer ans : mention.answers.get(slotName)) {
-				if (ans.answer.equals(location)) {
-					ans.doc.add(getFilename(annotations));
-					ans.count++;
-					found = true;
-					break;
-				}
-			}
-			
-			// this Answer is not in list, add it with a count of 1
-			if (!found) {
-				SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
-				ans.answer = location;
-				ans.doc = new HashSet<String>();
-				ans.doc.add(getFilename(annotations));
-				ans.count = 1;
-				mention.answers.get(slotName).add(ans);
-			}
-			
-		// no answers exist for this slot yet
-		} else {
-			// create SingleAnswer
-			SFEntity.SingleAnswer ans = new SFEntity.SingleAnswer();
-			ans.answer = location;
-			ans.doc = new HashSet<String>();
-			ans.doc.add(getFilename(annotations));
-			ans.count = 1;
-			
-			// create List of Answers containing SingleAnswer
-			List<SFEntity.SingleAnswer> answers = new ArrayList<SFEntity.SingleAnswer>();
-			answers.add(ans);
-			
-			// put in Map
-			mention.answers.put(slotName, answers);
-		}
-	}
-	
-	protected void addAnswer(SFEntity mention, Map<String, String> annotations, String location) {
-		addAnswer(mention, annotations, location, this.slotName);
 	}
 }

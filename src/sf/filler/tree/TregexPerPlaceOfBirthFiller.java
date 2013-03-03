@@ -1,9 +1,7 @@
 package sf.filler.tree;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import edu.stanford.nlp.trees.PennTreeReader;
@@ -13,7 +11,6 @@ import edu.stanford.nlp.trees.tregex.TregexPattern;
 
 import sf.SFConstants;
 import sf.SFEntity;
-import sf.SFEntity.SingleAnswer;
 import sf.filler.Filler;
 
 public class TregexPerPlaceOfBirthFiller extends Filler {
@@ -23,7 +20,9 @@ public class TregexPerPlaceOfBirthFiller extends Filler {
 	private static final String cityOfBirth = "per:city_of_birth";
 
 	public TregexPerPlaceOfBirthFiller() {
-		slotName = countryOfBirth;
+		slotNames.add(countryOfBirth);
+		slotNames.add(stateOfBirth);
+		slotNames.add(cityOfBirth);
 	}
 	
 	@Override
@@ -35,6 +34,7 @@ public class TregexPerPlaceOfBirthFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String filename = getFilename(annotations);
 		Tree t = null;
 		
 		try {
@@ -56,20 +56,11 @@ public class TregexPerPlaceOfBirthFiller extends Filler {
 		// TODO also check for LOCATION tags
 		for(String place : possiblePlaces) {
 			if(isCountry(place)) {
-				SFEntity.SingleAnswer country = new SFEntity.SingleAnswer();
-				country.answer = place;
-				country.doc = getFilename(annotations);
-				mention.answers.put(countryOfBirth, country);
+				mention.addAnswer(countryOfBirth, place, filename);
 			} else if(isStateProv(place)) {
-				SFEntity.SingleAnswer state = new SFEntity.SingleAnswer();
-				state.answer = place;
-				state.doc = getFilename(annotations);
-				mention.answers.put(stateOfBirth, state);
+				mention.addAnswer(stateOfBirth, place, filename);
 			} else {
-				SFEntity.SingleAnswer city = new SFEntity.SingleAnswer();
-				city.answer = place;
-				city.doc = getFilename(annotations);
-				mention.answers.put(cityOfBirth, city);
+				mention.addAnswer(cityOfBirth, place, filename);
 			}
 		}
 	}

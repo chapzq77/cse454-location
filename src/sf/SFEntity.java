@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import tackbp.KbEntity;
 import el.EntityMention;
@@ -23,40 +22,62 @@ public class SFEntity extends EntityMention {
 	public KbEntity.EntityType entityType = null;
 	// slots that can be ignored.
 	public List<String> ignoredSlots = new ArrayList<String>();
-	// answers: the key is slot type and the value is an <code>Answer</code>
-	// object.
-	// An <code>Answer</code> object should be either
-	// list-valued(<code>ListAnswer</code>)
-	// or single-valued (<code>SingleAnswer</code>).
-	
-	// TODO: this is specific to SingleAnswer answers right now
+	// answers: the key is slot type and the value is a List of 
+	// <code>SingleAnswer</code> objects
 	public Map<String, List<SingleAnswer>> answers = new HashMap<String, List<SingleAnswer>>();
 
-	public static abstract class Answer {
-
-	}
-
-	public static class ListAnswer extends Answer {
-		// answers
-		public List<String> listAnswers = new ArrayList<String>();
-		// The documents from which the answers are extracted.
-		// The number of docs MUST be the same as the number of answers.
-		public List<String> listDocs = new ArrayList<String>();
-		@Override
-		public String toString() {
-			return listAnswers.toString();
-		}
-	}
-
-	public static class SingleAnswer extends Answer {
-		// answer
+	public static class SingleAnswer {
+		// answer (location)
 		public String answer = null;
 		// The document from which the answer is extracted.
-		public Set<String> doc = null;
+		public String doc = null;
+		// count of times this answer has been found
 		public int count = 0;
 		@Override
 		public String toString() {
 			return answer;
+		}
+	}
+	
+	// adds answer/count to ongoing list.
+	public void addAnswer(String slotName, String location, String docName) {
+		
+		// at least one answer exists for this slot
+		if (answers.containsKey(slotName)) {
+			
+			// this Answer is already in list, increment count and add the doc
+			boolean found = false;
+			for (SingleAnswer ans : answers.get(slotName)) {
+				if (ans.answer.equals(location)) {
+					ans.count++;
+					found = true;
+					break;
+				}
+			}
+			
+			// this Answer is not in list, add it with a count of 1
+			if (!found) {
+				SingleAnswer ans = new SingleAnswer();
+				ans.answer = location;
+				ans.doc = docName;
+				ans.count = 1;
+				answers.get(slotName).add(ans);
+			}
+			
+		// no answers exist for this slot yet
+		} else {
+			// create SingleAnswer
+			SingleAnswer ans = new SingleAnswer();
+			ans.answer = location;
+			ans.doc = docName;
+			ans.count = 1;
+			
+			// create List of Answers containing SingleAnswer
+			List<SingleAnswer> ansList = new ArrayList<SingleAnswer>();
+			ansList.add(ans);
+			
+			// put in Map
+			answers.put(slotName, ansList);
 		}
 	}
 }

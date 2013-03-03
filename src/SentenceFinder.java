@@ -1,16 +1,10 @@
 import java.io.PrintStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Map;
 
 import sf.SFConstants;
-import sf.SFEntity;
-import sf.SFEntity.SingleAnswer;
-import sf.eval.SFScore;
-import sf.filler.Filler;
 import sf.retriever.ProcessedCorpus;
-import util.FileUtil;
 
 /**
  * Sentence Finder

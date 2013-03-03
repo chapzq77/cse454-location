@@ -6,7 +6,6 @@ import java.util.List;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.filler.Filler;
-import tackbp.KbEntity.EntityType;
 
 /**
  * Needs "tokens", "meta",
@@ -16,7 +15,7 @@ import tackbp.KbEntity.EntityType;
 public class RegexLocationFiller extends Filler {
 
 	public RegexLocationFiller() {
-		slotName = "regex_all_loc";
+		slotNames.add("regex_all_loc");
 	}
 	
 	@Override
@@ -35,26 +34,27 @@ public class RegexLocationFiller extends Filler {
 		List<String> locations = extractLocations(annotations, tokens);
 		if (locations.size() == 0)
 			return;
-			
+		
+		String filename = getFilename(annotations);
 		if (per) {
 			if (mentionsRegex(tokens, SFConstants.BIRTH_REGEX)) {
 				for (String location : locations) {
 					if (isCountry(location.toLowerCase()))
-						addAnswer(mention, annotations, location, SFConstants.slotNames[0]);
+						mention.addAnswer(SFConstants.slotNames[0], location, filename);
 					else if (isStateProv(location.toLowerCase()))
-						addAnswer(mention, annotations, location, SFConstants.slotNames[1]);
+						mention.addAnswer(SFConstants.slotNames[1], location, filename);
 					else
-						addAnswer(mention, annotations, location, SFConstants.slotNames[2]);
+						mention.addAnswer(SFConstants.slotNames[2], location, filename);
 				}
 			}
 			if (mentionsRegex(tokens, SFConstants.DEATH_REGEX)) {
 				for (String location : locations) {
 					if (isCountry(location.toLowerCase()))
-						addAnswer(mention, annotations, location, SFConstants.slotNames[3]);
+						mention.addAnswer(SFConstants.slotNames[3], location, filename);
 					else if (isStateProv(location.toLowerCase()))
-						addAnswer(mention, annotations, location, SFConstants.slotNames[4]);
+						mention.addAnswer(SFConstants.slotNames[4], location, filename);
 					else
-						addAnswer(mention, annotations, location, SFConstants.slotNames[5]);
+						mention.addAnswer(SFConstants.slotNames[5], location, filename);
 				}
 			}
 		}
@@ -62,11 +62,11 @@ public class RegexLocationFiller extends Filler {
 			if (mentionsRegex(tokens, SFConstants.HQ_REGEX)) {
 				for (String location : locations) {
 					if (isCountry(location.toLowerCase()))
-						addAnswer(mention, annotations, location, SFConstants.slotNames[6]);
+						mention.addAnswer(SFConstants.slotNames[6], location, filename);
 					else if (isStateProv(location.toLowerCase()))
-						addAnswer(mention, annotations, location, SFConstants.slotNames[7]);
+						mention.addAnswer(SFConstants.slotNames[7], location, filename);
 					else
-						addAnswer(mention, annotations, location, SFConstants.slotNames[8]);
+						mention.addAnswer(SFConstants.slotNames[8], location, filename);
 				}
 			}
 		}

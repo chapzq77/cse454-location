@@ -66,7 +66,7 @@ SF264	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL
 SF265	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF266	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF267	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
-SF268	per:country_of_birth	sf.filler.regex.RegexLocationFiller	APW_ENG_20080726.0510.LDC2009T13	Cuba
+SF268	per:country_of_birth	sf.filler.regex.RegexLocationFiller	XIN_ENG_20071014.0008.LDC2009T13	Cuba
 SF269	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF270	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF271	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
@@ -88,12 +88,12 @@ SF286	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL
 SF287	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF288	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF289	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
-SF290	per:country_of_birth	sf.filler.regex.RegexLocationFiller	APW_ENG_20070803.1419.LDC2009T13	Venezuela
+SF290	per:country_of_birth	sf.filler.regex.RegexLocationFiller	XIN_ENG_20070110.0345.LDC2009T13	Venezuela
 SF291	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF292	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF293	per:country_of_birth	sf.filler.regex.RegexLocationFiller	AFP_ENG_20081208.0084.LDC2009T13	Malawi
 SF294	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
-SF295	per:country_of_birth	sf.filler.regex.RegexLocationFiller	AFP_ENG_20080528.0550.LDC2009T13	Iraq
+SF295	per:country_of_birth	sf.filler.regex.RegexLocationFiller	AFP_ENG_20080313.0402.LDC2009T13	Iraq
 SF296	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF297	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF298	per:country_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
@@ -288,12 +288,12 @@ SF286	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL
 SF287	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF288	per:city_of_birth	sf.filler.regex.RegexLocationFiller	APW_ENG_20081018.0001.LDC2009T13	Los Angeles
 SF289	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
-SF290	per:city_of_birth	sf.filler.regex.RegexLocationFiller	APW_ENG_20070803.1419.LDC2009T13	Penn
+SF290	per:city_of_birth	sf.filler.regex.RegexLocationFiller	APW_ENG_20070803.1241.LDC2009T13	Penn
 SF291	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF292	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF293	per:city_of_birth	sf.filler.regex.RegexLocationFiller	APW_ENG_20080726.0506.LDC2009T13	Flora
 SF294	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
-SF295	per:city_of_birth	sf.filler.regex.RegexLocationFiller	AFP_ENG_20080528.0550.LDC2009T13	Najaf
+SF295	per:city_of_birth	sf.filler.regex.RegexLocationFiller	AFP_ENG_20070501.0073.LDC2009T13	Najaf
 SF296	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF297	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
 SF298	per:city_of_birth	sf.filler.regex.RegexLocationFiller	NIL	
@@ -366,7 +366,7 @@ SF264	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL
 SF265	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF266	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF267	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF268	per:country_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070111.0237.LDC2009T13	Cuba
+SF268	per:country_of_death	sf.filler.regex.RegexLocationFiller	XIN_ENG_20070110.0356.LDC2009T13	Cuba
 SF269	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF270	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF271	per:country_of_death	sf.filler.regex.RegexLocationFiller	LTW_ENG_20070130.0150.LDC2009T13	Iraq
@@ -388,7 +388,7 @@ SF286	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL
 SF287	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF288	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF289	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF290	per:country_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20080309.0776.LDC2009T13	Colombia
+SF290	per:country_of_death	sf.filler.regex.RegexLocationFiller	XIN_ENG_20080304.0320.LDC2009T13	Colombia
 SF291	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF292	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF293	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
@@ -396,7 +396,7 @@ SF294	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL
 SF295	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF296	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF297	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF298	per:country_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070524.0211.LDC2009T13	U.S.
+SF298	per:country_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070523.1726.LDC2009T13	U.S.
 SF299	per:country_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF200	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF201	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
@@ -472,7 +472,7 @@ SF270	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL
 SF271	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF272	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF273	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF274	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070418.1420.LDC2009T13	Virginia
+SF274	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070418.1708.LDC2009T13	Virginia
 SF275	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF276	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF277	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
@@ -488,7 +488,7 @@ SF286	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL
 SF287	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF288	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF289	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF290	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070414.0117.LDC2009T13	Washington
+SF290	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070414.0069.LDC2009T13	Washington
 SF291	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF292	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF293	per:stateorprovince_of_death	sf.filler.regex.RegexLocationFiller	NIL	
@@ -566,13 +566,13 @@ SF264	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL
 SF265	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF266	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF267	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF268	per:city_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070405.1401.LDC2009T13	Cuban
+SF268	per:city_of_death	sf.filler.regex.RegexLocationFiller	XIN_ENG_20071024.0439.LDC2009T13	Cuban
 SF269	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF270	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF271	per:city_of_death	sf.filler.regex.RegexLocationFiller	LTW_ENG_20070130.0150.LDC2009T13	Temecula
 SF272	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF273	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
-SF274	per:city_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070418.1420.LDC2009T13	Chesapeake
+SF274	per:city_of_death	sf.filler.regex.RegexLocationFiller	APW_ENG_20070418.1708.LDC2009T13	Chesapeake
 SF275	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF276	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
 SF277	per:city_of_death	sf.filler.regex.RegexLocationFiller	NIL	
@@ -631,7 +631,7 @@ SF229	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL
 SF230	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF231	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF232	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
-SF233	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	APW_ENG_20070408.0077.LDC2009T13	Mexico
+SF233	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	APW_ENG_20070407.0126.LDC2009T13	Mexico
 SF234	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF235	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF236	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
@@ -645,7 +645,7 @@ SF243	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL
 SF244	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF245	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF246	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
-SF247	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	XIN_ENG_20071008.0176.LDC2009T13	Malaysia
+SF247	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	XIN_ENG_20070801.0209.LDC2009T13	Malaysia
 SF248	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF249	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF250	org:country_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
@@ -854,7 +854,7 @@ SF252	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL
 SF253	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF254	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF255	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
-SF256	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	APW_ENG_20080519.0269.LDC2009T13	Glenview
+SF256	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	APW_ENG_20080519.0929.LDC2009T13	Glenview
 SF257	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	APW_ENG_20070413.1500.LDC2009T13	Weirton
 SF258	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	
 SF259	org:city_of_headquarters	sf.filler.regex.RegexLocationFiller	NIL	

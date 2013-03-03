@@ -7,8 +7,6 @@ import java.util.Map;
 
 import sf.SFConstants;
 import sf.SFEntity;
-import sf.SFEntity.Answer;
-import sf.SFEntity.ListAnswer;
 import sf.filler.Filler;
 import edu.stanford.nlp.trees.PennTreeReader;
 import edu.stanford.nlp.trees.Tree;
@@ -22,7 +20,9 @@ public class TregexPerPlacesOfResidenceFiller extends Filler {
 	private static final String citiesOfResidence = "per:cities_of_residence";
 
 	public TregexPerPlacesOfResidenceFiller() {
-		slotName = countriesOfResidence;
+		slotNames.add(countriesOfResidence);
+		slotNames.add(statesOfResidence);
+		slotNames.add(citiesOfResidence);
 	}
 	
 	@Override
@@ -34,6 +34,7 @@ public class TregexPerPlacesOfResidenceFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String filename = getFilename(annotations);
 		Tree t = null;
 		
 		try {
@@ -61,26 +62,11 @@ public class TregexPerPlacesOfResidenceFiller extends Filler {
 		// TODO also check for LOCATION tags
 		for(String place : possiblePlaces) {
 			if(isCountry(place)) {
-				ListAnswer cumulative = (ListAnswer)mention.answers.get(countriesOfResidence);
-				if(cumulative == null) {
-					cumulative = new ListAnswer();
-				}
-				cumulative.listAnswers.add(place);
-				cumulative.listDocs.add(getFilename(annotations));
+				mention.addAnswer(countriesOfResidence, place, filename);
 			} else if(isStateProv(place)) {
-				ListAnswer cumulative = (ListAnswer)mention.answers.get(statesOfResidence);
-				if(cumulative == null) {
-					cumulative = new ListAnswer();
-				}
-				cumulative.listAnswers.add(place);
-				cumulative.listDocs.add(getFilename(annotations));
+				mention.addAnswer(statesOfResidence, place, filename);
 			} else {
-				ListAnswer cumulative = (ListAnswer)mention.answers.get(citiesOfResidence);
-				if(cumulative == null) {
-					cumulative = new ListAnswer();
-				}
-				cumulative.listAnswers.add(place);
-				cumulative.listDocs.add(getFilename(annotations));
+				mention.addAnswer(citiesOfResidence, place, filename);
 			}
 		}
 	}

@@ -21,7 +21,9 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 	private static final String cityOfHeadquarters = "org:city_of_headquarters";
 
 	public TregexOrgPlaceOfHeadquartersFiller() {
-		slotName = countryOfHeadquarters;
+		slotNames.add(countryOfHeadquarters);
+		slotNames.add(stateOfHeadquarters);
+		slotNames.add(cityOfHeadquarters);
 	}
 	
 	@Override
@@ -33,6 +35,7 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String filename = getFilename(annotations);
 		Tree t = null;
 		
 		try {
@@ -54,20 +57,11 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 		// also check for LOCATION tags
 		for(String place : possiblePlaces) {
 			if(isCountry(place)) {
-				SFEntity.SingleAnswer country = new SFEntity.SingleAnswer();
-				country.answer = place;
-				country.doc = getFilename(annotations);
-				mention.answers.put(countryOfHeadquarters, country);
+				mention.addAnswer(countryOfHeadquarters, place, filename);
 			} else if(isStateProv(place)) {
-				SFEntity.SingleAnswer state = new SFEntity.SingleAnswer();
-				state.answer = place;
-				state.doc = getFilename(annotations);
-				mention.answers.put(stateOfHeadquarters, state);
+				mention.addAnswer(stateOfHeadquarters, place, filename);
 			} else {
-				SFEntity.SingleAnswer city = new SFEntity.SingleAnswer();
-				city.answer = place;
-				city.doc = getFilename(annotations);
-				mention.answers.put(cityOfHeadquarters, city);
+				mention.addAnswer(cityOfHeadquarters, place, filename);
 			}
 		}
 	}
