@@ -5,27 +5,23 @@ import tackbp.KbpConstants;
 public class SFConstants {
 
 	// data types/extensions
-	public static final String STANFORDNER = "stanfordner";
-
+	public static final String ARTICLE_IDS                = "articleIDs";
+	public static final String CJ                         = "cj";
 	public static final String DEPS_STANFORD_CC_PROCESSED = "depsStanfordCCProcessed";
-
-	public static final String CJ = "cj";
-
-	public static final String STANFORDPOS = "stanfordpos";
-
-	public static final String TOKEN_SPANS = "tokenSpans";
-
-	public static final String TOKENS = "tokens";
-
-	public static final String TEXT = "text";
-
-	public static final String META = "meta";
+	public static final String META                       = "meta";
+	public static final String STANFORDLEMMA              = "stanfordlemma";
+	public static final String STANFORDNER                = "stanfordner";
+	public static final String STANFORDPOS                = "stanfordpos";
+	public static final String TEXT                       = "text";
+	public static final String TOKENS                     = "tokens";
+	public static final String TOKEN_SPANS                = "tokenSpans";
+	public static final String WIKI                       = "wikification";
 
 	// file prefix of the data files
 	public static final String prefix = "sentences";
 
 	// a default list of data types
-	public static final String[] dataTypes = {META,TEXT, TOKENS, TOKEN_SPANS, STANFORDPOS, CJ, DEPS_STANFORD_CC_PROCESSED, STANFORDNER};
+	public static final String[] dataTypes = {ARTICLE_IDS,CJ,DEPS_STANFORD_CC_PROCESSED,META,STANFORDLEMMA,STANFORDNER,STANFORDPOS,TEXT,TOKENS,TOKEN_SPANS,WIKI};
 
 	// slot filling queries
 	public static final String queryFile = KbpConstants.truncatedRootPath + "sf/tac_2010_kbp_evaluation_slot_filling_queries.xml";

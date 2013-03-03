@@ -5,7 +5,7 @@ public class KbpConstants {
 	// the data folder. TODO CHANGE it if you mount the volume elsewhere.
 	public static String rootPath = "/kbp/data/";
 
-	public static final String processedDocPath = rootPath + "09nwa/";;
+	public static final String processedDocPath = rootPath + "09nw/";;
 
 	// Location of the corpus files containing only sentences with locations
 	// and organizations/people.

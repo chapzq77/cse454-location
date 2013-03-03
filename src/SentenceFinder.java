@@ -9,29 +9,23 @@ import sf.SFEntity;
 import sf.SFEntity.SingleAnswer;
 import sf.eval.SFScore;
 import sf.filler.Filler;
-import sf.filler.regex.RegexPerDateOfBirthFiller;
-import sf.filler.regex.RegexPerCountryOfBirthFiller;
 import sf.retriever.ProcessedCorpus;
 import util.FileUtil;
 
 /**
- * CSE 454 Assignment 1 main class. Java 7 required.
+ * Sentence Finder
  *
- * In the main method, a pipeline is run as follows: 1) Read the queries. 2) For
- * each query, retrieve relevant documents. In this assignment, only the
- * documents containing an answer will be returned to save running time. In
- * practice, a search-engine-style retriever will be used. Iterate through all
- * the sentences returned and the slot filler will applied to extract answers.
- * 3) Spit out answers and evaluate them against the labels.
+ * This class finds sentences containing both:
+ *  * a person or organization
+ *  * a location
+ * These classifications are given by the Stanford Named Entity Recognizer.
  *
- * In this assignment, you only need to write a new class for the assigned slots
- * implementing the <code>sf.filler.Filler</code> interface. An example class on
- * birthdate is implemented in <code>sf.filler.RegexPerDateOfBirthFiller.java</code>.
- *
- * @author Xiao Ling
+ * @author Jeff Booth
  */
 
 public class SentenceFinder {
+	static final int SENTENCE_LIMIT = 100000;
+
 	static class CorpusWriter implements AutoCloseable {
 		protected Map<String, PrintStream> dataWriters = null;
 
@@ -96,6 +90,7 @@ public class SentenceFinder {
 			 CorpusWriter corpusWriter = new CorpusWriter() ) {
 			Map<String, String> annotations = null;
 			int c = 0;
+			int validSentences = 0;
 			while (corpus.hasNext()) {
 				annotations = corpus.next();
 				if (c++ % 100000 == 0) {
@@ -110,6 +105,11 @@ public class SentenceFinder {
 
 					// Output the annotations.
 					corpusWriter.write( annotations );
+
+					// Leave once we have enough valid sentences.
+					validSentences++;
+					if ( validSentences >= SENTENCE_LIMIT )
+						return;
 				}
 			}
 		} catch ( Exception e ) {
