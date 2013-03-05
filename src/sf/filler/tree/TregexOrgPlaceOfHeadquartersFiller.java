@@ -3,6 +3,7 @@ package sf.filler.tree;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.nlp.trees.PennTreeReader;
@@ -33,7 +34,7 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isORG(mention))
 			return;
-		if (!containsName(mention, tokens))
+		if (!containsName(mention, tokens, sentenceCoref))
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
@@ -50,20 +51,34 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 		TregexPattern p = TregexPattern.compile("NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP)");
 		TregexMatcher m = p.matcher(t);
 		
-		ArrayList<String> possiblePlaces = new ArrayList<String>();
-		while(m.find()) {
-			possiblePlaces.add(m.getMatch().firstChild().value());
+		Tree parent = null;
+		List<String> places = new ArrayList<String>();
+		StringBuilder place = new StringBuilder();
+		if(m.find()) {
+			parent = m.getMatch().parent();
+			place.append(m.getMatch().firstChild().value());
+			while(m.find()) {
+				if(m.getMatch().parent().equals(parent)) {
+					place.append(" ");
+					place.append(m.getMatch().firstChild().value());
+				} else {
+					places.add(place.toString());
+					place = new StringBuilder();
+					place.append(m.getMatch().firstChild().value());
+				}
+			}
 		}
+		places.add(place.toString());
 		
 		// not very good, need a way to combine multiple word place names
 		// also check for LOCATION tags
-		for(String place : possiblePlaces) {
-			if(isCountry(place)) {
-				mention.addAnswer(countryOfHeadquarters, place, filename);
-			} else if(isStateProv(place)) {
-				mention.addAnswer(stateOfHeadquarters, place, filename);
+		for(String placeName : places) {
+			if(isCountry(placeName)) {
+				mention.addAnswer(countryOfHeadquarters, placeName, filename);
+			} else if(isStateProv(placeName)) {
+				mention.addAnswer(stateOfHeadquarters, placeName, filename);
 			} else {
-				mention.addAnswer(cityOfHeadquarters, place, filename);
+				mention.addAnswer(cityOfHeadquarters, placeName, filename);
 			}
 		}
 	}
