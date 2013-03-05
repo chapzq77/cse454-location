@@ -17,15 +17,15 @@ public class CorefIndex {
 		// TODO: create new provider.
 		return new CorefProvider() {
 			@Override
-			public CorefEntity[] inRange(int rangeStart, int rangeEnd) {
+			public CorefMention[] inRange(int rangeStart, int rangeEnd) {
 				// TODO Auto-generated method stub
-				return new CorefEntity[0];
+				return new CorefMention[0];
 			}
 
 			@Override
-			public CorefEntity[] all() {
+			public CorefMention[] all() {
 				// TODO Auto-generated method stub
-				return new CorefEntity[0];
+				return new CorefMention[0];
 			}
 		};
 	}
