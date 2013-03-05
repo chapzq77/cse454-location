@@ -6,6 +6,7 @@ import java.util.List;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.filler.Filler;
+import sf.retriever.CorefProvider;
 
 /**
  * Needs "tokens", "meta",
@@ -19,7 +20,8 @@ public class RegexLocationFiller extends Filler {
 	}
 	
 	@Override
-	public void predict(SFEntity mention, Map<String, String> annotations) {
+	public void predict(SFEntity mention, Map<String, String> annotations,
+			CorefProvider sentenceCoref) {
 		boolean per = isPER(mention);
 		boolean org = isORG(mention);
 		if (!(per || org))

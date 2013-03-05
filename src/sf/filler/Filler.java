@@ -12,6 +12,7 @@ import java.io.FileReader;
 
 import sf.SFConstants;
 import sf.SFEntity;
+import sf.retriever.CorefProvider;
 import tackbp.KbEntity.EntityType;
 
 /**
@@ -21,7 +22,7 @@ import tackbp.KbEntity.EntityType;
 
 public abstract class Filler {
 	public List<String> slotNames = new ArrayList<String>();
-	public abstract void predict(SFEntity mention, Map<String, String> annotations);
+	public abstract void predict(SFEntity mention, Map<String, String> annotations, CorefProvider sentenceCoref);
 	
 	protected boolean isPER(SFEntity mention) {
 		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.PER);
