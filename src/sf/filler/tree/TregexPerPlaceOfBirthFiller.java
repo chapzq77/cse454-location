@@ -12,6 +12,7 @@ import edu.stanford.nlp.trees.tregex.TregexPattern;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.filler.Filler;
+import sf.retriever.CorefProvider;
 
 public class TregexPerPlaceOfBirthFiller extends Filler {
 
@@ -26,7 +27,8 @@ public class TregexPerPlaceOfBirthFiller extends Filler {
 	}
 	
 	@Override
-	public void predict(SFEntity mention, Map<String, String> annotations) {
+	public void predict(SFEntity mention, Map<String, String> annotations,
+			CorefProvider sentenceCoref) {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isPER(mention))
 			return;

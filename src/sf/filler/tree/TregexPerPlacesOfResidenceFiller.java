@@ -8,6 +8,7 @@ import java.util.Map;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.filler.Filler;
+import sf.retriever.CorefProvider;
 import edu.stanford.nlp.trees.PennTreeReader;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.tregex.TregexMatcher;
@@ -26,7 +27,8 @@ public class TregexPerPlacesOfResidenceFiller extends Filler {
 	}
 	
 	@Override
-	public void predict(SFEntity mention, Map<String, String> annotations) {
+	public void predict(SFEntity mention, Map<String, String> annotations,
+			CorefProvider sentenceCoref) {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isPER(mention))
 			return;
