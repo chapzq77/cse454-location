@@ -61,26 +61,32 @@ public class CorefIndex implements AutoCloseable {
 	 * @param The ID of the document to advance to.
 	 */
 	public void nextDoc( long desiredDocId ) {
+		// If we are already on the requested document, we don't need to do
+		// anything.
 		if ( docId == desiredDocId )
 			return;
-		else if ( docId > desiredDocId )
-			throw new IllegalStateException(
-					"Coreference index is reading document " + docId +
-					", which is after the requested document " + desiredDocId +
-					". The index cannot access previous documents.");
 		
-		// Advance to the next document
-		while( nextDocId < desiredDocId ) {
-			getNextLine();
-			if ( nextDocId == -1 ) return;
-		}
-		docId = nextDocId;
-		
+		// Reset state for current document.
 		entities = Collections.emptyList();
 		sentencesMap.clear();
+		docId = desiredDocId;
 		
-		if ( nextLine == null ) { return; }
+		// If the current document ID is larger than the desired one, then
+		// there was no coreference data for the desired document, so simply
+		// return no data.
+		if ( docId > desiredDocId )
+			return;
 		
+		// Advance our buffered reader to the desired document.
+		while( nextDocId < desiredDocId ) {
+			getNextLine();
+			// If the buffered reader ran out of lines, then we just don't have
+			// the desired document. Instead, all queries will return blank
+			// info.
+			if ( nextDocId == -1 ) return;
+		}
+		
+		// This map will be used to create the entities.
 		Map<Long, CorefEntity> entitiesMap = new HashMap<Long, CorefEntity>();
 		
 		while ( nextDocId == docId ) {
