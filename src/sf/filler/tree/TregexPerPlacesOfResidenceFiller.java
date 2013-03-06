@@ -2,19 +2,16 @@ package sf.filler.tree;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import sf.SFConstants;
 import sf.SFEntity;
-import sf.filler.Filler;
 import sf.retriever.CorefProvider;
 import edu.stanford.nlp.trees.PennTreeReader;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.tregex.TregexMatcher;
-import edu.stanford.nlp.trees.tregex.TregexPattern;
 
-public class TregexPerPlacesOfResidenceFiller extends Filler {
+public class TregexPerPlacesOfResidenceFiller extends BaseTregexFiller {
 
 	private static final String countriesOfResidence = "per:countries_of_residence";
 	private static final String statesOfResidence = "per:stateorprovinces_of_residence";
@@ -32,7 +29,7 @@ public class TregexPerPlacesOfResidenceFiller extends Filler {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isPER(mention))
 			return;
-		if (!containsName(mention, tokens))
+		if (!containsName(mention, tokens, sentenceCoref))
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
@@ -45,30 +42,18 @@ public class TregexPerPlacesOfResidenceFiller extends Filler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		TregexPattern p = TregexPattern.compile("NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /lived/))))");
-		TregexMatcher m = p.matcher(t);
-		
-		TregexPattern p2 = TregexPattern.compile("NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /grew/))))");
-		TregexMatcher m2 = p2.matcher(t);
-		
-		ArrayList<String> possiblePlaces = new ArrayList<String>();
-		while(m.find()) {
-			possiblePlaces.add(m.getMatch().firstChild().value());
-		}
-		while(m2.find()) {
-			possiblePlaces.add(m2.getMatch().firstChild().value());
-		}
+		List<String> places = getMatchNames("NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /lived/))))", t);
+		places.addAll(getMatchNames("NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /grew/))))", t));
 		
 		// TODO not very good, need a way to combine multiple word place names
 		// TODO also check for LOCATION tags
-		for(String place : possiblePlaces) {
-			if(isCountry(place)) {
-				mention.addAnswer(countriesOfResidence, place, filename);
-			} else if(isStateProv(place)) {
-				mention.addAnswer(statesOfResidence, place, filename);
+		for(String placeName : places) {
+			if(isCountry(placeName)) {
+				mention.addAnswer(countriesOfResidence, placeName, filename);
+			} else if(isStateProv(placeName)) {
+				mention.addAnswer(statesOfResidence, placeName, filename);
 			} else {
-				mention.addAnswer(citiesOfResidence, place, filename);
+				mention.addAnswer(citiesOfResidence, placeName, filename);
 			}
 		}
 	}

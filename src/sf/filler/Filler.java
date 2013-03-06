@@ -12,6 +12,7 @@ import java.io.FileReader;
 
 import sf.SFConstants;
 import sf.SFEntity;
+import sf.retriever.CorefMention;
 import sf.retriever.CorefProvider;
 import tackbp.KbEntity.EntityType;
 
@@ -32,7 +33,14 @@ public abstract class Filler {
 		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.ORG);
 	}
 	
-	protected boolean containsName(SFEntity mention, String tokens) {
+	protected boolean containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
+		CorefMention[] sentenceMentions = sentenceCoref.all();
+		for(CorefMention coref : sentenceMentions) {
+			//if(coref.corefEntity.repMention.mentionSpan.equals(mention.mentionString)) {
+			//	return true;
+			//}
+		}
+		
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
 		// do case-insensitive match only if name is long

@@ -1,20 +1,17 @@
 package sf.filler.tree;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import edu.stanford.nlp.trees.PennTreeReader;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.tregex.TregexMatcher;
-import edu.stanford.nlp.trees.tregex.TregexPattern;
 
 import sf.SFConstants;
 import sf.SFEntity;
-import sf.filler.Filler;
 import sf.retriever.CorefProvider;
 
-public class TregexPerPlaceOfDeathFiller extends Filler {
+public class TregexPerPlaceOfDeathFiller extends BaseTregexFiller {
 
 	private static final String countryOfDeath = "per:country_of_death";
 	private static final String stateOfDeath = "per:stateorprovince_of_death";
@@ -32,7 +29,7 @@ public class TregexPerPlaceOfDeathFiller extends Filler {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isPER(mention))
 			return;
-		if (!containsName(mention, tokens))
+		if (!containsName(mention, tokens, sentenceCoref))
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
@@ -46,23 +43,17 @@ public class TregexPerPlaceOfDeathFiller extends Filler {
 			e.printStackTrace();
 		}
 		
-		TregexPattern p = TregexPattern.compile("NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /^died$/))))");
-		TregexMatcher m = p.matcher(t);
-		
-		ArrayList<String> possiblePlaces = new ArrayList<String>();
-		while(m.find()) {
-			possiblePlaces.add(m.getMatch().firstChild().value());
-		}
+		List<String> places = getMatchNames("NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /^died$/))))", t);
 		
 		// TODO not very good, need a way to combine multiple word place names
 		// TODO also check for LOCATION tags
-		for(String place : possiblePlaces) {
-			if(isCountry(place)) {
-				mention.addAnswer(countryOfDeath, place, filename);
-			} else if(isStateProv(place)) {
-				mention.addAnswer(stateOfDeath, place, filename);
+		for(String placeName : places) {
+			if(isCountry(placeName)) {
+				mention.addAnswer(countryOfDeath, placeName, filename);
+			} else if(isStateProv(placeName)) {
+				mention.addAnswer(stateOfDeath, placeName, filename);
 			} else {
-				mention.addAnswer(cityOfDeath, place, filename);
+				mention.addAnswer(cityOfDeath, placeName, filename);
 			}
 		}
 	}

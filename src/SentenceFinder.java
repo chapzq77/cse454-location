@@ -18,8 +18,6 @@ import sf.retriever.ProcessedCorpus;
  */
 
 public class SentenceFinder {
-	static final int SENTENCE_LIMIT = 100000;
-
 	static class CorpusWriter implements AutoCloseable {
 		protected Map<String, PrintStream> dataWriters = null;
 
@@ -76,9 +74,17 @@ public class SentenceFinder {
 	}
 
 	public static void main(String[] args) throws Exception {
-		// initialize the corpus
-		// FIXME replace the list by a generic class with an input of slot
-		// name and an output of all the relevant files from the answer file
+		// Set to the number of sentences to read.
+		int SENTENCE_LIMIT = 0;
+		if ( args.length > 0 ) {
+			try {
+				SENTENCE_LIMIT = Integer.parseInt( args[0] );
+			} catch( NumberFormatException nfe ) {
+				System.err.println(
+					"Number of sentences to read was not provided.");
+				return;
+			}
+		}
 
 		try( ProcessedCorpus corpus = new ProcessedCorpus();
 			 CorpusWriter corpusWriter = new CorpusWriter() ) {
@@ -87,8 +93,8 @@ public class SentenceFinder {
 			int validSentences = 0;
 			while (corpus.hasNext()) {
 				annotations = corpus.next();
-				if (c++ % 100000 == 0) {
-					System.err.print("finished reading " + c + " lines\r");
+				if (++c % 100000 == 0) {
+					System.err.print("finished reading " + c + " lines\n");
 				}
 
 				// If the annotations contain a Person or Organization, and a Location, then write out the sentence.
@@ -101,9 +107,11 @@ public class SentenceFinder {
 					corpusWriter.write( annotations );
 
 					// Leave once we have enough valid sentences.
-					validSentences++;
-					if ( validSentences >= SENTENCE_LIMIT )
-						return;
+					if ( SENTENCE_LIMIT > 0 ) {
+						validSentences++;
+						if ( validSentences >= SENTENCE_LIMIT )
+							return;
+					}
 				}
 			}
 		} catch ( Exception e ) {
