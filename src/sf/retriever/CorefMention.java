@@ -14,6 +14,9 @@ public class CorefMention {
 	public static enum Plurality { SINGULAR, PLURAL, UNKNOWN }
 	public static enum Gender { FEMALE, UNKNOWN, MALE, NEUTRAL }
 	
+	/** ID number for this mention (scope: document). */
+	public long id;
+	
 	/** Entity being referred to in this mention. */
 	public CorefEntity entity;
 	
@@ -56,14 +59,35 @@ public class CorefMention {
 	 * Animacy
 	 */
 	public Animacy animacy;
+	
+	/**
+	 * Determines if a token overlaps the tokens in this mention. 
+	 * 
+	 * @param token Zero-based index of the token in the sentence.
+	 * @return true if the token overlaps this mention.
+	 */
+	public boolean overlaps( int token ) {
+		return token >= start && token <= end;
+	}
+	
+	/**
+	 * Determines if a token range overlaps the tokens in this mention. 
+	 * 
+	 * @param token Zero-based index of the *start* of the token range.
+	 * @param token Zero-based index of the *end* of the token range.
+	 * @return true if the token overlaps this mention.
+	 */
+	public boolean overlaps( int start, int end ) {
+		return start <= this.end && end >= this.start;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (int)id;
 		result = prime * result + ((animacy == null) ? 0 : animacy.hashCode());
 		result = prime * result + end;
-		result = prime * result + ((entity == null) ? 0 : entity.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + head;
 		result = prime * result
@@ -83,6 +107,8 @@ public class CorefMention {
 		if (getClass() != obj.getClass())
 			return false;
 		CorefMention other = (CorefMention) obj;
+		if (id != other.id)
+			return false;
 		if (animacy != other.animacy)
 			return false;
 		if (end != other.end)
@@ -107,7 +133,7 @@ public class CorefMention {
 
 	@Override
 	public String toString() {
-		return "CorefMention [start=" + start + ", end="
+		return "CorefMention [id=" + id + ", start=" + start + ", end="
 				+ end + ", head=" + head + ", mentionSpan=" + mentionSpan
 				+ ", type=" + type + ", number=" + number + ", gender="
 				+ gender + ", animacy=" + animacy + "]";

@@ -29,7 +29,8 @@ public class RegexLocationFiller extends Filler {
 
 		// check if the name is mentioned.
 		String tokens = annotations.get(SFConstants.TOKENS);
-		if ((per && !containsName(mention, tokens)) || (org && !containsOrg(mention, tokens)))
+		if ((per && !containsName(mention, tokens, sentenceCoref)) ||
+				(org && !containsOrg(mention, tokens)))
 			return;
 			
 		// find locations, if any exist, in tokens

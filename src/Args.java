@@ -35,7 +35,8 @@ public class Args {
 	public static String DEFAULT_DATA_SRC = "sample";
 	static {
 		DATA_SRC_ABBREVS = new HashMap<String, String>();
-		DATA_SRC_ABBREVS.put("sample", "data/large-corpus/");
+		DATA_SRC_ABBREVS.put("filtered", "data/large-corpus/");
+		DATA_SRC_ABBREVS.put("sample", "data/unfiltered-corpus/");
 		DATA_SRC_ABBREVS.put("full", "/kbp/data/09nw/");
 	}
 	

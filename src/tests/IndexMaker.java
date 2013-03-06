@@ -60,6 +60,7 @@ class IndexMaker {
 	}
 	
 	public CorefIndex make() {
-		return new CorefIndex( new StringReader( data.toString() ) );
+		// TODO: provide a ProcessedCorpus...
+		return new CorefIndex( new StringReader( data.toString() ), null );
 	}
 }

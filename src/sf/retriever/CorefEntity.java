@@ -13,6 +13,11 @@ import java.util.List;
  */
 public class CorefEntity {
 	/**
+	 * ID number of the cluster corresponding to this entity.
+	 */
+	public long id;
+	
+	/**
 	 * ID of Wikipedia article. Will be null if no Wiki article corresponds to
 	 * this entry.
 	 */
@@ -44,17 +49,7 @@ public class CorefEntity {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((fullName == null) ? 0 : fullName.hashCode());
-		result = prime * result
-				+ ((mentions == null) ? 0 : mentions.hashCode());
-		result = prime * result + ((nerType == null) ? 0 : nerType.hashCode());
-		result = prime * result
-				+ ((repMention == null) ? 0 : repMention.hashCode());
-		result = prime * result + ((wikiId == null) ? 0 : wikiId.hashCode());
-		return result;
+		return (int) id;
 	}
 
 	@Override
@@ -66,15 +61,12 @@ public class CorefEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		CorefEntity other = (CorefEntity) obj;
+		if (id != other.id)
+			return false;
 		if (fullName == null) {
 			if (other.fullName != null)
 				return false;
 		} else if (!fullName.equals(other.fullName))
-			return false;
-		if (mentions == null) {
-			if (other.mentions != null)
-				return false;
-		} else if (!mentions.equals(other.mentions))
 			return false;
 		if (nerType != other.nerType)
 			return false;
@@ -93,7 +85,8 @@ public class CorefEntity {
 
 	@Override
 	public String toString() {
-		return "CorefEntity [wikiId=" + wikiId + ", nerType=" + nerType
+		return "CorefEntity [id=" + id + ", wikiId=" + wikiId
+				+ ", nerType=" + nerType
 				+ ", fullName=" + fullName + ", repMention=" + repMention
 				+ ", mentions=" + mentions + "]";
 	}

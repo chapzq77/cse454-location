@@ -11,7 +11,9 @@ import sf.filler.Filler;
 import sf.filler.regex.*;
 import sf.filler.tree.*;
 
+import sf.retriever.CorefEntity;
 import sf.retriever.CorefIndex;
+import sf.retriever.CorefMention;
 import sf.retriever.CorefProvider;
 import sf.retriever.ProcessedCorpus;
 import util.FileUtil;
@@ -54,8 +56,7 @@ public class Assignment1 {
 		// FIXME replace the list by a generic class with an input of slot
 		// name and an output of all the relevant files from the answer file
 		try( ProcessedCorpus corpus = new ProcessedCorpus( basePath );
-		     CorefIndex corefIndex =
-		    		 new CorefIndex( basePath + "documents.coref" ) ) {
+		     CorefIndex corefIndex = new CorefIndex( basePath ) ) {
 			
 			// Predict annotations
 			Map<String, String> annotations = null;
@@ -83,6 +84,11 @@ public class Assignment1 {
 							annotations.get( SFConstants.TEXT ) );
 					System.out.println("Coreference mentions: " +
 							sentenceCoref.all());
+					Set<CorefEntity> entities = new HashSet<CorefEntity>();
+					for ( CorefMention mention : sentenceCoref.all() ) {
+						entities.add( mention.entity );
+					}
+					System.out.println("Coreference entities: " + entities);
 				}
 
 				// For each query and filler, attempt to fill the slot.

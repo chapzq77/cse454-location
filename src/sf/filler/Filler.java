@@ -1,5 +1,6 @@
 package sf.filler;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
@@ -34,7 +35,7 @@ public abstract class Filler {
 	}
 	
 	protected boolean containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
-		CorefMention[] sentenceMentions = sentenceCoref.all();
+		Collection<CorefMention> sentenceMentions = sentenceCoref.all();
 		for(CorefMention coref : sentenceMentions) {
 			//if(coref.corefEntity.repMention.mentionSpan.equals(mention.mentionString)) {
 			//	return true;
