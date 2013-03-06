@@ -64,7 +64,7 @@ public class Assignment1 {
 				// Get next annotation
 				annotations = corpus.next();
 				if (++c % 1000 == 0) {
-					System.err.print("finished reading " + c + " lines\r");
+					System.out.println("finished reading " + c + " lines");
 				}
 				
 				String[] sentenceArticle = annotations.get(
@@ -78,6 +78,12 @@ public class Assignment1 {
 				long sentenceId = Long.parseLong( sentenceArticle[0] );
 				CorefProvider sentenceCoref =
 						corefIndex.getSentenceProvider( sentenceId );
+				if ( args.verbose && c % 1000 == 0 ) {
+					System.out.println("Sentence " + sentenceId + ": " +
+							annotations.get( SFConstants.TEXT ) );
+					System.out.println("Coreference mentions: " +
+							sentenceCoref.all());
+				}
 
 				// For each query and filler, attempt to fill the slot.
 				for (SFEntity query : queryReader.queryList) {

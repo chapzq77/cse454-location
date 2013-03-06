@@ -39,7 +39,7 @@ public class Args {
 		DATA_SRC_ABBREVS.put("full", "/kbp/data/09nw/");
 	}
 	
-	public boolean run, eval;
+	public boolean run, eval, verbose;
 	public long limit;
 	public Set<Class<? extends Filler>> fillers;
 	private PrintStream out;
@@ -49,8 +49,9 @@ public class Args {
 		// Display initial arguments.
 		out.println("Arguments:\n" +
 	                "\n" +
-				    "run          - Run the evaluator\n" +
+				    "run          - Run the evaluator.\n" +
 	                "eval         - Evaluate the results.\n" +
+				    "-v           - Print verbose output.\n" +
 				    "-limit n     - Limit to n sentences. If n == 0, " + 
 	                    "the number of sentences is not limited.\n");
 		
@@ -92,6 +93,8 @@ public class Args {
 					eval = true;
 				else if ( arg.equals("all-fillers") )
 					fillers.addAll( FILLER_ABBREVS.values() );
+				else if ( arg.equals("-v") )
+					verbose = true;
 				else if ( arg.equals("-limit") ) {
 					idx++;
 					try {
