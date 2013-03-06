@@ -8,3 +8,5 @@
 # Vim swap files
 *.sw?
 *.pred
+
+/data
