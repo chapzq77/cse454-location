@@ -104,31 +104,33 @@ public class Assignment1 {
 			}
 			
 			// Collect answers
-			for (String slotName : SFConstants.slotNames) {
-				// for each query, print out the answer, or NIL if nothing is found
-				for (SFEntity query : queryReader.queryList) {
-					if (query.answers.containsKey(slotName)) {
-						// The output file format
-						// Column 1: query id
-						// Column 2: the slot name
-						// Column 3: a unique run id for the submission
-						// Column 4: NIL, if the system believes no
-						// information is learnable for this slot. Or, 
-						// a single docid which supports the slot value
-						// Column 5: a slot value
-						SingleAnswer ans = query.answers.get(slotName).get(0);
-						for (SingleAnswer a : query.answers.get(slotName)) {
-							if (a.count > ans.count) // choose answer with highest count
-								ans = a;
+			for (Filler filler : fillers) {
+				for (String slotName : filler.slotNames) {
+					// for each query, print out the answer, or NIL if nothing is found
+					for (SFEntity query : queryReader.queryList) {
+						if (query.answers.containsKey(slotName)) {
+							// The output file format
+							// Column 1: query id
+							// Column 2: the slot name
+							// Column 3: a unique run id for the submission
+							// Column 4: NIL, if the system believes no
+							// information is learnable for this slot. Or, 
+							// a single docid which supports the slot value
+							// Column 5: a slot value
+							SingleAnswer ans = query.answers.get(slotName).get(0);
+							for (SingleAnswer a : query.answers.get(slotName)) {
+								if (a.count > ans.count) // choose answer with highest count
+									ans = a;
+							}
+							answersString.append(String.format(
+									"%s\t%s\t%s\t%s\t%s\n", query.queryId,
+									slotName, "MyRun", ans.doc,
+									ans.answer));
+						} else {
+							answersString.append(String.format(
+									"%s\t%s\t%s\t%s\t%s\n", query.queryId,
+									slotName, "MyRun", "NIL", ""));
 						}
-						answersString.append(String.format(
-								"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-								slotName, "MyRun", ans.doc,
-								ans.answer));
-					} else {
-						answersString.append(String.format(
-								"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-								slotName, "MyRun", "NIL", ""));
 					}
 				}
 			}

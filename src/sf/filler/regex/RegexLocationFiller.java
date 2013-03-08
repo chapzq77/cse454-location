@@ -16,7 +16,9 @@ import sf.retriever.CorefProvider;
 public class RegexLocationFiller extends Filler {
 
 	public RegexLocationFiller() {
-		slotNames.add("regex_all_loc");
+		for (String slot : SFConstants.slotNames) {
+			slotNames.add(slot);
+		}
 	}
 	
 	@Override
@@ -42,21 +44,21 @@ public class RegexLocationFiller extends Filler {
 		if (per) {
 			if (mentionsRegex(tokens, SFConstants.BIRTH_REGEX)) {
 				for (String location : locations) {
-					if (isCountry(location.toLowerCase()))
+					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[0]))
 						mention.addAnswer(SFConstants.slotNames[0], location, filename);
-					else if (isStateProv(location.toLowerCase()))
+					else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[1]))
 						mention.addAnswer(SFConstants.slotNames[1], location, filename);
-					else
+					else if (!mention.ignoredSlots.contains(SFConstants.slotNames[2]))
 						mention.addAnswer(SFConstants.slotNames[2], location, filename);
 				}
 			}
 			if (mentionsRegex(tokens, SFConstants.DEATH_REGEX)) {
 				for (String location : locations) {
-					if (isCountry(location.toLowerCase()))
+					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[3]))
 						mention.addAnswer(SFConstants.slotNames[3], location, filename);
-					else if (isStateProv(location.toLowerCase()))
+					else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[4]))
 						mention.addAnswer(SFConstants.slotNames[4], location, filename);
-					else
+					else if (!mention.ignoredSlots.contains(SFConstants.slotNames[5]))
 						mention.addAnswer(SFConstants.slotNames[5], location, filename);
 				}
 			}
@@ -64,11 +66,11 @@ public class RegexLocationFiller extends Filler {
 		if (org) {
 			if (mentionsRegex(tokens, SFConstants.HQ_REGEX)) {
 				for (String location : locations) {
-					if (isCountry(location.toLowerCase()))
+					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[6]))
 						mention.addAnswer(SFConstants.slotNames[6], location, filename);
-					else if (isStateProv(location.toLowerCase()))
+					else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[7]))
 						mention.addAnswer(SFConstants.slotNames[7], location, filename);
-					else
+					else if (!mention.ignoredSlots.contains(SFConstants.slotNames[8]))
 						mention.addAnswer(SFConstants.slotNames[8], location, filename);
 				}
 			}
