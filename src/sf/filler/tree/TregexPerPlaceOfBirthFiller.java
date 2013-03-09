@@ -49,11 +49,17 @@ public class TregexPerPlaceOfBirthFiller extends BaseTregexFiller {
 		// TODO also check for LOCATION tags
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
-				mention.addAnswer(countryOfBirth, placeName, filename);
+				if(!mention.ignoredSlots.contains(countryOfBirth)) {
+					mention.addAnswer(countryOfBirth, placeName, filename);
+				}
 			} else if(isStateProv(placeName)) {
-				mention.addAnswer(stateOfBirth, placeName, filename);
+				if(!mention.ignoredSlots.contains(stateOfBirth)) {
+					mention.addAnswer(stateOfBirth, placeName, filename);
+				}
 			} else {
-				mention.addAnswer(cityOfBirth, placeName, filename);
+				if(!mention.ignoredSlots.contains(cityOfBirth)) {
+					mention.addAnswer(cityOfBirth, placeName, filename);
+				}
 			}
 		}
 	}

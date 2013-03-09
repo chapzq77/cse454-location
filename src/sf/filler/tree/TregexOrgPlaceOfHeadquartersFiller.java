@@ -74,11 +74,17 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 		// also check for LOCATION tags
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
-				mention.addAnswer(countryOfHeadquarters, placeName, filename);
+				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {
+					mention.addAnswer(countryOfHeadquarters, placeName, filename);
+				}
 			} else if(isStateProv(placeName)) {
-				mention.addAnswer(stateOfHeadquarters, placeName, filename);
+				if(!mention.ignoredSlots.contains(stateOfHeadquarters)) {
+					mention.addAnswer(stateOfHeadquarters, placeName, filename);
+				}
 			} else {
-				mention.addAnswer(cityOfHeadquarters, placeName, filename);
+				if(!mention.ignoredSlots.contains(cityOfHeadquarters)) {
+					mention.addAnswer(cityOfHeadquarters, placeName, filename);
+				}
 			}
 		}
 	}
