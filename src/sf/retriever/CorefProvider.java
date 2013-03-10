@@ -1,5 +1,7 @@
 package sf.retriever;
 
+import java.util.Collection;
+
 /**
  * Provides all of the mentions and entities that correspond to data in the
  * coreference database.
@@ -17,11 +19,11 @@ public interface CorefProvider {
 	 *         sorted so that mentions which have more tokens overlapping the
 	 *         given range are at the front.
 	 */
-	CorefMention[] inRange( int rangeStart, int rangeEnd );
+	Collection<CorefMention> inRange( int rangeStart, int rangeEnd );
 	
 	/**
 	 * Returns all entity mentions in a sentence.
 	 * @return
 	 */
-	CorefMention[] all();
+	Collection<CorefMention> all();
 }

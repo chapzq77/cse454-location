@@ -1,5 +1,8 @@
 package sf.retriever;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a cluster of coreference mentions.
  * This class may also contain the corresponding Wikipedia article ID and NER
@@ -9,6 +12,11 @@ package sf.retriever;
  * @author Jeffrey Booth
  */
 public class CorefEntity {
+	/**
+	 * ID number of the cluster corresponding to this entity.
+	 */
+	public long id;
+	
 	/**
 	 * ID of Wikipedia article. Will be null if no Wiki article corresponds to
 	 * this entry.
@@ -33,5 +41,53 @@ public class CorefEntity {
 	/**
 	 * All mentions.
 	 */
-	public CorefMention[] mentions;
+	public List<CorefMention> mentions;
+	
+	public CorefEntity() {
+		mentions = new ArrayList<CorefMention>();
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CorefEntity other = (CorefEntity) obj;
+		if (id != other.id)
+			return false;
+		if (fullName == null) {
+			if (other.fullName != null)
+				return false;
+		} else if (!fullName.equals(other.fullName))
+			return false;
+		if (nerType != other.nerType)
+			return false;
+		if (repMention == null) {
+			if (other.repMention != null)
+				return false;
+		} else if (!repMention.equals(other.repMention))
+			return false;
+		if (wikiId == null) {
+			if (other.wikiId != null)
+				return false;
+		} else if (!wikiId.equals(other.wikiId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CorefEntity [id=" + id + ", wikiId=" + wikiId
+				+ ", nerType=" + nerType
+				+ ", fullName=" + fullName + ", repMention=" + repMention
+				+ ", mentions=" + mentions + "]";
+	}
 }

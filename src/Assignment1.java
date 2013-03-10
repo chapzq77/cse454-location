@@ -1,9 +1,5 @@
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 import tackbp.KbpConstants;
 import sf.SFConstants;
@@ -15,7 +11,9 @@ import sf.filler.Filler;
 import sf.filler.regex.*;
 import sf.filler.tree.*;
 
+import sf.retriever.CorefEntity;
 import sf.retriever.CorefIndex;
+import sf.retriever.CorefMention;
 import sf.retriever.CorefProvider;
 import sf.retriever.ProcessedCorpus;
 import util.FileUtil;
@@ -38,112 +36,6 @@ import util.FileUtil;
  */
 
 public class Assignment1 {
-	public static Map<String, Class<? extends Filler>> fillerAbbrevs;
-	
-	// Filler abbreviations for the command-line interface.
-	// NOTE: You should add your fillers here!
-	static {
-		fillerAbbrevs = new HashMap<String, Class<? extends Filler>>();
-		//          Abbrev.     Class
-		fillerAbbrevs.put("reg",      RegexLocationFiller.class );
-		fillerAbbrevs.put("tr-hq",    TregexOrgPlaceOfHeadquartersFiller.class );
-		fillerAbbrevs.put("tr-birth", TregexPerPlaceOfBirthFiller.class );
-		fillerAbbrevs.put("tr-death", TregexPerPlaceOfDeathFiller.class );
-		fillerAbbrevs.put("tr-homes", TregexPerPlacesOfResidenceFiller.class );
-	}
-	
-	/**
-	 * Processes arguments.
-	 * @author Jeffrey Booth
-	 */
-	static class Args {
-		public boolean run, eval;
-		public long limit;
-		public Set<Class<? extends Filler>> fillers;
-		private PrintStream out;
-		
-		public void usage() {
-			out.println("Arguments:\n" +
-		                "\n" +
-					    "run          - Run the evaluator\n" +
-		                "eval         - Evaluate the results.\n" +
-					    "limit n      - Limit to n sentences. If n == 0, " + 
-		                    "the number of sentences is not limited.\n");
-			for ( Map.Entry<String, Class<? extends Filler>> entry :
-				fillerAbbrevs.entrySet() ) {
-				out.printf( "%-12s - Use %s\n", entry.getKey(), entry.getValue() );
-			}
-			out.println("(class name) - Use the filler with the given class name.");
-			out.println("all-fillers  - Use all fillers in filterAbbrevs.");
-		}
-		
-		@SuppressWarnings("unchecked")
-		public Args( String[] args, PrintStream out ) {
-			try {
-				this.out = out;
-				
-				fillers = new HashSet<Class<? extends Filler>>();
-				int idx = 0;
-				Class<? extends Filler> filler = null;
-				while ( idx < args.length ) {
-					String arg = args[ idx ];
-					if ( arg.equals("run") )
-						run = true;
-					else if ( arg.equals("eval") )
-						eval = true;
-					else if ( arg.equals("all-fillers") )
-						fillers.addAll( fillerAbbrevs.values() );
-					else if ( arg.equals("limit") ) {
-						idx++;
-						try {
-							limit = Long.parseLong( args[idx] );
-							if ( limit < 0 ) {
-								throw new IllegalArgumentException(
-										"Sentence limit must be positive.");
-							}
-						} catch( NumberFormatException ex ) {
-							throw new IllegalArgumentException(
-									"Sentence limit must be an integer.");
-						} catch( ArrayIndexOutOfBoundsException ex ) {
-							throw new IllegalArgumentException(
-									"Missing number of sentences to limit to.");
-						}
-					}
-					// If a class abbrev was provided, use it as a filler.
-					else if ( ( filler = fillerAbbrevs.get( arg ) ) != null )
-						fillers.add( filler );
-					else {
-						// If a filler's full class name was given, use it too.
-						try {
-							Class<?> cls = Class.forName( arg );
-							if ( Filler.class.isAssignableFrom( cls ) ) {
-								fillers.add( (Class<? extends Filler>)
-										     Class.forName(arg) );
-							} else {
-								throw new IllegalArgumentException(
-										"Class " + arg +
-										" does not extend Filler.");
-							}
-						} catch( ClassNotFoundException ex ) {
-							throw new IllegalArgumentException(
-									"Missing class " + arg + ".");
-						}
-					}
-					idx++;
-				}
-				
-				if ( fillers.size() == 0 ) {
-					throw new IllegalArgumentException(
-							"No fillers specified.");
-				}
-			} catch( IllegalArgumentException ex ) {
-				out.println( ex.getMessage() + "\n" );
-				usage();
-				throw ex;
-			}
-		}
-	}
-	
 	public static void run(Args args) throws InstantiationException, IllegalAccessException {
 		// read the queries
 		sf.query.QueryReader queryReader = new sf.query.QueryReader();
@@ -158,12 +50,13 @@ public class Assignment1 {
 		
 		StringBuilder answersString = new StringBuilder();
 		
+		String basePath = args.dataSrc;
+		
 		// initialize the corpus
 		// FIXME replace the list by a generic class with an input of slot
 		// name and an output of all the relevant files from the answer file
-		try( ProcessedCorpus corpus = new ProcessedCorpus( KbpConstants.truncatedDocPath ) ) {
-			// TODO: provide document ID
-			CorefIndex corefIndex = new CorefIndex(0);
+		try( ProcessedCorpus corpus = new ProcessedCorpus( basePath );
+		     CorefIndex corefIndex = new CorefIndex( basePath ) ) {
 			
 			// Predict annotations
 			Map<String, String> annotations = null;
@@ -172,12 +65,33 @@ public class Assignment1 {
 				// Get next annotation
 				annotations = corpus.next();
 				if (++c % 1000 == 0) {
-					System.err.print("finished reading " + c + " lines\r");
+					System.out.println("finished reading " + c + " lines");
+				}
+				
+				String[] sentenceArticle = annotations.get(
+						SFConstants.ARTICLE_IDS ).split("\t");
+				
+				// Advance index to current document ID.
+				long desiredDocId = Long.parseLong( sentenceArticle[1] );
+				corefIndex.nextDoc( desiredDocId );
+				
+				// Get a coreference provider for the current sentence.
+				long sentenceId = Long.parseLong( sentenceArticle[0] );
+				CorefProvider sentenceCoref =
+						corefIndex.getSentenceProvider( sentenceId );
+				if ( args.verbose && c % 1000 == 0 ) {
+					System.out.println("Sentence " + sentenceId + ": " +
+							annotations.get( SFConstants.TEXT ) );
+					System.out.println("Coreference mentions: " +
+							sentenceCoref.all());
+					Set<CorefEntity> entities = new HashSet<CorefEntity>();
+					for ( CorefMention mention : sentenceCoref.all() ) {
+						entities.add( mention.entity );
+					}
+					System.out.println("Coreference entities: " + entities);
 				}
 
-				// for each query and filler, attempt to fill the slot.
-				// TODO: provide sentence ID
-				CorefProvider sentenceCoref = corefIndex.getSentenceIndex(0);
+				// For each query and filler, attempt to fill the slot.
 				for (SFEntity query : queryReader.queryList) {
 					for ( Filler filler : fillers ) {
 						filler.predict(query, annotations, sentenceCoref);
@@ -190,31 +104,33 @@ public class Assignment1 {
 			}
 			
 			// Collect answers
-			for (String slotName : SFConstants.slotNames) {
-				// for each query, print out the answer, or NIL if nothing is found
-				for (SFEntity query : queryReader.queryList) {
-					if (query.answers.containsKey(slotName)) {
-						// The output file format
-						// Column 1: query id
-						// Column 2: the slot name
-						// Column 3: a unique run id for the submission
-						// Column 4: NIL, if the system believes no
-						// information is learnable for this slot. Or, 
-						// a single docid which supports the slot value
-						// Column 5: a slot value
-						SingleAnswer ans = query.answers.get(slotName).get(0);
-						for (SingleAnswer a : query.answers.get(slotName)) {
-							if (a.count > ans.count) // choose answer with highest count
-								ans = a;
+			for (Filler filler : fillers) {
+				for (String slotName : filler.slotNames) {
+					// for each query, print out the answer, or NIL if nothing is found
+					for (SFEntity query : queryReader.queryList) {
+						if (query.answers.containsKey(slotName)) {
+							// The output file format
+							// Column 1: query id
+							// Column 2: the slot name
+							// Column 3: a unique run id for the submission
+							// Column 4: NIL, if the system believes no
+							// information is learnable for this slot. Or, 
+							// a single docid which supports the slot value
+							// Column 5: a slot value
+							SingleAnswer ans = query.answers.get(slotName).get(0);
+							for (SingleAnswer a : query.answers.get(slotName)) {
+								if (a.count > ans.count) // choose answer with highest count
+									ans = a;
+							}
+							answersString.append(String.format(
+									"%s\t%s\t%s\t%s\t%s\n", query.queryId,
+									slotName, "MyRun", ans.doc,
+									ans.answer));
+						} else {
+							answersString.append(String.format(
+									"%s\t%s\t%s\t%s\t%s\n", query.queryId,
+									slotName, "MyRun", "NIL", ""));
 						}
-						answersString.append(String.format(
-								"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-								slotName, "MyRun", ans.doc,
-								ans.answer));
-					} else {
-						answersString.append(String.format(
-								"%s\t%s\t%s\t%s\t%s\n", query.queryId,
-								slotName, "MyRun", "NIL", ""));
 					}
 				}
 			}
@@ -228,6 +144,7 @@ public class Assignment1 {
 	
 	public static void main(String[] argsList) throws Exception {
 		Args args = new Args(argsList, System.err);
+		System.out.println("Arguments:\n" + args);
 
 		// The slot filling pipeline
 		if (args.run)
