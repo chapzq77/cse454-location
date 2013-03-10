@@ -1,3 +1,4 @@
+package cli;
 import java.io.PrintStream;
 import java.io.IOException;
 import java.util.HashMap;

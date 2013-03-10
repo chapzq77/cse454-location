@@ -1,3 +1,4 @@
+package cli;
 import java.io.*;
 import java.util.*;
 
@@ -35,7 +36,7 @@ import util.FileUtil;
  * @author Xiao Ling
  */
 
-public class Assignment1 {
+public class LocationFiller {
 	public static void run(Args args) throws InstantiationException, IllegalAccessException {
 		// read the queries
 		sf.query.QueryReader queryReader = new sf.query.QueryReader();
