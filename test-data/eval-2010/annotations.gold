@@ -1,17 +1,8 @@
-54	SF209	LDC	org:city_of_headquarters	eng-WL-11-174576-12934658	1327	1334	Chelsea	Chelsea	54	1
-55	SF209	LDC	org:country_of_headquarters	eng-WL-11-174576-12934685	1019	1026	America	United States of America	55	1
-56	SF209	LDC	org:stateorprovince_of_headquarters	eng-WL-11-174576-12934679	333	341	Michigan	Michigan	56	1
 67	SF210	LDC	org:country_of_headquarters	AFP_ENG_20070705.0490.LDC2009T13	499	516	England and Wales	United Kingdom	67	1
-76	SF212	LDC	per:stateorprovince_of_birth	eng-WL-11-174592-12941952	511	517	Oregon	Oregon	76	1
-81	SF213	LDC	org:stateorprovince_of_headquarters	eng-WL-11-174596-12958946	346	353	Ontario	Ontario	81	1
-82	SF213	LDC	org:country_of_headquarters	eng-WL-11-174596-12953475	1047	1053	Canada	Canada	82	1
-94	SF215	LDC	org:country_of_headquarters	eng-WL-107-174567-12933979	469	471	UK	UK	94	1
 121	SF217	LDC	org:city_of_headquarters	CNA_ENG_20080726.0008.LDC2009T13	3643	3649	Taipei	Taipei	121	-1
 123	SF217	LDC	org:country_of_headquarters	CNA_ENG_20081201.0035.LDC2009T13	5019	5025	Taiwan	Taiwan	123	1
-129	SF218	LDC	org:stateorprovince_of_headquarters	eng-WL-11-174611-12972779	963	971	New York	New York	129	-1
 134	SF219	LDC	org:city_of_headquarters	AFP_ENG_20071215.0316.LDC2009T13	561	566	Paris	Paris	134	-1
 142	SF219	LDC	org:country_of_headquarters	AFP_ENG_20071026.0173.LDC2009T13	1078	1084	France	France	142	1
-164	SF221	LDC	org:country_of_headquarters	eng-NG-31-102460-10983969	2458	2465	America	America	164	1
 166	SF222	LDC	org:stateorprovince_of_headquarters	NYT_ENG_20070125.0247.LDC2009T13	1541	1547	Calif.	Calif.	166	1
 167	SF222	LDC	org:city_of_headquarters	NYT_ENG_20070125.0247.LDC2009T13	1527	1547	Agoura Hills, Calif.	Agoura Hills, Calif.	167	1
 183	SF223	LDC	org:country_of_headquarters	NYT_ENG_20080909.0136.LDC2009T13	1691	1697	Angola	Angola	183	1
@@ -28,7 +19,6 @@
 239	SF230	LDC	org:country_of_headquarters	NYT_ENG_20070522.0015.LDC2009T13	474	509	US Representative Michael Capuano,	US 	239	-1
 267	SF231	LDC	per:stateorprovince_of_birth	AFP_ENG_20070513.0173.LDC2009T13	2211	2224	Hertfordshire	Hertfordshire	267	1
 273	SF231	LDC	per:country_of_birth	APW_ENG_20081102.0697.LDC2009T13	392	399	England	England	273	1
-281	SF232	LDC	org:stateorprovince_of_headquarters	eng-NG-31-141808-9966458	1388	1396	Florida 	Florida 	281	1
 283	SF232	LDC	org:city_of_headquarters	APW_ENG_20080827.1056.LDC2009T13	1163	1170	Orlando	Orlando	283	1
 287	SF233	LDC	org:city_of_headquarters	APW_ENG_20071211.0156.LDC2009T13	1008	1013	Miami	Miami	287	1
 292	SF234	LDC	org:city_of_headquarters	NYT_ENG_20070604.0258.LDC2009T13	1222	1232	Parsippany	Parsippany	292	1
@@ -36,16 +26,12 @@
 307	SF235	LDC	org:city_of_headquarters	APW_ENG_20080305.0053.LDC2009T13	524	535	Kansas City	Kansas City	307	1
 309	SF235	LDC	org:stateorprovince_of_headquarters	NYT_ENG_20081020.0160.LDC2009T13	1364	1366	Mo	Missouri 	309	1
 315	SF236	LDC	org:stateorprovince_of_headquarters	LTW_ENG_20070801.0124.LDC2009T13	2646	2654	Virginia	Virginia	315	1
-320	SF237	LDC	org:stateorprovince_of_headquarters	eng-NG-31-142686-10071058	767	777	California	California	320	1
 325	SF238	LDC	org:city_of_headquarters	NYT_ENG_20071115.0202.LDC2009T13	1124	1132	Atlanta 	Atlanta 	325	-1
 329	SF239	LDC	org:country_of_headquarters	XIN_ENG_20070603.0084.LDC2009T13	260	267	Myanmar	Myanmar	329	1
 342	SF240	LDC	org:city_of_headquarters	LTW_ENG_20080314.0016.LDC2009T13	650	660	Washington	Washington	342	1
 356	SF242	LDC	org:country_of_headquarters	AFP_ENG_20070409.0012.LDC2009T13	253	261	Japanese	Japan	356	1
 358	SF243	LDC	org:stateorprovince_of_headquarters	AFP_ENG_20080502.0320.LDC2009T13	307	322	New South Wales	New South Wales	358	-1
 359	SF243	LDC	org:country_of_headquarters	AFP_ENG_20080502.0320.LDC2009T13	233	256	Australian rugby league	Australia	359	-1
-378	SF245	LDC	per:stateorprovince_of_birth	eng-WL-11-174643-12999935	1630	1642	West Lothian	West Lothian	378	1
-379	SF245	LDC	per:country_of_birth	eng-WL-11-174643-12999935	1644	1652	Scotland	Scotland	379	1
-382	SF246	LDC	per:country_of_birth	eng-WL-110-174612-12990534	378	385	British	England	382	1
 392	SF247	LDC	org:country_of_headquarters	XIN_ENG_20080519.0095.LDC2009T13	2420	2429	Malaysian	Malaysia	392	1
 399	SF248	LDC	per:stateorprovince_of_birth	AFP_ENG_20070220.0682.LDC2009T13	2220	2229	Louisiana	Louisiana	399	1
 406	SF249	LDC	org:city_of_headquarters	NYT_ENG_20080410.0175.LDC2009T13	4866	4873	Midland	Midland	406	1
@@ -62,7 +48,6 @@
 461	SF257	LDC	org:country_of_headquarters	APW_ENG_20070413.1500.LDC2009T13	329	333	U.S.	U.S.	461	1
 462	SF257	LDC	org:stateorprovince_of_headquarters	APW_ENG_20070413.1500.LDC2009T13	593	606	West Virginia	West Virginia	462	-1
 464	SF258	LDC	org:city_of_headquarters	AFP_ENG_20081111.0575.LDC2009T13	377	385	Jakarta 	Jakarta 	464	-1
-467	SF258	LDC	org:country_of_headquarters	eng-WL-11-174596-12950865	373	382	Indonesia	Indonesia	467	1
 485	SF260	LDC	org:city_of_headquarters	NYT_ENG_20070917.0134.LDC2009T13	9876	10000	McCain said that he and his family have been members of the North Phoenix Baptist Church in Arizona for more than 15 years. 	Phoenix	485	-1
 486	SF260	LDC	org:stateorprovince_of_headquarters	NYT_ENG_20070917.0134.LDC2009T13	9876	10000	McCain said that he and his family have been members of the North Phoenix Baptist Church in Arizona for more than 15 years. 	Arizona	486	1
 489	SF261	LDC	org:country_of_headquarters	NYT_ENG_20080522.0276.LDC2009T13	3392	3482	the New Jerusalem Foundation, a charity meant to raise money for civic projects in Israel.	Israel	489	-1
@@ -72,14 +57,11 @@
 502	SF263	LDC	org:stateorprovince_of_headquarters	APW_ENG_20071211.0028.LDC2009T13	2026	2092	the National Christmas Tree Association in Chesterfield, Missouri.	Missouri	502	1
 503	SF263	LDC	org:country_of_headquarters	APW_ENG_20071211.0028.LDC2009T13	1900	2093	a live Christmas tree in the U.S. is expected to be similar to last year's average of $40.50 (euro27.65), said Rick Dungey of the National Christmas Tree Association in Chesterfield, Missouri. 	United States of America	503	1
 509	SF264	LDC	org:city_of_headquarters	LTW_ENG_20070704.0172.LDC2009T13	398	410	LOS ANGELES Fernandez was eventually transferred to USC/Norris Comprehensive Cancer Center east of downtown	Los Angeles	509	1
-511	SF264	LDC	org:stateorprovince_of_headquarters	eng-NG-31-126512-12055955	3690	3840	California: Assistant/Associate Professor (cancer prevention, health behavior), University of Southern California, Norris Comprehensive Cancer Center 	California	511	1
 516	SF265	LDC	org:city_of_headquarters	APW_ENG_20070228.1570.LDC2009T13	1253	1263	Bethlehem 	Bethlehem 	516	1
 517	SF265	LDC	org:stateorprovince_of_headquarters	APW_ENG_20070228.1570.LDC2009T13	259	271	Pennsylvania	Pennsylvania	517	1
 518	SF265	LDC	org:country_of_headquarters	APW_ENG_20070228.1570.LDC2009T13	158	163	U.S. 	United States of America 	518	1
-526	SF266	LDC	org:country_of_headquarters	eng-NG-31-101955-11228051	2128	2146	American Red Cross	United States of America	526	1
 543	SF268	LDC	per:country_of_birth	XIN_ENG_20080224.0186.LDC2009T13	177	216	Elected president of Cuba </HEADLINE> 	Cuba 	543	1
 553	SF268	LDC	per:stateorprovince_of_birth	XIN_ENG_20080224.0243.LDC2009T13	500	516	Oriente Province	Oriente 	553	1
 647	SF280	LDC	per:country_of_birth	AFP_ENG_20070607.0542.LDC2009T13	313	320	British	Great Britain	647	1
-664	SF283	LDC	per:city_of_death	eng-WL-11-174611-12982940	424	432	Brooklyn	Brooklyn	664	1
 744	SF293	LDC	per:country_of_birth	AFP_ENG_20070412.0661.LDC2009T13	1866	1873	Malawi 	Malawi 	744	1
 757	SF295	LDC	per:country_of_birth	APW_ENG_20071021.0085.LDC2009T13	299	305	Iraqi	Iraq	757	1

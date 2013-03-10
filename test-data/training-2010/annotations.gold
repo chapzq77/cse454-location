@@ -1,31 +1,15 @@
-12	SF101	LDC	per:stateorprovince_of_birth	eng-WL-11-174592-12943032	1342	1344	NY	NY	12	1
-52	SF107	LDC	per:stateorprovince_of_birth	eng-WL-11-174611-12977045	1974	1980	Texas 	Texas 	52	1
-53	SF107	LDC	per:country_of_birth	eng-WL-11-174611-12971045	507	512	U.S. 	U.S. 	53	1
-65	SF108	LDC	org:country_of_headquarters	eng-WL-11-174585-12938274	362	371	Australia	Australia	65	1
 68	SF109	LDC	org:country_of_headquarters	AFP_ENG_20070702.0089.LDC2009T13	241	247	Iran's	Iran	68	1
 75	SF109	LDC	org:city_of_headquarters	APW_ENG_20070702.0317.LDC2009T13	393	401	Tehran's	Tehran	75	1
-95	SF111	LDC	per:country_of_birth	eng-WL-11-174572-12949958	417	426	Australia	Australia	95	1
 111	SF112	LDC	per:country_of_birth	AFP_ENG_20071108.0224.LDC2009T13	604	613	Frenchman	France	111	1
-157	SF118	LDC	org:country_of_headquarters	eng-WL-11-174596-12953128	424	497	Place: National Archives/Library of Canada, 395 Wellington Street Ottawa 	Canada	157	1
-159	SF118	LDC	org:city_of_headquarters	eng-WL-11-174596-12953128	2055	2119	The Free Thinking Film Society was established in 2007 in Ottawa	Ottawa	159	1
-184	SF121	LDC	org:country_of_headquarters	eng-NG-31-142149-10024879	559	567	Canadian	Canada	184	1
-187	SF122	LDC	org:stateorprovince_of_headquarters	eng-WL-11-174611-12976585	737	745	New York	New York	187	1
-188	SF122	LDC	org:city_of_headquarters	eng-WL-11-174611-12976585	737	745	New York	New York	188	-1
-199	SF123	LDC	per:stateorprovince_of_birth	eng-WL-11-174598-12964978	7585	7591	Oregon	Oregon	199	1
 238	SF126	LDC	org:city_of_headquarters	AFP_ENG_20070626.0062.LDC2009T13	442	449	Lynwood	Lynwood	238	1
 239	SF126	LDC	org:stateorprovince_of_headquarters	AFP_ENG_20070626.0062.LDC2009T13	451	461	California	California	239	1
-249	SF127	LDC	per:city_of_death	eng-WL-11-174611-12975539	449	456	Wichita	Wichita	249	1
-250	SF127	LDC	per:stateorprovince_of_death	eng-WL-11-174611-12975539	458	464	Kansas	Kansas	250	1
 281	SF130	LDC	org:city_of_headquarters	APW_ENG_20081119.0292.LDC2009T13	3050	3063	New York City	New York City	281	1
 282	SF130	LDC	org:stateorprovince_of_headquarters	NYT_ENG_20081007.0193.LDC2009T13	1375	1383	New York	New York	282	1
 290	SF131	LDC	org:city_of_headquarters	APW_ENG_20080509.0922.LDC2009T13	417	430	Geneva-based	Geneva	290	1
 292	SF131	LDC	org:country_of_headquarters	AFP_ENG_20070509.0565.LDC2009T13	1776	1852	Swiss secretary of state Michael Ambuehl told the opening session of the WMO	Switzerland	292	-1
-327	SF134	LDC	org:country_of_headquarters	eng-WL-11-174596-12952294	408	423	the Netherlands	the Netherlands	327	1
-328	SF134	LDC	org:city_of_headquarters	eng-WL-11-174596-12953512	1063	1068	Hague	Hague	328	1
 338	SF135	LDC	org:city_of_headquarters	NYT_ENG_20070104.0162.LDC2009T13	2876	2883	Atlanta	Atlanta	338	1
 361	SF136	LDC	org:city_of_headquarters	NYT_ENG_20081004.0126.LDC2009T13	868	874	Queens	Queens	361	1
 369	SF136	LDC	org:stateorprovince_of_headquarters	LTW_ENG_20070606.0079.LDC2009T13	516	524	New York	New York	369	1
-380	SF137	LDC	org:city_of_headquarters	eng-NG-31-133414-9536189	3332	3346	Washington, DC	Washington, DC	380	1
 386	SF137	LDC	org:country_of_headquarters	AFP_ENG_20070818.0047.LDC2009T13	869	871	US	US	386	1
 390	SF138	LDC	org:country_of_headquarters	APW_ENG_20081201.1138.LDC2009T13	504	515	Switzerland	Switzerland	390	1
 391	SF138	LDC	org:city_of_headquarters	APW_ENG_20081201.1138.LDC2009T13	496	502	Geneva	Geneva	391	1
@@ -35,7 +19,6 @@
 439	SF143	LDC	org:stateorprovince_of_headquarters	APW_ENG_20070928.0336.LDC2009T13	1951	1961	Ohio-based	Ohio	439	-1
 440	SF143	LDC	org:city_of_headquarters	APW_ENG_20070508.0855.LDC2009T13	2236	2245	Cleveland	Cleveland	440	1
 445	SF144	LDC	org:stateorprovince_of_headquarters	XIN_ENG_20071023.0233.LDC2009T13	1631	1661	North and South-Kivu provinces	North and South-Kivu provinces	445	1
-460	SF145	LDC	org:country_of_headquarters	eng-NG-31-142760-10091454	1541	1549	Canadian	Canada	460	1
 465	SF146	LDC	org:country_of_headquarters	APW_ENG_20080508.1124.LDC2009T13	291	298	French 	France	465	-1
 473	SF147	LDC	org:city_of_headquarters	NYT_ENG_20080805.0089.LDC2009T13	1329	1345	Washington, D.C.	Washington, D.C.	473	1
 474	SF147	LDC	org:stateorprovince_of_headquarters	NYT_ENG_20080805.0089.LDC2009T13	1341	1345	D.C.	D.C.	474	1
