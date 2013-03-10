@@ -1,0 +1,307 @@
+<kbpslotfill>
+  <query id="SF100">
+    <name>Hiram Monserrate</name>
+    <docid>eng-WL-11-174611-12969136</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00001</nodeid>
+  </query>
+  <query id="SF101">
+    <name>Jared Cotter</name>
+    <docid>eng-WL-110-174626-12995817</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00002</nodeid>
+  </query>
+  <query id="SF102">
+    <name>Diane Olson</name>
+    <docid>eng-WL-11-174611-12977604</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00003</nodeid>
+  </query>
+  <query id="SF103">
+    <name>Emile Lahoud</name>
+    <docid>eng-WL-11-174596-12956280</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00004</nodeid>
+  </query>
+  <query id="SF104">
+    <name>Jose Peralta</name>
+    <docid>eng-WL-11-174611-12969073</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00005</nodeid>
+  </query>
+  <query id="SF105">
+    <name>Alli Sims</name>
+    <docid>eng-WL-11-174595-12968343</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00006</nodeid>
+  </query>
+  <query id="SF106">
+    <name>Orly Taitz</name>
+    <docid>eng-WL-11-174611-12974383</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00007</nodeid>
+  </query>
+  <query id="SF107">
+    <name>Annise Parker</name>
+    <docid>eng-WL-11-174611-12973446</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00008</nodeid>
+  </query>
+  <query id="SF108">
+    <name>Screen Australia</name>
+    <docid>eng-WL-11-174585-12938157</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00009</nodeid>
+  </query>
+  <query id="SF109">
+    <name>Quds Force</name>
+    <docid>eng-WL-11-174596-12952726</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00010</nodeid>
+  </query>
+  <query id="SF110">
+    <name>Clive Davis</name>
+    <docid>eng-WL-110-174612-12992437</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00011</nodeid>
+  </query>
+  <query id="SF111">
+    <name>Corey Bohan</name>
+    <docid>eng-WL-11-174572-12948236</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00012</nodeid>
+  </query>
+  <query id="SF112">
+    <name>Arsene Wenger</name>
+    <docid>eng-WL-110-174613-12994655</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00013</nodeid>
+  </query>
+  <query id="SF113">
+    <name>Steve Schalchlin</name>
+    <docid>eng-WL-11-174611-12982622</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00014</nodeid>
+  </query>
+  <query id="SF114">
+    <name>Masi Oka</name>
+    <docid>eng-WL-11-174592-12943233</docid>
+    <enttype>PER</enttype>
+    <nodeid>E0300113</nodeid>
+    <ignore>per:date_of_birth per:age per:country_of_birth per:city_of_birth</ignore>
+  </query>
+  <query id="SF115">
+    <name>Annie Liebovitz</name>
+    <docid>eng-WL-11-174643-13000334</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00015</nodeid>
+  </query>
+  <query id="SF116">
+    <name>Amy MacDonald</name>
+    <docid>eng-WL-109-174581-12950735</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00016</nodeid>
+  </query>
+  <query id="SF117">
+    <name>Danny Moder</name>
+    <docid>eng-WL-11-174594-12963703</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00017</nodeid>
+  </query>
+  <query id="SF118">
+    <name>Free Thinking Film Society</name>
+    <docid>eng-WL-11-174596-12952578</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00018</nodeid>
+  </query>
+  <query id="SF119">
+    <name>Kurt Westergaard</name>
+    <docid>eng-WL-11-174596-12951082</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00019</nodeid>
+  </query>
+  <query id="SF120">
+    <name>Levi Johnston</name>
+    <docid>eng-WL-11-174575-12948893</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00020</nodeid>
+  </query>
+  <query id="SF121">
+    <name>Canadian Islamic Congress</name>
+    <docid>eng-WL-11-174596-12950886</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00021</nodeid>
+  </query>
+  <query id="SF122">
+    <name>Creative Coalition</name>
+    <docid>eng-WL-109-174581-12950234</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00022</nodeid>
+  </query>
+  <query id="SF123">
+    <name>Holly Madison</name>
+    <docid>eng-WL-11-174595-12968314</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00023</nodeid>
+  </query>
+  <query id="SF124">
+    <name>Kimora Lee Simmons</name>
+    <docid>eng-WL-11-174595-12968551</docid>
+    <enttype>PER</enttype>
+    <nodeid>E0018726</nodeid>
+    <ignore>per:date_of_birth per:age per:country_of_birth per:stateorprovince_of_birth per:city_of_birth</ignore>
+  </query>
+  <query id="SF125">
+    <name>Linda Hogan</name>
+    <docid>eng-WL-11-174595-12972970</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00024</nodeid>
+  </query>
+  <query id="SF126">
+    <name>Century Regional Detention Center</name>
+    <docid>eng-WL-11-174595-12968241</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00025</nodeid>
+  </query>
+  <query id="SF127">
+    <name>George Tiller</name>
+    <docid>eng-WL-11-174575-12948812</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00026</nodeid>
+  </query>
+  <query id="SF128">
+    <name>David Coleman Headley</name>
+    <docid>eng-WL-11-174596-12951768</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00027</nodeid>
+  </query>
+  <query id="SF129">
+    <name>Richard Goldstone</name>
+    <docid>eng-WL-11-174596-12952002</docid>
+    <enttype>PER</enttype>
+    <nodeid>NIL00028</nodeid>
+  </query>
+  <query id="SF130">
+    <name>GLSEN</name>
+    <docid>eng-WL-11-174611-12981530</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00029</nodeid>
+  </query>
+  <query id="SF131">
+    <name>World Meteorological Organization</name>
+    <docid>eng-WL-11-174596-12954197</docid>
+    <enttype>ORG</enttype>
+    <nodeid>E0351519</nodeid>
+  </query>
+  <query id="SF132">
+    <name>Halliburton</name>
+    <docid>eng-WL-11-174595-12966605</docid>
+    <enttype>ORG</enttype>
+    <nodeid>E0137767</nodeid>
+    <ignore>org:number_of_employees/members org:founded org:country_of_headquarters org:stateorprovince_of_headquarters org:city_of_headquarters org:website</ignore>
+  </query>
+  <query id="SF133">
+    <name>Dionne Warwick</name>
+    <docid>eng-WL-11-174643-13000390</docid>
+    <enttype>PER</enttype>
+    <nodeid>E0017142</nodeid>
+    <ignore>per:date_of_birth per:age per:stateorprovince_of_birth per:city_of_birth</ignore>
+  </query>
+  <query id="SF134">
+    <name>CIDI</name>
+    <docid>eng-WL-11-174596-12956724</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00030</nodeid>
+  </query>
+  <query id="SF135">
+    <name>Cingular</name>
+    <docid>eng-WL-11-174595-12967473</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00031</nodeid>
+  </query>
+  <query id="SF136">
+    <name>New York Mets</name>
+    <docid>eng-WL-11-174643-13000249</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00032</nodeid>
+  </query>
+  <query id="SF137">
+    <name>FEMA</name>
+    <docid>eng-WL-11-174575-12945138</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00033</nodeid>
+  </query>
+  <query id="SF138">
+    <name>UNAIDS</name>
+    <docid>eng-WL-11-174611-12984378</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00034</nodeid>
+  </query>
+  <query id="SF139">
+    <name>Walmart</name>
+    <docid>eng-WL-11-174574-12938159</docid>
+    <enttype>ORG</enttype>
+    <nodeid>E0540204</nodeid>
+    <ignore>org:number_of_employees/members org:country_of_headquarters org:stateorprovince_of_headquarters org:city_of_headquarters org:website</ignore>
+  </query>
+  <query id="SF140">
+    <name>National Center for State Courts</name>
+    <docid>APW_ENG_20070801.0030.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00035</nodeid>
+  </query>
+  <query id="SF141">
+    <name>Massey Energy</name>
+    <docid>NYT_ENG_20080118.0219.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00036</nodeid>
+  </query>
+  <query id="SF142">
+    <name>Islamic Charity Movement</name>
+    <docid>AFP_ENG_20080430.0485.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00037</nodeid>
+  </query>
+  <query id="SF143">
+    <name>International Steel Group</name>
+    <docid>XIN_ENG_20070221.0213.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00038</nodeid>
+  </query>
+  <query id="SF144">
+    <name>Mai-Mai militia</name>
+    <docid>AFP_ENG_20081108.0221.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00039</nodeid>
+  </query>
+  <query id="SF145">
+    <name>Canadian Jewish Congress</name>
+    <docid>eng-WL-11-174596-12956886</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00040</nodeid>
+  </query>
+  <query id="SF146">
+    <name>Lancome</name>
+    <docid>eng-WL-11-174599-12965329</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00041</nodeid>
+  </query>
+  <query id="SF147">
+    <name>Peter D. Hart Research Associates</name>
+    <docid>NYT_ENG_20080911.0006.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00042</nodeid>
+  </query>
+  <query id="SF148">
+    <name>Pembina Institute</name>
+    <docid>APW_ENG_20080824.0044.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00043</nodeid>
+  </query>
+  <query id="SF149">
+    <name>Nixon Center</name>
+    <docid>LTW_ENG_20071006.0065.LDC2009T13</docid>
+    <enttype>ORG</enttype>
+    <nodeid>NIL00044</nodeid>
+  </query>
+</kbpslotfill>
