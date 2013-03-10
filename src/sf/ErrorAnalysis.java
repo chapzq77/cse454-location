@@ -9,14 +9,19 @@ import util.FileUtil;
 
 public class ErrorAnalysis {
 	public static void main(String[] args) {
-		getLabels("per:country_of_birth");
+		if ( args.length < 2 ) {
+			System.err.println( "Missing args." );
+			System.err.println( "You need to provide the label and the gold " +
+					"annotation file to read correct answers from." );
+		}
+		getLabels(args[0], args[1]);
 	}
 	/**
 	 * print out all the correct answers for the slot
  	 * @param slot
  	 */
-	public static void getLabels(String slot) {
-		String[] lines = FileUtil.getTextFromFile(SFConstants.labelFile).split(
+	public static void getLabels(String slot, String labelFile) {
+		String[] lines = FileUtil.getTextFromFile(labelFile).split(
 				"\n");
 		for (String line : lines) {
 			String[] fields = line.split("\t");

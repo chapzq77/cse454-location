@@ -22,14 +22,6 @@ public class SFConstants {
 
 	// a default list of data types
 	public static final String[] dataTypes = {ARTICLE_IDS,CJ,DEPS_STANFORD_CC_PROCESSED,META,STANFORDLEMMA,STANFORDNER,STANFORDPOS,TEXT,TOKENS,TOKEN_SPANS,WIKI};
-
-	// slot filling queries
-	public static final String queryFile = KbpConstants.truncatedRootPath + "sf/tac_2010_kbp_evaluation_slot_filling_queries.xml";
-
-	// slot filling output file
-	public static final String outFile = KbpConstants.truncatedRootPath + "sf/sf.pred";
-
-	public static final String labelFile = KbpConstants.truncatedRootPath + "sf/sf.gold";
 	
 	public static final String DATA_DIR = "data/";
 	public static final String COUNTRIES_FILE = DATA_DIR + "countries.txt";

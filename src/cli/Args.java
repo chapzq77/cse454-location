@@ -31,21 +31,12 @@ public class Args {
 		FILLER_ABBREVS.put("tr-homes", TregexPerPlacesOfResidenceFiller.class );
 	}
 	
-	// Abbreviations for data sources.
-	public static Map<String, String> DATA_SRC_ABBREVS;
-	public static String DEFAULT_DATA_SRC = "sample";
-	static {
-		DATA_SRC_ABBREVS = new HashMap<String, String>();
-		DATA_SRC_ABBREVS.put("filtered", "data/large-corpus/");
-		DATA_SRC_ABBREVS.put("sample", "data/unfiltered-corpus/");
-		DATA_SRC_ABBREVS.put("full", "/kbp/data/09nw/");
-	}
-	
 	public boolean run, eval, verbose;
 	public long limit;
 	public Set<Class<? extends Filler>> fillers;
 	private PrintStream out;
-	public String dataSrc;
+	public File corpus;
+	public File testSet;
 	
 	public void usage() {
 		// Display initial arguments.
@@ -57,15 +48,17 @@ public class Args {
 				    "-limit n     - Limit to n sentences. If n == 0, " + 
 	                    "the number of sentences is not limited.\n");
 		
-		// Display data sources.
-		out.println("-data x      - Use data source x, which is either " +
-		                "the path to the folder containing\n" +
-				    "               sentences.txt files, or one of the " +
-		                "following:");
-		for ( Map.Entry<String, String> entry :
-			DATA_SRC_ABBREVS.entrySet() ) {
-			out.printf( "  %-10s - Use %s\n", entry.getKey(),
-					entry.getValue() );
+		// Display corpus samples.
+		out.println("-corpus x    - Use data source x, which is " +
+		            "               the path to the folder containing\n" +
+				    "               sentences.txt files. This path may be \n" +
+		            "               relative to the corpus-samples/ \n" +
+				    "               directory in your repository, which\n" +
+		            "               includes the following:");
+		File dir = new File( "corpus-samples" );
+		for ( File child : dir.listFiles() ) {
+			if ( !child.isDirectory() ) continue;
+			out.println( "               * " + child.getName() );
 		}
 		
 		// Display filler names.
@@ -75,12 +68,22 @@ public class Args {
 		}
 		out.println("(class name) - Use the filler with the given class name.");
 		out.println("all-fillers  - Use all fillers in filterAbbrevs.");
+		
+		// Display test sets.
+		out.println("-test-set x  - Use the queries and annotations in the " +
+		            "               given directory x. This path may be \n" +
+		            "               relative to the test-data/ \n" +
+				    "               directory in your repository, which\n" +
+		            "               includes the following:");
+		dir = new File( "test-data" );
+		for ( File child : dir.listFiles() ) {
+			if ( !child.isDirectory() ) continue;
+			out.println( "               * " + child.getName() );
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Args( String[] args, PrintStream out ) {
-		dataSrc = DATA_SRC_ABBREVS.get( DEFAULT_DATA_SRC );
-		
 		try {
 			this.out = out;
 			
@@ -113,23 +116,37 @@ public class Args {
 								"Missing number of sentences to limit to.");
 					}
 				}
-				// Pick the data source
-				else if ( arg.equals("-data") ) {
+				
+				// Pick the corpus
+				else if ( arg.equals("-corpus") ) {
 					idx++;
-					try {
-						dataSrc = DATA_SRC_ABBREVS.get(args[idx]);
-						if ( dataSrc == null ) {
-							dataSrc = args[idx];
+					String corpusPath = args[idx];
+					corpus = new File( new File("corpus-samples"),
+							corpusPath );
+					if ( !corpus.isDirectory() ) {
+						corpus = new File( corpusPath );
+						if ( !corpus.isDirectory() ) {
+							throw new IllegalArgumentException( "The corpus" +
+									" path " + corpusPath +
+									" must be a directory.");
 						}
-						if ( !(new File(dataSrc)).isDirectory() ) {
-							throw new IllegalArgumentException(
-									dataSrc + " must be a directory.");
-						}
-					} catch( ArrayIndexOutOfBoundsException ex ) {
-						throw new IllegalArgumentException(
-								"Missing path to data, or path abbrev.");
 					}
 				}
+				
+				// Pick the test set
+				else if ( arg.equals("-test-set") ) {
+					idx++;
+					String testPath = args[idx];
+					testSet = new File( new File("test-data"), testPath );
+					if ( !testSet.isDirectory() ) {
+						testSet = new File( testPath );
+						if ( !testSet.isDirectory() ) {
+							throw new IllegalArgumentException( "The test path "
+									+ testPath + " must be a directory.");
+						}
+					}
+				}
+				
 				// If a class abbrev was provided, use it as a filler.
 				else if ( ( filler = FILLER_ABBREVS.get( arg ) ) != null )
 					fillers.add( filler );
@@ -157,6 +174,16 @@ public class Args {
 				throw new IllegalArgumentException(
 						"No fillers specified.");
 			}
+			
+			if ( corpus == null ) {
+				throw new IllegalArgumentException(
+						"No corpus sample specified.");
+			}
+			
+			if ( testSet == null ) {
+				throw new IllegalArgumentException(
+						"A test set (with queries and annotations) is required.");
+			}
 		} catch( IllegalArgumentException ex ) {
 			out.println( ex.getMessage() + "\n" );
 			usage();
@@ -168,6 +195,6 @@ public class Args {
 	public String toString() {
 		return "run=" + run + "\neval=" + eval +
 			   "\nlimit=" + limit + "\nfillers=" + fillers +
-			   "\ndataSrc=" + dataSrc;
+			   "\ncorpus=" + corpus + "\ntest-set" + testSet;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.*;
 
 import sf.SFConstants;
 import sf.retriever.CorefMention.*;
+import util.FileUtil;
 
 public class CorefIndex implements AutoCloseable {
 	public static final String CORPUS_FILE = "documents.coref";
@@ -26,10 +27,11 @@ public class CorefIndex implements AutoCloseable {
 	 * @throws FileNotFoundException if the document cannot be found.
 	 */
 	public CorefIndex( String path ) throws Exception {
-		this( new InputStreamReader( new FileInputStream( path +
-				CORPUS_FILE ) ), new ProcessedCorpus( path,
+		this( new InputStreamReader(
+				new FileInputStream(FileUtil.joinPaths( path, CORPUS_FILE ) )),
+				new ProcessedCorpus( path,
 				new String[] { SFConstants.WIKI, SFConstants.ARTICLE_IDS,
-				SFConstants.STANFORDNER } ) );
+							   SFConstants.STANFORDNER } ) );
 	}
 	
 	/**

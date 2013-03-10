@@ -70,7 +70,8 @@ public class ProcessedCorpus implements Iterator<Map<String, String>>, AutoClose
 		}
 		for (String dataType : dataTypes) {
 			try {
-				String filename = path + SFConstants.prefix + "." + dataType;
+				String filename = new File( new File( path ),
+						SFConstants.prefix + "." + dataType ).getPath();
 				if (new File(filename).exists()) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(

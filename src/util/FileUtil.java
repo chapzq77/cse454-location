@@ -54,4 +54,15 @@ public class FileUtil {
 	static public void copyFile(String src, String dst){
 		writeTextToFile(getTextFromFile(src), dst);
 	}
+	
+	public static String joinPaths( String... paths ) {
+		if ( paths.length == 0 )
+			return "";
+		File f = null;
+		for ( String path : paths ) {
+			if ( f == null ) f = new File( path );
+			else f = new File( f, path );
+		}
+		return f.toString();
+	}
 }

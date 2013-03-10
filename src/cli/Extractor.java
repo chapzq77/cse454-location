@@ -36,11 +36,12 @@ import util.FileUtil;
  * @author Xiao Ling
  */
 
-public class LocationFiller {
+public class Extractor {
 	public static void run(Args args) throws InstantiationException, IllegalAccessException {
 		// read the queries
 		sf.query.QueryReader queryReader = new sf.query.QueryReader();
-		queryReader.readFrom(SFConstants.queryFile);
+		queryReader.readFrom( new File( args.testSet, "queries.xml" )
+			.getPath() );
 		
 		// Construct fillers
 		Filler[] fillers = new Filler[ args.fillers.size() ];
@@ -51,7 +52,7 @@ public class LocationFiller {
 		
 		StringBuilder answersString = new StringBuilder();
 		
-		String basePath = args.dataSrc;
+		String basePath = args.corpus.getPath();
 		
 		// initialize the corpus
 		// FIXME replace the list by a generic class with an input of slot
@@ -140,7 +141,7 @@ public class LocationFiller {
 		}
 		
 		FileUtil.writeTextToFile(answersString.toString(),
-				SFConstants.outFile);
+				new File( args.testSet, "annotations.pred" ).getPath() );
 	}
 	
 	public static void main(String[] argsList) throws Exception {
@@ -162,8 +163,14 @@ public class LocationFiller {
 		// 9. answer string
 		// 10. equiv. class for the answer in different strings
 		// 11. judgement. Correct ones are labeled as 1.
-		if (args.eval)
-			SFScore.main(new String[] {SFConstants.outFile,
-					                   SFConstants.labelFile}); 
+		if (args.eval) {
+			String goldAnnotationPath =
+					new File( args.testSet, "annotations.gold" ).getPath();
+			String predictedAnnotationPath =
+					new File( args.testSet, "annotations.pred" ).getPath();
+			SFScore.main(new String[] { predictedAnnotationPath,
+										goldAnnotationPath,
+										"anydoc" });
+		}
 	}
 }
