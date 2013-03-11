@@ -31,7 +31,7 @@ public class RegexLocationFiller extends Filler {
 
 		// check if the name is mentioned.
 		String tokens = annotations.get(SFConstants.TOKENS);
-		if ((per && containsName(mention, tokens, sentenceCoref) != -1) ||
+		if ((per && containsName(mention, tokens, sentenceCoref) == -1) ||
 				(org && !containsOrg(mention, tokens)))
 			return;
 		
