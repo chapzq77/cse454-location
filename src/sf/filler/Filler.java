@@ -52,14 +52,17 @@ public abstract class Filler {
 	}
 	
 	protected boolean containsOrg(SFEntity mention, String tokens) {
-		return tokens.contains(mention.mentionString);
+		String name = mention.mentionString;
+		if (name.length() > 20)
+			name = name.substring(0, 20);
+		return tokens.toLowerCase().contains(name.toLowerCase());
 	}
 	
 	protected List<String> extractLocations(Map<String, String> annotations, String tokens) {
 		List<String> locs = new ArrayList<String>();
 		String[] namedEnts = annotations.get(SFConstants.STANFORDNER).split("\\s+"); // splitting by \t wasnt working...
 		String[] tokensArr = tokens.split("\\s+");
-		
+
 		for (int i = 0; i < namedEnts.length; i++) {
 			if (namedEnts[i].equals("LOCATION")) {
 				String location = tokensArr[i];
@@ -69,7 +72,14 @@ public abstract class Filler {
 				locs.add(location);
 			}
 		}
-		
+
+		// bug in NER, doesn't understand "Tokyo-based" as a location
+		for (int i = 0; i < tokensArr.length; i++) {
+			if (tokensArr[i].contains("-based")) {
+				locs.add(tokensArr[i].substring(0, tokensArr[i].length() - 6));
+			}
+		}
+
 		return locs;
 	}
 	
