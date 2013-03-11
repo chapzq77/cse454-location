@@ -1,5 +1,6 @@
 package sf.filler;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -34,14 +35,14 @@ public abstract class Filler {
 		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.ORG);
 	}
 	
-	protected boolean containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
+	protected int containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
 		Collection<CorefMention> sentenceMentions = sentenceCoref.all();
 		for(CorefMention coref : sentenceMentions) {
 			if(mention.mentionString.equals(coref.entity.repMention.entity.fullName)) {
-				return true;
+				return coref.head;
 			}
 		}
-		return tokens.contains(mention.mentionString);
+		return tokens.contains(mention.mentionString) ? Arrays.asList(tokens.split(" ")).indexOf(mention.mentionString.split(" ")[0]) : -1;
 		/*
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
@@ -104,7 +105,7 @@ public abstract class Filler {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return countries.contains(location);
+		return countries.contains(location.toLowerCase());
 	}
 	
 	protected boolean isStateProv(String location) {
@@ -122,6 +123,6 @@ public abstract class Filler {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return stateProvs.contains(location);
+		return stateProvs.contains(location.toLowerCase());
 	}
 }

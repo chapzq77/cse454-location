@@ -26,10 +26,10 @@ public abstract class BaseTregexFiller extends Filler {
 		List<String> places = new ArrayList<String>();
 		while(m.find()) {
 			Tree match = m.getMatch();
-			for(Tree node : match.children()) {
-				if(node.label().value().startsWith("NNP")) {
-					places.add(node.firstChild().value());
-				}
+			for(Tree node : match.getLeaves()) {
+				String name = node.value();
+				name.replace("-based", "");
+				places.add(name);
 			}
 		}
 		

@@ -30,7 +30,8 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isORG(mention))
 			return;
-		if (!containsName(mention, tokens, sentenceCoref))
+		int mentionIndex = containsName(mention, tokens, sentenceCoref);
+		if (mentionIndex == -1)
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
@@ -47,14 +48,19 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 		ArrayList<String> places = new ArrayList<String>();
 		
 		// Try to match for Place's Mention
-		StringBuilder possessiveMatch = new StringBuilder("NP < (NNP > (NP < POS) >> (NP");
-		for(String mentionToken : mention.mentionString.split(" ")) {
-			possessiveMatch.append(" << /" + mentionToken + "/");
-		}
-		possessiveMatch.append("))");
-		places.addAll(getMatchNames(possessiveMatch.toString(), t, annotations, sentenceCoref));
+		String actualMention = tokens.split(" ")[mentionIndex];
+		places.addAll(getMatchNames("NP < (NNP > (NP < POS) >> (NP << /" + actualMention + "/ ))", t, annotations, sentenceCoref));
 		
-		//places.addAll(getMatchNames("NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP)", t));
+		// Try to match Place-based Mention
+		places.addAll(getMatchNames("ADJP << /based/", t, annotations, sentenceCoref));
+		
+		// Try to match adjective phrases
+		places.addAll(getMatchNames("JJ > (NP << /" + actualMention + "/ )", t, annotations, sentenceCoref));
+		
+		// Try to match verbed in Place
+		places.addAll(getMatchNames("NP >> (PP < (IN < /^in$/) > (VP < (VBN < /^(based|located|headquartered|centered)$/)))", t, annotations, sentenceCoref));
+		
+		//places.addAll(getMatchNames("NP < (NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP))", t, annotations, sentenceCoref));
 		
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
