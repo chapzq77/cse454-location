@@ -34,7 +34,7 @@ public class RegexLocationFiller extends Filler {
 		if ((per && !containsName(mention, tokens, sentenceCoref)) ||
 				(org && !containsOrg(mention, tokens)))
 			return;
-			
+		
 		// find locations, if any exist, in tokens
 		List<String> locations = extractLocations(annotations, tokens);
 		if (locations.size() == 0)
@@ -42,6 +42,7 @@ public class RegexLocationFiller extends Filler {
 		
 		String filename = getFilename(annotations);
 		if (per) {
+			// per place of birth
 			if (mentionsRegex(tokens, SFConstants.BIRTH_REGEX)) {
 				for (String location : locations) {
 					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[0]))
@@ -52,6 +53,7 @@ public class RegexLocationFiller extends Filler {
 						mention.addAnswer(SFConstants.slotNames[2], location, filename);
 				}
 			}
+			// per place of death
 			if (mentionsRegex(tokens, SFConstants.DEATH_REGEX)) {
 				for (String location : locations) {
 					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[3]))
@@ -64,14 +66,25 @@ public class RegexLocationFiller extends Filler {
 			}
 		}
 		if (org) {
-			if (mentionsRegex(tokens, SFConstants.HQ_REGEX)) {
+			// org place of headquarters
+			boolean hqReg = mentionsRegex(tokens, SFConstants.HQ_REGEX);
+			String orgName = mention.mentionString;
+			if (orgName.length() > 20)
+				orgName = orgName.substring(0,20);
+			if (hqReg || tokens.contains("'s") || tokens.contains("in")) {
 				for (String location : locations) {
-					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[6]))
-						mention.addAnswer(SFConstants.slotNames[6], location, filename);
-					else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[7]))
-						mention.addAnswer(SFConstants.slotNames[7], location, filename);
-					else if (!mention.ignoredSlots.contains(SFConstants.slotNames[8]))
-						mention.addAnswer(SFConstants.slotNames[8], location, filename);
+					String locRegex = "(?i)" + location + " 's .*" + orgName + "|" +
+							"(" + orgName + "|organization|company).{0,30} in .{0,20}" + location + "|" +
+							"^\\d*\\sin " + location;
+					if (hqReg || mentionsRegex(tokens, locRegex)) {
+						int conf = (tokens.contains(location + "-based")) ? 2 : 1;
+						if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[6]))
+							mention.addAnswer(SFConstants.slotNames[6], location, filename, conf);
+						else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[7]))
+							mention.addAnswer(SFConstants.slotNames[7], location, filename, conf);
+						else if (!mention.ignoredSlots.contains(SFConstants.slotNames[8]))
+							mention.addAnswer(SFConstants.slotNames[8], location, filename, conf);
+					}
 				}
 			}
 		}

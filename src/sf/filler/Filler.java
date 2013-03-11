@@ -52,7 +52,10 @@ public abstract class Filler {
 	}
 	
 	protected boolean containsOrg(SFEntity mention, String tokens) {
-		return tokens.contains(mention.mentionString);
+		String name = mention.mentionString;
+		if (name.length() > 20)
+			name = name.substring(0, 20);
+		return tokens.toLowerCase().contains(name.toLowerCase());
 	}
 	
 	protected List<String> extractLocations(Map<String, String> annotations, String tokens) {
@@ -67,6 +70,13 @@ public abstract class Filler {
 					location += " " + tokensArr[i];
 				}
 				locs.add(location);
+			}
+		}
+		
+		// bug in NER, doesn't understand "Tokyo-based" as a location
+		for (int i = 0; i < tokensArr.length; i++) {
+			if (tokensArr[i].contains("-based")) {
+				locs.add(tokensArr[i].substring(0, tokensArr[i].length() - 6));
 			}
 		}
 		

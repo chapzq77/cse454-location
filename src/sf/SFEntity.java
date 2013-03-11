@@ -39,8 +39,13 @@ public class SFEntity extends EntityMention {
 		}
 	}
 	
-	// adds answer/count to ongoing list.
+	// add an answer with default confidence of 1
 	public void addAnswer(String slotName, String location, String docName) {
+		addAnswer(slotName, location, docName, 1);
+	}
+	
+	// adds answer with a given confidence
+	public void addAnswer(String slotName, String location, String docName, int conf) {
 		
 		// at least one answer exists for this slot
 		if (answers.containsKey(slotName)) {
@@ -49,7 +54,7 @@ public class SFEntity extends EntityMention {
 			boolean found = false;
 			for (SingleAnswer ans : answers.get(slotName)) {
 				if (ans.answer.equals(location)) {
-					ans.count++;
+					ans.count += conf;
 					found = true;
 					break;
 				}
@@ -60,7 +65,7 @@ public class SFEntity extends EntityMention {
 				SingleAnswer ans = new SingleAnswer();
 				ans.answer = location;
 				ans.doc = docName;
-				ans.count = 1;
+				ans.count = conf;
 				answers.get(slotName).add(ans);
 			}
 			
@@ -70,7 +75,7 @@ public class SFEntity extends EntityMention {
 			SingleAnswer ans = new SingleAnswer();
 			ans.answer = location;
 			ans.doc = docName;
-			ans.count = 1;
+			ans.count = conf;
 			
 			// create List of Answers containing SingleAnswer
 			List<SingleAnswer> ansList = new ArrayList<SingleAnswer>();
