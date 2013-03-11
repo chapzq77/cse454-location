@@ -47,6 +47,7 @@ public class TregexPerPlaceOfBirthFiller extends BaseTregexFiller {
 		
 		// TODO not very good, need a way to combine multiple word place names
 		// TODO also check for LOCATION tags
+		//System.out.println(places);
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfBirth)) {
@@ -56,7 +57,7 @@ public class TregexPerPlaceOfBirthFiller extends BaseTregexFiller {
 				if(!mention.ignoredSlots.contains(stateOfBirth)) {
 					mention.addAnswer(stateOfBirth, placeName, filename);
 				}
-			} else {
+			} else if(placeName.length() > 1){
 				if(!mention.ignoredSlots.contains(cityOfBirth)) {
 					mention.addAnswer(cityOfBirth, placeName, filename);
 				}

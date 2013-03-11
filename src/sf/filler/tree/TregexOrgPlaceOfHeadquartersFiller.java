@@ -16,7 +16,7 @@ import sf.SFEntity;
 import sf.filler.Filler;
 import sf.retriever.CorefProvider;
 
-public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
+public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 
 	private static final String countryOfHeadquarters = "org:country_of_headquarters";
 	private static final String stateOfHeadquarters = "org:stateorprovince_of_headquarters";
@@ -38,6 +38,7 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
+		String ner = annotations.get(SFConstants.STANFORDNER);
 		String filename = getFilename(annotations);
 		Tree t = null;
 		
@@ -48,30 +49,18 @@ public class TregexOrgPlaceOfHeadquartersFiller extends Filler {
 			e.printStackTrace();
 		}
 		
-		TregexPattern p = TregexPattern.compile("NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP)");
-		TregexMatcher m = p.matcher(t);
+		ArrayList<String> places = new ArrayList<String>();
 		
-		Tree parent = null;
-		List<String> places = new ArrayList<String>();
-		StringBuilder place = new StringBuilder();
-		if(m.find()) {
-			parent = m.getMatch().parent();
-			place.append(m.getMatch().firstChild().value());
-			while(m.find()) {
-				if(m.getMatch().parent().equals(parent)) {
-					place.append(" ");
-					place.append(m.getMatch().firstChild().value());
-				} else {
-					places.add(place.toString());
-					place = new StringBuilder();
-					place.append(m.getMatch().firstChild().value());
-				}
-			}
+		// Try to match for Place's Mention
+		StringBuilder possessiveMatch = new StringBuilder("NP < (NNP > (NP < POS) >> (NP");
+		for(String mentionToken : mention.mentionString.split(" ")) {
+			possessiveMatch.append(" << /" + mentionToken + "/");
 		}
-		places.add(place.toString());
+		possessiveMatch.append("))");
+		places.addAll(getMatchNames(possessiveMatch.toString(), t, annotations, sentenceCoref));
 		
-		// not very good, need a way to combine multiple word place names
-		// also check for LOCATION tags
+		//places.addAll(getMatchNames("NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP)", t));
+		
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {

@@ -37,17 +37,18 @@ public abstract class Filler {
 	protected boolean containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
 		Collection<CorefMention> sentenceMentions = sentenceCoref.all();
 		for(CorefMention coref : sentenceMentions) {
-			//if(coref.corefEntity.repMention.mentionSpan.equals(mention.mentionString)) {
-			//	return true;
-			//}
+			if(mention.mentionString.equals(coref.entity.repMention.entity.fullName)) {
+				return true;
+			}
 		}
-		
+		return tokens.contains(mention.mentionString);
+		/*
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
 		// do case-insensitive match only if name is long
 		// (otherwise White and white, Rose and rose, etc match)
 		String regex = (lastName.length() > 5 ? "(?i)" : "") + "\\b" + lastName + "\\b";
-		return mentionsRegex(tokens, regex);
+		return mentionsRegex(tokens, regex);*/
 	}
 	
 	protected boolean containsOrg(SFEntity mention, String tokens) {

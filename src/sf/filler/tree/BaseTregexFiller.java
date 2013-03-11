@@ -1,40 +1,55 @@
 package sf.filler.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.tregex.TregexMatcher;
 import edu.stanford.nlp.trees.tregex.TregexPattern;
 
+import sf.SFConstants;
 import sf.filler.Filler;
+import sf.retriever.CorefEntity;
+import sf.retriever.CorefMention;
+import sf.retriever.CorefProvider;
+import sf.retriever.NerType;
 
 public abstract class BaseTregexFiller extends Filler {
 	
-	protected List<String> getMatchNames(String pattern, Tree t) {
+	protected List<String> getMatchNames(String pattern, Tree t, Map<String, String> annotations, CorefProvider coref) {
 		TregexPattern p = TregexPattern.compile(pattern);
 		TregexMatcher m = p.matcher(t);
 		
-		Tree parent = null;
 		List<String> places = new ArrayList<String>();
-		StringBuilder place = new StringBuilder();
-		if(m.find()) {
-			parent = m.getMatch().parent();
-			place.append(m.getMatch().firstChild().value());
-			while(m.find()) {
-				if(m.getMatch().parent().equals(parent)) {
-					place.append(" ");
-					place.append(m.getMatch().firstChild().value());
-				} else {
-					places.add(place.toString());
-					place = new StringBuilder();
-					place.append(m.getMatch().firstChild().value());
+		while(m.find()) {
+			Tree match = m.getMatch();
+			boolean first = true;
+			for(Tree node : match.children()) {
+				if(node.label().value().startsWith("NNP")) {
+					places.add(node.firstChild().value());
 				}
 			}
 		}
-		places.add(place.toString());
 		
-		return places;
+		ArrayList<String> retPlaces = new ArrayList<String>();
+		List<String> tokens = Arrays.asList(annotations.get(SFConstants.TOKENS).split(" "));
+		List<String> ner = Arrays.asList(annotations.get(SFConstants.STANFORDNER).split(" "));
+		for(String place : places) {
+			int placeIndex = tokens.indexOf(place);
+			if(placeIndex >= 0) {
+				Collection<CorefMention> corefs = coref.inRange(placeIndex, placeIndex);
+				if(corefs.size() > 0) {
+					CorefEntity entity = corefs.iterator().next().entity;
+					if(entity.nerType == NerType.LOCATION)
+						retPlaces.add(entity.repMention.entity.fullName);
+				}
+			}
+		}
+		
+		return retPlaces;
 	}
 	
 }
