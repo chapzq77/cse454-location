@@ -42,8 +42,8 @@ public class TregexPerPlacesOfResidenceFiller extends BaseTregexFiller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<String> places = getMatchNames("NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /lived/))))", t);
-		places.addAll(getMatchNames("NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /grew/))))", t));
+		List<String> places = getMatchNames("NNP|NNPS >> (NP >> (PP < (IN < /^(in|at)$/) > (VP < (VBD|VBN < /lived/))))", t, annotations, sentenceCoref);
+		places.addAll(getMatchNames("NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /grew/))))", t, annotations, sentenceCoref));
 		
 		// TODO not very good, need a way to combine multiple word place names
 		// TODO also check for LOCATION tags

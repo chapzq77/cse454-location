@@ -3,17 +3,13 @@ package sf.filler.tree;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import edu.stanford.nlp.trees.PennTreeReader;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.tregex.TregexMatcher;
-import edu.stanford.nlp.trees.tregex.TregexPattern;
 
 import sf.SFConstants;
 import sf.SFEntity;
-import sf.filler.Filler;
 import sf.retriever.CorefProvider;
 
 public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
@@ -38,7 +34,6 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
-		String ner = annotations.get(SFConstants.STANFORDNER);
 		String filename = getFilename(annotations);
 		Tree t = null;
 		

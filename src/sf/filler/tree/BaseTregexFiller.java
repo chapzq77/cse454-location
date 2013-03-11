@@ -26,7 +26,6 @@ public abstract class BaseTregexFiller extends Filler {
 		List<String> places = new ArrayList<String>();
 		while(m.find()) {
 			Tree match = m.getMatch();
-			boolean first = true;
 			for(Tree node : match.children()) {
 				if(node.label().value().startsWith("NNP")) {
 					places.add(node.firstChild().value());
@@ -36,7 +35,6 @@ public abstract class BaseTregexFiller extends Filler {
 		
 		ArrayList<String> retPlaces = new ArrayList<String>();
 		List<String> tokens = Arrays.asList(annotations.get(SFConstants.TOKENS).split(" "));
-		List<String> ner = Arrays.asList(annotations.get(SFConstants.STANFORDNER).split(" "));
 		for(String place : places) {
 			int placeIndex = tokens.indexOf(place);
 			if(placeIndex >= 0) {

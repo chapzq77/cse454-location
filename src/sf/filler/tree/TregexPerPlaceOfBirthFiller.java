@@ -43,7 +43,7 @@ public class TregexPerPlaceOfBirthFiller extends BaseTregexFiller {
 			e.printStackTrace();
 		}
 		
-		List<String> places = getMatchNames("NNP|NNPS >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /born/))))", t);
+		List<String> places = getMatchNames("NNP|NNPS >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /born/))))", t, annotations, sentenceCoref);
 		
 		// TODO not very good, need a way to combine multiple word place names
 		// TODO also check for LOCATION tags
