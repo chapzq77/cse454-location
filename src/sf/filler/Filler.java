@@ -35,14 +35,14 @@ public abstract class Filler {
 		return (!mention.ignoredSlots.containsAll(slotNames) && mention.entityType == EntityType.ORG);
 	}
 	
-	protected int containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
+	protected String containsName(SFEntity mention, String tokens, CorefProvider sentenceCoref) {
 		Collection<CorefMention> sentenceMentions = sentenceCoref.all();
 		for(CorefMention coref : sentenceMentions) {
 			if(mention.mentionString.equals(coref.entity.repMention.entity.fullName)) {
-				return coref.head;
+				return coref.mentionSpan;
 			}
 		}
-		return tokens.contains(mention.mentionString) ? Arrays.asList(tokens.split(" ")).indexOf(mention.mentionString.split(" ")[0]) : -1;
+		return tokens.contains(mention.mentionString) ? mention.mentionString : null;
 		/*
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
@@ -109,20 +109,34 @@ public abstract class Filler {
 	}
 	
 	protected boolean isStateProv(String location) {
-		Set<String> stateProvs = new HashSet<String>();
+		return isUSState(location) || isCanadianProvince(location);
+	}
+	
+	protected boolean isUSState(String location) {
+		Set<String> states = new HashSet<String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATES_FILE));
 			while ((line = br.readLine()) != null) {
-				stateProvs.add(line.toLowerCase());
-			}
-			br = new BufferedReader(new FileReader(SFConstants.PROVINCES_FILE));
-			while ((line = br.readLine()) != null) {
-				stateProvs.add(line.toLowerCase());
+				states.add(line.toLowerCase());
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return stateProvs.contains(location.toLowerCase());
+		return states.contains(location.toLowerCase());
+	}
+	
+	protected boolean isCanadianProvince(String location) {
+		Set<String> provinces = new HashSet<String>();
+		try {
+			String line;
+			BufferedReader br = new BufferedReader(new FileReader(SFConstants.PROVINCES_FILE));
+			while ((line = br.readLine()) != null) {
+				provinces.add(line.toLowerCase());
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return provinces.contains(location.toLowerCase());
 	}
 }

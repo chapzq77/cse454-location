@@ -29,7 +29,7 @@ public class TregexPerPlaceOfBirthFiller extends BaseTregexFiller {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isPER(mention))
 			return;
-		if (containsName(mention, tokens, sentenceCoref) == -1)
+		if (containsName(mention, tokens, sentenceCoref) == null)
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);

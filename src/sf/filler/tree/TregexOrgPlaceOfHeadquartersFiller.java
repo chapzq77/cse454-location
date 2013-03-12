@@ -30,8 +30,8 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 		String tokens = annotations.get(SFConstants.TOKENS);
 		if (!isORG(mention))
 			return;
-		int mentionIndex = containsName(mention, tokens, sentenceCoref);
-		if (mentionIndex == -1)
+		String mentionContext = containsName(mention, tokens, sentenceCoref);
+		if (mentionContext == null)
 			return;
 		
 		String cjtext = annotations.get(SFConstants.CJ);
@@ -47,27 +47,50 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 		
 		ArrayList<String> places = new ArrayList<String>();
 		
+		String mentionNP = "(NP";
+		for(String mentionToken : mentionContext.split(" ")) {
+			mentionToken = mentionToken.replaceAll("[/\\)\\(\\:]", "");
+			mentionNP += " << /(" + mentionToken + ")|(" + mentionToken.toLowerCase() + ")/";
+		}
+		mentionNP += ")";
+		
 		// Try to match for Place's Mention
-		String actualMention = tokens.split(" ")[mentionIndex];
-		places.addAll(getMatchNames("NP < (NNP > (NP < POS) >> (NP << /" + actualMention + "/ ))", t, annotations, sentenceCoref));
+		//String actualMention = "(NP < /" + tokens.split(" ")[mentionIndex] + "/)";
+		places.addAll(getMatchNames("NP < (NNP > (NP < POS) >> " + mentionNP + ")", t, annotations, sentenceCoref));
 		
 		// Try to match Place-based Mention
 		places.addAll(getMatchNames("ADJP << /based/", t, annotations, sentenceCoref));
 		
 		// Try to match adjective phrases
-		places.addAll(getMatchNames("JJ > (NP << /" + actualMention + "/ )", t, annotations, sentenceCoref));
+		places.addAll(getMatchNames("JJ > " + mentionNP, t, annotations, sentenceCoref));
 		
 		// Try to match verbed in Place
-		places.addAll(getMatchNames("NP >> (PP < (IN < /^in$/) > (VP < (VBN < /^(based|located|headquartered|centered)$/)))", t, annotations, sentenceCoref));
+		places.addAll(getMatchNames("NP >> (PP < (IN < /^in$/) > (VP < (VBN < /^((based)|(located)|(headquartered)|(centered)|(active))$/)))", t, annotations, sentenceCoref));
+		
+		//places.addAll(getMatchNames("NP >> (PP < (IN < /^in$/) $-- " + mentionNP + ")", t, annotations, sentenceCoref));
+		
+		// Try to match parenthetical information
+		//places.addAll(getMatchNames("NP ,, (/,/ , " + mentionNP + ")", t, annotations, sentenceCoref));
 		
 		//places.addAll(getMatchNames("NP < (NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP))", t, annotations, sentenceCoref));
 		
+		System.out.println(mention.mentionString + " " + places);
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {
 					mention.addAnswer(countryOfHeadquarters, placeName, filename);
 				}
-			} else if(isStateProv(placeName)) {
+			} else if(isUSState(placeName)) {
+				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {
+					mention.addAnswer(countryOfHeadquarters, "US", filename);
+				}
+				if(!mention.ignoredSlots.contains(stateOfHeadquarters)) {
+					mention.addAnswer(stateOfHeadquarters, placeName, filename);
+				}
+			} else if(isCanadianProvince(placeName)) {
+				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {
+					mention.addAnswer(countryOfHeadquarters, "Canada", filename);
+				}
 				if(!mention.ignoredSlots.contains(stateOfHeadquarters)) {
 					mention.addAnswer(stateOfHeadquarters, placeName, filename);
 				}
