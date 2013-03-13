@@ -1,0 +1,337 @@
+filler_id	sf_id	system_id	slot_name	docid	start_char	end_char	response	norm_response	equiv_class_id	judgment
+1	SF48	LDC	per:title	AFP_ENG_20021211.0447.LDC2007T07	532	538	Prince	Prince	1	1
+2	SF48	LDC	per:parents	AFP_ENG_20021211.0447.LDC2007T07	462	481	Mohammed Zahir Shah	Mohammed Zahir Shah	2	1
+3	SF48	LDC	per:date_of_death	AFP_ENG_20021211.0447.LDC2007T07	663	669	Monday	2002-12-09	3	1
+4	SF48	LDC	per:country_of_death	AFP_ENG_20021211.0447.LDC2007T07	673	678	Italy	Italy	4	1
+5	SF48	LDC	per:age	AFP_ENG_20021211.0447.LDC2007T07	654	656	56	56	5	1
+6	SF48	LDC	per:countries_of_residence	AFP_ENG_20021211.0447.LDC2007T07	673	678	Italy	Italy	6	1
+7	SF48	LDC	per:parents	AFP_ENG_20021211.0447.LDC2007T07	1217	1224	Homeira	Homeira Shah	7	1
+8	SF11	LDC	per:title	CNN828-7.940923.LDC98T25	563	578	press secretary	press secretary	8	1
+9	SF11	LDC	per:title	CNN828-7.940923.LDC98T25	2291	2324	deputy assistant to the president	deputy assistant	9	1
+10	SF11	LDC	per:title	CNN868-5.940923.LDC98T25	322	345	White House spokeswoman	Spokeswoman	10	1
+11	SF11	LDC	per:employee_of	CNN868-5.940923.LDC98T25	322	334	White House 	White House 	11	1
+12	SF5	LDC	org:alternate_names	AFP_ENG_20070627.0652.LDC2009T13	932	935	OIC	OIC	12	1
+13	SF5	LDC	org:alternate_names	AFP_ENG_20070306.0066.LDC2009T13	668	706	Organisation of the Islamic Conference	Organisation of the Islamic Conference	13	1
+14	SF5	LDC	org:members	AFP_ENG_20070213.0106.LDC2009T13	1226	1234	Malaysia	Malaysia	14	1
+15	SF5	LDC	org:political/religious_affiliation	AFP_ENG_20070514.0632.LDC2009T13	1549	1555	Muslim	Muslim	15	1
+16	SF5	LDC	org:members	AFP_ENG_20070605.0166.LDC2009T13	487	492	Egypt	Egypt	16	1
+17	SF5	LDC	org:members	AFP_ENG_20070605.0166.LDC2009T13	158	169	Philippines	Philippines	17	1
+18	SF5	LDC	org:members	AFP_ENG_20070321.0443.LDC2009T13	325	332	Senegal	Senegal	18	1
+19	SF5	LDC	org:members	AFP_ENG_20070728.0151.LDC2009T13	1243	1255	Saudi Arabia	Saudi Arabia	19	1
+20	SF5	LDC	org:members	AFP_ENG_20070315.0804.LDC2009T13	500	505	Syria	Syria	20	1
+21	SF5	LDC	org:members	AFP_ENG_20070315.0804.LDC2009T13	554	560	Jordan	Jordan	21	1
+22	SF5	LDC	org:members	AFP_ENG_20070315.0804.LDC2009T13	704	708	Iran	Iran	22	1
+23	SF5	LDC	org:members	XIN_ENG_20080202.0113.LDC2009T13	798	808	Azerbaijan	Azerbaijan	23	1
+24	SF5	LDC	org:members	XIN_ENG_20080202.0113.LDC2009T13	820	826	Uganda	Uganda	24	1
+25	SF5	LDC	org:members	XIN_ENG_20080202.0113.LDC2009T13	947	953	Turkey	Turkey	25	1
+26	SF5	LDC	org:subsidiaries	XIN_ENG_20080310.0122.LDC2009T13	2465	2495	OIC Islamophobia Observatory 	OIC Islamophobia Observatory 	26	1
+27	SF5	LDC	org:subsidiaries	XIN_ENG_20080429.0072.LDC2009T13	983	1003	(OIC) Business Forum	OIC Business Forum	27	1
+28	SF5	LDC	org:top_members/employees	APW_ENG_20070613.1353.LDC2009T13	963	983	Atta El-Manan Bakhit	Atta El-Manan Bakhit	28	1
+29	SF5	LDC	org:members	XIN_ENG_20070226.0216.LDC2009T13	687	697	Kazakhstan	Kazakhstan	29	1
+30	SF5	LDC	org:subsidiaries	XIN_ENG_20070514.0182.LDC2009T13	289	335	Islamic Conference of Foreign Ministers (ICFM)	Islamic Conference of Foreign Ministers (ICFM)	30	1
+31	SF5	LDC	org:subsidiaries	APW_ENG_20070209.0432.LDC2009T13	1054	1073	Parliamentary Union	Parliamentary Union	31	1
+32	SF5	LDC	org:subsidiaries	AFP_ENG_20070206.0454.LDC2009T13	2014	2082	Islamic Educational, Scientific, and Cultural Organisation (ISESCO)	Islamic Educational, Scientific, and Cultural Organisation (ISESCO)	32	1
+33	SF5	LDC	org:political/religious_affiliation	AFP_ENG_20070212.0646.LDC2009T13	2163	2174	pan-Islamic	pan-Islamic	33	1
+34	SF5	LDC	org:subsidiaries	AFP_ENG_20050719.0151.LDC2007T07	251	282	Islamic Development Bank (IDB)	Islamic Development Bank (IDB)	34	1
+35	SF5	LDC	org:alternate_names	AFP_ENG_20051205.0418.LDC2007T07	2220	2253	Organisation of Islamic Countries	Organisation of Islamic Countries	35	1
+36	SF5	LDC	org:founded_by	XIN_ENG_20080314.0085.LDC2009T13	1987	2012	Islamic Summit Conference	Islamic Summit Conference	36	1
+37	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3112	3116	Iraq	Iraq	37	1
+38	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3118	3127	Indonesia	Indonesia	38	1
+39	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3129	3142	Cote D'Ivoire	Cote D'Ivoire	39	1
+40	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3144	3152	Pakistan	Pakistan	40	1
+41	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3154	3159	Sudan	Sudan	41	1
+42	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3161	3168	Nigeria	Nigeria	42	1
+43	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3170	3175	Libya	Libya	43	1
+44	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3177	3187	Bangladesh	Bangladesh	44	1
+45	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3189	3198	Palestine	Palestine	45	1
+46	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3200	3206	Kuwait	Kuwait	46	1
+47	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3216	3226	Mozambique	Mozambique	47	1
+48	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3228	3248	United Arab Emirates	United Arab Emirates	48	1
+49	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3250	3255	Qatar	Qatar	49	1
+50	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3257	3264	Morocco	Morocco	50	1
+51	SF5	LDC	org:members	AFP_ENG_20070311.0055.LDC2009T13	3269	3277	Maldives	Maldives	51	1
+52	SF5	LDC	org:members	AFP_ENG_20080313.0191.LDC2009T13	2505	2512	Comoros	Comoros	52	1
+53	SF5	LDC	org:members	AFP_ENG_20080313.0191.LDC2009T13	2594	2598	Chad	Chad	53	1
+54	SF5	LDC	org:members	AFP_ENG_20080313.0191.LDC2009T13	2487	2494	Lebanon	Lebanon	54	1
+55	SF5	LDC	org:members	XIN_ENG_20080314.0073.LDC2009T13	5201	5215	Guinea- Bissau	Guinea- Bissau	55	1
+56	SF5	LDC	org:members	XIN_ENG_20080314.0073.LDC2009T13	5217	5222	Niger	Niger	56	1
+57	SF5	LDC	org:members	XIN_ENG_20080314.0073.LDC2009T13	5227	5239	Burkina Faso	Burkina Faso	57	1
+58	SF5	LDC	org:top_members/employees	XIN_ENG_20080306.0080.LDC2009T13	386	396	Karim Wade	Karim Wade	58	1
+59	SF5	LDC	org:members	XIN_ENG_20070704.0185.LDC2009T13	525	535	Uzbekistan	Uzbekistan	59	1
+60	SF22	LDC	per:countries_of_residence	AFP_ENG_20070913.0599.LDC2009T13	257	262	China	China	60	1
+61	SF22	LDC	per:title	AFP_ENG_20070420.0629.LDC2009T13	2083	2090	Captain	Captain	61	1
+62	SF22	LDC	per:member_of	XIN_ENG_20070421.0054.LDC2009T13	334	361	Chinese women's soccer team	Chinese women's soccer team	62	1
+63	SF22	LDC	per:schools_attended	XIN_ENG_20081208.0202.LDC2009T13	1172	1197	Beijing Normal University	Beijing Normal University	63	1
+64	SF22	LDC	per:age	XIN_ENG_20080101.0088.LDC2009T13	817	819	25	25	64	1
+65	SF22	LDC	per:cities_of_residence	XIN_ENG_20081208.0202.LDC2009T13	1172	1179	Beijing	Beijing	65	1
+66	SF37	LDC	org:alternate_names	AFP_ENG_20080820.0795.LDC2009T13	255	277	Competition Commission	Competition Commission	66	1
+67	SF37	LDC	org:country_of_headquarters	AFP_ENG_20080820.0795.LDC2009T13	245	252	Britain	Britain	67	1
+68	SF37	LDC	org:top_members/employees	AFP_ENG_20071003.0369.LDC2009T13	1567	1585	Christopher Clarke	Christopher Clarke	68	1
+69	SF37	LDC	org:founded	AFP_ENG_20071002.0558.LDC2009T13	2356	2360	1999	1999	69	1
+70	SF37	LDC	org:top_members/employees	AFP_ENG_20070123.0446.LDC2009T13	782	795	Peter Freeman	Peter Freeman	70	1
+71	SF37	LDC	org:parents	AFP_ENG_20071002.0350.LDC2009T13	2419	2476	Department for Business, Enterprise and Regulatory Reform	Department for Business, Enterprise and Regulatory Reform	71	1
+72	SF37	LDC	org:political/religious_affiliation	AFP_ENG_20071002.0350.LDC2009T13	3185	3208	independent public body	independent public body	72	1
+73	SF18	LDC	org:top_members/employees	APW_ENG_20081114.0421.LDC2009T13	1475	1482	Yi Jiao	Yi Jiao	73	1
+74	SF18	LDC	org:country_of_headquarters	AFP_ENG_20081116.0156.LDC2009T13	1238	1243	China	China	74	1
+75	SF18	LDC	org:city_of_headquarters	APW_ENG_20070702.1026.LDC2009T13	1646	1653	Tianjin	Tianjin	75	1
+76	SF18	LDC	org:founded	APW_ENG_20070707.0132.LDC2009T13	3512	3516	2002	2002	76	1
+77	SF18	LDC	org:stateorprovince_of_headquarters	AFP_ENG_20070412.0012.LDC2009T13	3321	3328	Tianjin	Tianjin	77	1
+78	SF18	LDC	org:top_members/employees	APW_ENG_20081114.0421.LDC2009T13	1136	1144	Chen Wei	Chen Wei	78	1
+79	SF18	LDC	org:parents	APW_ENG_20070707.0132.LDC2009T13	3362	3383	China Baseball League	China Baseball League	79	1
+80	SF24	LDC	org:political/religious_affiliation	NYT_ENG_20071214.0247.LDC2009T13	1338	1344	Muslim	Muslim	80	1
+81	SF24	LDC	org:country_of_headquarters	NYT_ENG_20071214.0247.LDC2009T13	299	310	Philippines	Philippines	81	1
+82	SF24	LDC	org:stateorprovince_of_headquarters	XIN_ENG_20080901.0069.LDC2009T13	395	403	Mindanao	Mindanao	82	1
+83	SF24	LDC	org:founded_by	APW_ENG_20080425.0502.LDC2009T13	489	500	Nur Misuari	Nur Misuari	83	1
+84	SF24	LDC	org:alternate_names	XIN_ENG_19960926.0308.LDC2007T07	306	310	MNLF	MNLF	84	1
+85	SF24	LDC	org:founded	AFP_ENG_20070318.0037.LDC2009T13	1062	1066	1972	1972	85	1
+86	SF24	LDC	org:top_members/employees	AFP_ENG_20070202.0708.LDC2009T13	643	655	Khaid Ajibun	Khaid Ajibun	86	1
+87	SF24	LDC	org:top_members/employees	AFP_ENG_20070204.0089.LDC2009T13	1802	1813	Nur Misuari	Nur Misuari	87	1
+88	SF24	LDC	org:member_of	AFP_ENG_20070413.0626.LDC2009T13	1712	1715	OIC	OIC	88	1
+89	SF24	LDC	org:top_members/employees	XIN_ENG_20070417.0097.LDC2009T13	721	740	Ustadz Habier Malik	Ustadz Habier Malik	89	1
+90	SF24	LDC	org:top_members/employees	XIN_ENG_19960915.0156.LDC2007T07	599	611	Mampait Alam	Mampait Alam	90	1
+91	SF49	LDC	org:political/religious_affiliation	AFP_ENG_20070215.0527.LDC2009T13	257	263	Shiite	Shiite	91	1
+92	SF49	LDC	org:members	AFP_ENG_20080407.0320.LDC2009T13	613	628	Salah al-Obeidi	Salah al-Obeidi	92	1
+93	SF49	LDC	org:top_members/employees	APW_ENG_20070526.0300.LDC2009T13	5078	5094	Wissam al- Waili	Wissam al- Waili	93	1
+94	SF49	LDC	org:founded_by	AFP_ENG_20070522.0185.LDC2009T13	2737	2743	Sadr's	Muqtada al-Sadr	94	1
+95	SF49	LDC	org:alternate_names	AFP_ENG_20070304.0232.LDC2009T13	2077	2080	JAM	JAM	95	1
+96	SF49	LDC	org:top_members/employees	AFP_ENG_20070305.0059.LDC2009T13	3769	3781	Hamad Jassam	Hamad Jassam	96	1
+97	SF49	LDC	org:alternate_names	AFP_ENG_20070202.0513.LDC2009T13	4546	4568	Jaysh al-Mahdi militia	Jaysh al-Mahdi militia	97	1
+98	SF49	LDC	org:alternate_names	AFP_ENG_20070401.0040.LDC2009T13	1237	1250	Mahdi militia	Mahdi militia	98	1
+99	SF6	LDC	org:top_members/employees	LTW_ENG_20080307.0018.LDC2009T13	260	277	Svetlana Mironyuk	Svetlana Mironyuk	99	1
+100	SF8	LDC	per:countries_of_residence	NYT_ENG_20070312.0026.LDC2009T13	10396	10403	America	America	100	1
+101	SF8	LDC	per:countries_of_residence	NYT_ENG_20070312.0026.LDC2009T13	10423	10427	Iran	Iran	101	1
+102	SF8	LDC	per:cities_of_residence	NYT_ENG_20070312.0026.LDC2009T13	274	283	Cambridge	Cambridge	102	1
+103	SF8	LDC	per:schools_attended	NYT_ENG_20070312.0026.LDC2009T13	10284	10287	MIT	MIT	103	1
+104	SF8	LDC	per:stateorprovinces_of_residence	NYT_ENG_20070312.0026.LDC2009T13	363	376	Massachusetts	Massachusetts	104	1
+105	SF8	LDC	per:title	AFP_ENG_20030912.0616.LDC2007T07	259	320	Iranian ambassador to the International Atomic Energy Agency 	Ambassador to the International Atomic Energy Agency 	105	1
+106	SF8	LDC	per:member_of	AFP_ENG_20030912.0616.LDC2007T07	285	320	International Atomic Energy Agency 	International Atomic Energy Agency 	106	1
+107	SF23	LDC	org:alternate_names	AFP_ENG_20070726.0408.LDC2009T13	667	670	CNB	CNB	107	1
+108	SF23	LDC	org:top_members/employees	APW_ENG_20080507.0032.LDC2009T13	2646	2658	Mojmir Hampl	Mojmir Hampl	108	1
+109	SF23	LDC	org:top_members/employees	AFP_ENG_20081217.0174.LDC2009T13	559	574	Miroslav Singer	Miroslav Singer	109	1
+110	SF51	LDC	org:country_of_headquarters	AFP_ENG_20070508.0178.LDC2009T13	260	267	Armenia	Armenia	110	1
+111	SF51	LDC	org:city_of_headquarters	AFP_ENG_20070509.0624.LDC2009T13	605	613	Yerevan 	Yerevan	111	1
+112	SF51	LDC	org:parents	AFP_ENG_20070509.0624.LDC2009T13	652	659	Armenia	Armenia	112	1
+113	SF34	LDC	per:countries_of_residence	LTW_ENG_20070103.0096.LDC2009T13	1651	1655	U.S.	U.S.	113	1
+114	SF34	LDC	per:employee_of	NYT_ENG_20080202.0184.LDC2009T13	1326	1336	New School	New School	114	1
+115	SF34	LDC	per:employee_of	NYT_ENG_20080202.0184.LDC2009T13	1477	1485	Columbia	Columbia University	115	1
+116	SF34	LDC	per:employee_of	NYT_ENG_20080108.0037.LDC2009T13	2384	2400	The New Republic	The New Republic	116	1
+117	SF26	LDC	org:alternate_names	AFP_ENG_20080120.0447.LDC2009T13	608	612	CNAC	CNAC	117	1
+118	SF26	LDC	org:subsidiaries	AFP_ENG_20080120.0447.LDC2009T13	615	624	Air China	Air China	118	1
+119	SF26	LDC	org:member_of	AFP_ENG_20021011.0565.LDC2007T07	677	697	China Aviation Group	China Aviation Group	119	1
+120	SF26	LDC	org:subsidiaries	AFP_ENG_20021011.0565.LDC2007T07	872	882	Dragon Air	Dragon Air	120	1
+121	SF26	LDC	org:alternate_names	AFP_ENG_20080101.0180.LDC2009T13	619	624	CNACG	CNACG	121	1
+122	SF26	LDC	org:member_of	AFP_ENG_20021011.0565.LDC2007T07	442	480	Civil Aviation Administration of China	Civil Aviation Administration of China	122	1
+123	SF26	LDC	org:country_of_headquarters	XIN_ENG_20080103.0097.LDC2009T13	514	520	China 	China 	123	1
+124	SF26	LDC	org:city_of_headquarters	XIN_ENG_20080103.0097.LDC2009T13	752	761	Hong Kong	Hong Kong	124	1
+125	SF26	LDC	org:parents	XIN_ENG_20080103.0097.LDC2009T13	861	908	China National Aviation Holding Company (CNAHC)	China National Aviation Holding Company (CNAHC)	125	1
+126	SF26	LDC	org:top_members/employees	XIN_ENG_20080103.0097.LDC2009T13	2341	2352	Li Jiaxiang	Li Jiaxiang	126	1
+127	SF26	LDC	org:subsidiaries	AFP_ENG_20020210.0520.LDC2007T07	307	346	China National Aviation Co. (Macau) Ltd	China National Aviation Co. (Macau) Ltd	127	1
+128	SF26	LDC	org:subsidiaries	AFP_ENG_19960709.0292.LDC2007T07	2014	2036	Cathay Pacific Airways	Cathay Pacific Airways	128	1
+129	SF26	LDC	org:subsidiaries	AFP_ENG_20020210.0520.LDC2007T07	376	385	Air Macau	Air Macau	129	1
+130	SF26	LDC	org:alternate_names	AFP_ENG_20080101.0166.LDC2009T13	563	615	China National Aviation Corporation (Group) Limited 	China National Aviation Corporation (Group) Limited	130	1
+131	SF26	LDC	org:founded	AFP_ENG_20041104.0885.LDC2007T07	1283	1288	2002 	2002 	131	1
+132	SF26	LDC	org:number_of_employees/members	APW_ENG_20021011.0049.LDC2007T07	1077	1084	22,000	22,000	132	1
+133	SF45	LDC	org:alternate_names	NYT_ENG_20070420.0083.LDC2009T13	2118	2121	PRC	PRC	133	1
+134	SF45	LDC	org:city_of_headquarters	NYT_ENG_20071207.0125.LDC2009T13	512	518	Boston	Boston	134	1
+135	SF45	LDC	org:top_members/employees	NYT_ENG_20070427.0094.LDC2009T13	10408	10423	Leslie K. Brown	Leslie K. Brown	135	1
+136	SF28	LDC	org:top_members/employees	NYT_ENG_20070526.0113.LDC2009T13	1919	1930	Larry Gross	Larry Gross	136	1
+137	SF28	LDC	org:city_of_headquarters	NYT_ENG_20070526.0113.LDC2009T13	2040	2044	L.A.	L.A.	137	1
+138	SF10	LDC	per:member_of	APW_ENG_20081207.0236.LDC2009T13	5928	5957	Minuteman Civil Defense Corps	Minuteman Civil Defense Corps	138	1
+139	SF10	LDC	per:title	APW_ENG_20080418.1136.LDC2009T13	4545	4573	Minuteman national President	National President	139	1
+140	SF10	LDC	per:cities_of_residence	APW_ENG_20060401.0016.LDC2007T07	925	932	Phoenix	Phoenix	140	1
+141	SF10	LDC	per:stateorprovinces_of_residence	NYT_ENG_20050919.0130.LDC2007T07	645	650	Ariz.	Arizona	141	1
+142	SF10	LDC	per:cities_of_residence	NYT_ENG_20050919.0130.LDC2007T07	637	643	Tucson	Tucson	142	1
+143	SF10	LDC	per:member_of	groups.google.com_Minuteman_657beae4479f3e14_ENG_20050421_112900.LDC2006E32	1542	1564	Civil Homeland Defense	Civil Homeland Defense	143	1
+144	SF10	LDC	per:title	groups.google.com_Minuteman_657beae4479f3e14_ENG_20050421_112900.LDC2006E32	3667	3732	Civil Homeland Defense, an organization that Chris Simcox founded	Founder	144	1
+145	SF10	LDC	per:title	groups.google.com_Minuteman_657beae4479f3e14_ENG_20050421_112900.LDC2006E32	4181	4192	Co- founder of MMP	Co-founder	145	1
+146	SF25	LDC	org:website	APW_ENG_20070503.1480.LDC2009T13	3365	3396	http://www.canaconvocation.org/	http://www.canaconvocation.org/	146	1
+147	SF25	LDC	org:top_members/employees	AFP_ENG_20070830.0124.LDC2009T13	2531	2543	Martyn Minns	Martyn Minns	147	1
+148	SF25	LDC	org:parents	LTW_ENG_20070504.0119.LDC2009T13	1249	1264	Nigerian church	Anglican Church of Nigeria	148	1
+149	SF25	LDC	org:political/religious_affiliation	APW_ENG_20070505.0890.LDC2009T13	931	940	Anglicans	Anglican	149	1
+150	SF25	LDC	org:alternate_names	LTW_ENG_20070217.0019.LDC2009T13	3397	3401	CANA	CANA	150	1
+151	SF25	LDC	org:members	APW_ENG_20070326.1485.LDC2009T13	525	545	St. Stephen's Parish	St. Stephen's Parish	151	1
+152	SF25	LDC	org:members	APW_ENG_20070326.1485.LDC2009T13	551	573	Grace Episcopal Church	Grace Episcopal Church	152	1
+153	SF25	LDC	org:members	APW_ENG_20070503.1480.LDC2009T13	2519	2531	Truro Church	Truro Church	153	1
+154	SF25	LDC	org:members	APW_ENG_20070503.1480.LDC2009T13	2565	2581	The Falls Church	The Falls Church	154	1
+155	SF25	LDC	org:members	LTW_ENG_20070217.0019.LDC2009T13	4867	4889	Church of the Epiphany	Church of the Epiphany	155	1
+156	SF25	LDC	org:founded_by	APW_ENG_20070503.1480.LDC2009T13	488	501	Peter Akinola	Peter Akinola	156	1
+157	SF25	LDC	org:members	APW_ENG_20070119.0364.LDC2009T13	3786	3806	Church of Our Savior	Church of Our Savior	157	1
+158	SF16	LDC	per:employee_of	XIN_ENG_20060830.0036.LDC2007T07	1099	1113	Cathay Pacific	Cathay Pacific	158	1
+159	SF16	LDC	per:title	XIN_ENG_20060830.0036.LDC2007T07	1114	1129	Chief Executive	Chief Executive	159	1
+160	SF16	LDC	per:title	XIN_ENG_20040614.0134.LDC2007T07	1126	1163	Director and Chief Operating Officer 	Director and Chief Operating Officer 	160	1
+161	SF16	LDC	per:alternate_names	XIN_ENG_20060901.0034.LDC2007T07	1157	1176	Philip Chen Nan-lok	Philip Chen Nan-lok	161	1
+162	SF16	LDC	per:member_of	XIN_ENG_20060901.0034.LDC2007T07	295	317	Hong Kong Jockey  Club	Hong Kong Jockey  Club	162	1
+163	SF16	LDC	per:cities_of_residence	XIN_ENG_20070402.0184.LDC2009T13	1190	1199	Hong Kong	Hong Kong	163	1
+164	SF16	LDC	per:age	APW_ENG_20070309.0343.LDC2009T13	504	506	51	51	164	1
+165	SF16	LDC	per:employee_of	APW_ENG_20070309.0343.LDC2009T13	537	572	 John Swire &amp; Sons (China) Ltd.	 John Swire &amp; Sons (China) Ltd.	165	1
+166	SF16	LDC	per:cities_of_residence	APW_ENG_20070309.0343.LDC2009T13	1846	1853	Beijing	Beijing	166	1
+167	SF16	LDC	per:countries_of_residence	APW_ENG_20070309.0343.LDC2009T13	1731	1736	China	China	167	1
+168	SF16	LDC	per:employee_of	NYT_ENG_19961113.0054.LDC2007T07	379	388	Dragonair	Dragonair	168	1
+169	SF16	LDC	per:title	APW_ENG_20070309.0343.LDC2009T13	626	654	nonexecutive deputy chairman	nonexecutive deputy chairman	169	1
+170	SF16	LDC	per:title	APW_ENG_20070309.0343.LDC2009T13	526	534	chairman	chairman	170	1
+171	SF16	LDC	per:title	APW_ENG_20070309.0343.LDC2009T13	1803	1817	representative	representative	171	1
+172	SF16	LDC	per:city_of_birth	NYT_ENG_19961113.0054.LDC2007T07	806	815	Hong Kong	Hong Kong	172	1
+173	SF47	LDC	per:title	APW_ENG_20040408.0107.LDC2007T07	523	570	chief of security for Pakistan's tribal regions	chief of security	173	1
+174	SF47	LDC	per:cities_of_residence	APW_ENG_20040408.0107.LDC2007T07	1359	1367	Peshawar	Peshawar	174	1
+175	SF47	LDC	per:countries_of_residence	APW_ENG_20040322.0242.LDC2007T07	778	786	Pakistan	Pakistan	175	1
+176	SF47	LDC	per:title	LTW_ENG_20081108.0081.LDC2009T13	3775	3785	Brig. Gen.	Brigadier General	176	1
+177	SF47	LDC	per:title	APW_ENG_20050207.0716.LDC2007T07	1362	1400	chief of security for South Waziristan	chief of security	177	1
+178	SF12	LDC	per:alternate_names	AFP_ENG_20061002.0523.LDC2007T07	936	949	Gary Kirchner	Gary Kirchner	178	1
+179	SF12	LDC	per:employee_of	AFP_ENG_20061002.0523.LDC2007T07	910	926	Lancaster County	Lancaster County	179	1
+180	SF12	LDC	per:charges	APW_ENG_20070710.1052.LDC2009T13	324	338	animal cruelty	animal cruelty	180	1
+181	SF12	LDC	per:title	APW_ENG_20061002.1126.LDC2007T07	582	589	Coroner	Coroner	181	1
+182	SF12	LDC	per:stateorprovinces_of_residence	APW_ENG_20070710.1052.LDC2009T13	371	383	Pennsylvania	Pennsylvania	182	1
+183	SF12	LDC	per:cities_of_residence	APW_ENG_20070710.1052.LDC2009T13	476	485	Lancaster	Lancaster	183	1
+184	SF12	LDC	per:charges	APW_ENG_20061007.0743.LDC2007T07	1119	1265	gave Intelligencer Journal reporters his password to a part of the county's Web site restricted to law enforcement and other authorized officials.	gave Intelligencer Journal reporters his password to a part of the county's Web site restricted to law enforcement and other authorized officials.	184	1
+185	SF12	LDC	per:title	APW_ENG_20070710.1052.LDC2009T13	501	504	Dr.	Dr.	185	1
+186	SF4	LDC	org:alternate_names	AFP_ENG_20070203.0148.LDC2009T13	3072	3075	IMF	IMF	186	1
+187	SF4	LDC	org:members	AFP_ENG_20070315.0165.LDC2009T13	497	509	ZIAD ABU AMR	ZIAD ABU AMR	187	1
+188	SF4	LDC	org:top_members/employees	AFP_ENG_20070210.0150.LDC2009T13	427	442	Rodrigo de Rato	Rodrigo de Rato	188	1
+189	SF4	LDC	org:founded	AFP_ENG_20070413.0055.LDC2009T13	1897	1901	1944	1944	189	1
+190	SF4	LDC	org:members	AFP_ENG_20070118.0660.LDC2009T13	158	168	Montenegro	Montenegro	190	1
+191	SF4	LDC	org:top_members/employees	AFP_ENG_20070228.0515.LDC2009T13	227	240	Simon Johnson	Simon Johnson	191	1
+192	SF4	LDC	org:top_members/employees	AFP_ENG_20070228.0515.LDC2009T13	575	589	Raghuram Rajan	Raghuram Rajan	192	1
+193	SF4	LDC	org:top_members/employees	AFP_ENG_20070308.0186.LDC2009T13	1145	1160	Murilo Portugal	Murilo Portugal	193	1
+194	SF4	LDC	org:top_members/employees	AFP_ENG_20070313.0446.LDC2009T13	768	782	Takatoshi Kato	Takatoshi Kato	194	1
+195	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	854	861	Britain	Britain	195	1
+196	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	863	869	Canada	Canada	196	1
+197	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	871	877	France	France	197	1
+198	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	879	886	Germany	Germany	198	1
+199	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	888	893	Italy	Italy	199	1
+200	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	895	900	Japan	Japan	200	1
+201	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	909	922	United States	United States	201	1
+202	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	1914	1925	South Korea	South Korea	202	1
+203	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	1927	1933	Mexico	Mexico	203	1
+204	SF4	LDC	org:members	AFP_ENG_20070407.0464.LDC2009T13	1938	1945	Turkey 	Turkey 	204	1
+205	SF4	LDC	org:subsidiaries	AFP_ENG_20070412.0512.LDC2009T13	312	324	World Bank's	World Bank	205	1
+206	SF4	LDC	org:number_of_employees/members	AFP_ENG_20070409.0394.LDC2009T13	1558	1561	185	185	206	1
+207	SF4	LDC	org:parents	AFP_ENG_20070715.0481.LDC2009T13	472	479	Europe 	Europe 	207	1
+208	SF4	LDC	org:shareholders	AFP_ENG_20070715.0481.LDC2009T13	3379	3384	China	China	208	1
+209	SF4	LDC	org:shareholders	AFP_ENG_20070715.0481.LDC2009T13	3386	3391	India	India	209	1
+210	SF4	LDC	org:shareholders	AFP_ENG_20070715.0481.LDC2009T13	3393	3405	South Africa	South Africa	210	1
+211	SF4	LDC	org:shareholders	AFP_ENG_20070715.0481.LDC2009T13	3407	3413	Brazil	Brazil	211	1
+212	SF4	LDC	org:shareholders	AFP_ENG_20070715.0481.LDC2009T13	3418	3424	Mexico	Mexico	212	1
+213	SF4	LDC	org:shareholders	AFP_ENG_20070715.0481.LDC2009T13	3658	3671	United States	United States	213	1
+214	SF4	LDC	org:political/religious_affiliation	AFP_ENG_20070829.0652.LDC2009T13	875	888	Bretton Woods	Bretton Woods	214	1
+215	SF4	LDC	org:members	AFP_ENG_20070829.0652.LDC2009T13	1399	1405	Russia	Russia	215	1
+216	SF4	LDC	org:shareholders	AFP_ENG_20080429.0213.LDC2009T13	1673	1684	South Korea	South Korea	216	1
+217	SF4	LDC	org:shareholders	AFP_ENG_20080429.0213.LDC2009T13	1745	1752	Britain	Great Britain	217	1
+218	SF4	LDC	org:shareholders	AFP_ENG_20080429.0213.LDC2009T13	1766	1772	France	France	218	1
+219	SF4	LDC	org:shareholders	AFP_ENG_20080429.0213.LDC2009T13	1774	1786	Saudi Arabia	Saudi Arabia	219	1
+220	SF4	LDC	org:shareholders	AFP_ENG_20080429.0213.LDC2009T13	1788	1794	Canada	Canada	220	1
+221	SF4	LDC	org:shareholders	AFP_ENG_20080429.0213.LDC2009T13	1799	1805	Russia	Russia	221	1
+222	SF4	LDC	org:members	AFP_ENG_20080429.0213.LDC2009T13	1774	1786	Saudi Arabia	Saudi Arabia	222	1
+223	SF4	LDC	org:members	AFP_ENG_20080429.0213.LDC2009T13	1651	1656	China	China	223	1
+224	SF4	LDC	org:members	AFP_ENG_20080429.0213.LDC2009T13	1658	1663	India	India	224	1
+225	SF4	LDC	org:members	AFP_ENG_20080429.0213.LDC2009T13	1665	1671	Brazil	Brazil	225	1
+226	SF4	LDC	org:top_members/employees	AFP_ENG_20070823.0223.LDC2009T13	406	416	Gerry Rice	Gerry Rice	226	1
+227	SF4	LDC	org:members	AFP_ENG_20081107.0741.LDC2009T13	348	355	Hungary	Hungary	227	1
+228	SF4	LDC	org:members	AFP_ENG_20081231.0082.LDC2009T13	991	998	Belarus	Belarus	228	1
+229	SF4	LDC	org:members	AFP_ENG_20070316.0384.LDC2009T13	1560	1568	Zimbabwe	Zimbabwe	229	1
+230	SF4	LDC	org:top_members/employees	AFP_ENG_20070410.0295.LDC2009T13	2220	2232	Gordon Brown	Gordon Brown	230	1
+231	SF4	LDC	org:subsidiaries	AFP_ENG_20070410.0295.LDC2009T13	2078	2122	International Monetary and Finance Committee	International Monetary and Finance Committee	231	1
+232	SF4	LDC	org:alternate_names	AFP_ENG_20070411.0325.LDC2009T13	672	680	The fund	The fund	232	1
+233	SF4	LDC	org:top_members/employees	AFP_ENG_20070411.0451.LDC2009T13	712	722	Tim Callen	Tim Callen	233	1
+234	SF38	LDC	org:alternate_names	XIN_ENG_20081005.0097.LDC2009T13	502	539	Brazilian Electoral Superior Tribunal	Brazilian Electoral Superior Tribunal	234	1
+235	SF38	LDC	org:country_of_headquarters	XIN_ENG_20080815.0145.LDC2009T13	179	185	Brazil	Brazil	235	1
+236	SF38	LDC	org:alternate_names	XIN_ENG_20080911.0189.LDC2009T13	1282	1305	Supreme Electoral Court	Supreme Electoral Court	236	1
+237	SF38	LDC	org:subsidiaries	APW_ENG_20070122.1594.LDC2009T13	569	582	Alagoas state	Alagoas	237	1
+238	SF38	LDC	org:subsidiaries	XIN_ENG_20081005.0097.LDC2009T13	615	619	Acre	Acre	238	1
+239	SF38	LDC	org:subsidiaries	XIN_ENG_20081005.0097.LDC2009T13	621	629	Amazonas	Amazonas	239	1
+240	SF38	LDC	org:subsidiaries	XIN_ENG_20081005.0097.LDC2009T13	631	642	Mato Grosso	Mato Grosso	240	1
+241	SF38	LDC	org:number_of_employees/members	XIN_ENG_20081005.0097.LDC2009T13	772	791	Carlos Ayres Britto	Carlos Ayres Britto	241	1
+242	SF33	LDC	org:founded_by	AFP_ENG_20071007.0500.LDC2009T13	772	782	Mao Zedong	Mao Zedong	242	1
+243	SF33	LDC	org:top_members/employees	AFP_ENG_20071007.0500.LDC2009T13	2276	2287	Jiang Zemin	Jiang Zemin	243	1
+244	SF33	LDC	org:subsidiaries	XIN_ENG_20070228.0046.LDC2009T13	840	911	Standing Committee of the Political Bureau of the CPC Central Committee	Standing Committee of the Political Bureau of the CPC Central Committee	244	1
+245	SF33	LDC	org:top_members/employees	AFP_ENG_20070213.0010.LDC2009T13	1245	1257	Chen Liangyu	Chen Liangyu	245	1
+246	SF33	LDC	org:subsidiaries	AFP_ENG_20070215.0666.LDC2009T13	444	508	Political Bureau of the Central Committee of the Communist Party	Political Bureau of the Central Committee of the Communist Party	246	1
+247	SF33	LDC	org:top_members/employees	AFP_ENG_20070218.0447.LDC2009T13	276	289	Deng Xiaoping	Deng Xiaoping	247	1
+248	SF33	LDC	org:subsidiaries	AFP_ENG_20070218.0447.LDC2009T13	1093	1137	Central Committee Literature Research Centre	Central Committee Literature Research Centre	248	1
+249	SF33	LDC	org:subsidiaries	AFP_ENG_20070305.0102.LDC2009T13	243	269	National People's Congress	National People's Congress	249	1
+250	SF33	LDC	org:political/religious_affiliation	AFP_ENG_20081119.0721.LDC2009T13	3208	3225	Marxist Socialist	Marxist Socialist	250	1
+251	SF33	LDC	org:political/religious_affiliation	AFP_ENG_20081119.0721.LDC2009T13	4519	4528	Communist	Communist	251	1
+252	SF33	LDC	org:website	APW_ENG_20070424.0226.LDC2009T13	2918	2936	http://www.gov.cn 	http://www.gov.cn 	252	1
+253	SF33	LDC	org:founded_by	AFP_ENG_20071007.0500.LDC2009T13	706	741	delegates to the 1st Party Congress	delegates to the 1st Party Congress	253	1
+254	SF33	LDC	org:alternate_names	XIN_ENG_20070228.0046.LDC2009T13	325	328	CPC	CPC	254	1
+255	SF33	LDC	org:alternate_names	CNA_ENG_20080317.0034.LDC2009T13	2093	2116	Chinese Communist Party	Chinese Communist Party	255	1
+256	SF33	LDC	org:political/religious_affiliation	AFP_ENG_20071007.0500.LDC2009T13	1412	1421	Leninist 	Leninist 	256	1
+257	SF33	LDC	org:alternate_names	AFP_ENG_20071021.0467.LDC2009T13	219	242	China's Communist Party	China's Communist Party	257	1
+258	SF33	LDC	org:subsidiaries	AFP_ENG_20070419.0697.LDC2009T13	426	486	Politburo Standing Committee of the Communist Party of China	Politburo Standing Committee of the Communist Party of China	258	1
+259	SF33	LDC	org:subsidiaries	AFP_ENG_20071021.0519.LDC2009T13	480	497	Central Committee	Central Committee	259	1
+260	SF33	LDC	org:top_members/employees	eng-NG-31-142147-10013233	4785	4795	Wen Jiabao	Wen Jiabao	260	1
+261	SF33	LDC	org:top_members/employees	NYT_ENG_20070620.0176.LDC2009T13	3257	3262	Wu Yi	Wu Yi	261	1
+262	SF32	LDC	org:alternate_names	NYT_ENG_20070411.0214.LDC2009T13	1322	1339	Canadian National	Canadian National	262	1
+263	SF32	LDC	org:alternate_names	APW_ENG_20080318.1951.LDC2009T13	542	544	CN	CN	263	1
+264	SF39	LDC	org:alternate_names	XIN_ENG_20070205.0148.LDC2009T13	266	295	Popular Resistance Committees	Popular Resistance Committees	264	1
+265	SF39	LDC	org:top_members/employees	XIN_ENG_20070205.0148.LDC2009T13	351	370	Jamal Abu Samhadana	Jamal Abu Samhadana	265	1
+266	SF39	LDC	org:top_members/employees	XIN_ENG_20070205.0148.LDC2009T13	498	512	Kamal al-Nirab	Kamal al-Nirab	266	1
+267	SF39	LDC	org:top_members/employees	XIN_ENG_20070330.0296.LDC2009T13	624	642	Abu Yousef al-Guga	Abu Yousef al-Guga	267	1
+268	SF39	LDC	org:subsidiaries	XIN_ENG_20080223.0050.LDC2009T13	746	772	Al-Nasser Saladin Brigades	Al-Nasser Saladin Brigades	268	1
+269	SF39	LDC	org:top_members/employees	APW_ENG_20080204.0459.LDC2009T13	514	530	Abu Said Qarmout	Abu Said Qarmout	269	1
+270	SF39	LDC	org:subsidiaries	XIN_ENG_20071009.0366.LDC2009T13	332	354	Salah el-Dein Brigades	Salah el-Dein Brigades	270	1
+271	SF39	LDC	org:top_members/employees	APW_ENG_20071023.0649.LDC2009T13	500	519	Mubarak al-Hassanat	Mubarak al-Hassanat	271	1
+272	SF39	LDC	org:top_members/employees	AFP_ENG_20080204.0387.LDC2009T13	446	460	Amer al-Qarmut	Amer al-Qarmut	272	1
+273	SF39	LDC	org:top_members/employees	XIN_ENG_20070205.0148.LDC2009T13	652	660	Abu Awad	Abu Awad	273	1
+274	SF39	LDC	org:country_of_headquarters	XIN_ENG_20070122.0168.LDC2009T13	261	273	Palestinian 	Palestine	274	1
+275	SF39	LDC	org:alternate_names	XIN_ENG_20071206.0039.LDC2009T13	639	667	Popular Resistance Committee	Popular Resistance Committee	275	1
+276	SF40	LDC	per:employee_of	NYT_ENG_20070420.0023.LDC2009T13	1755	1784	Giants' personnel department 	Giants' personnel department 	276	1
+277	SF40	LDC	per:title	NYT_ENG_20070902.0159.LDC2009T13	1088	1111	Giants' general manager	General manager	277	1
+278	SF31	LDC	org:stateorprovince_of_headquarters	APW_ENG_20070206.1549.LDC2009T13	3420	3426	Ottawa	Ottawa	278	1
+279	SF31	LDC	org:country_of_headquarters	APW_ENG_20070418.1062.LDC2009T13	2051	2059	Canada's	Canada	279	1
+280	SF31	LDC	org:top_members/employees	APW_ENG_20070418.1062.LDC2009T13	1992	2014	Kathleen Heppell-Masys	Kathleen Heppell-Masys	280	1
+281	SF31	LDC	org:top_members/employees	AFP_ENG_20071106.0218.LDC2009T13	359	371	Peter MacKay	Peter MacKay	281	1
+282	SF31	LDC	org:top_members/employees	AFP_ENG_20070805.0103.LDC2009T13	297	312	Gordon O'Connor	Gordon O'Connor	282	1
+283	SF30	LDC	org:top_members/employees	APW_ENG_20081218.0158.LDC2009T13	3078	3094	Vitaly Fedorchuk	Vitaly Fedorchuk	283	1
+284	SF30	LDC	org:top_members/employees	AFP_ENG_20071125.0271.LDC2009T13	232	250	Vladimir Kryuchkov	Vladimir Kryuchkov	284	1
+285	SF44	LDC	org:alternate_names	AFP_ENG_20070215.0062.LDC2009T13	874	877	ABC	ABC	285	1
+286	SF44	LDC	org:country_of_headquarters	AFP_ENG_20070215.0062.LDC2009T13	719	726	Lesotho	Lesotho	286	1
+287	SF44	LDC	org:founded_by	AFP_ENG_20070215.0065.LDC2009T13	2119	2130	Tom Thabane	Tom Thabane	287	1
+288	SF44	LDC	org:top_members/employees	AFP_ENG_20070624.0198.LDC2009T13	978	989	Tom Thabane	Tom Thabane	288	1
+289	SF44	LDC	org:founded	APW_ENG_20070220.1125.LDC2009T13	1030	1045	four months ago	2006-10	289	1
+290	SF3	LDC	org:alternate_names	LTW_ENG_20081125.0103.LDC2009T13	1362	1383	City Bank of New York	City Bank of New York	290	1
+291	SF3	LDC	org:alternate_names	LTW_ENG_20081125.0103.LDC2009T13	1449	1467	National City Bank	National City Bank	291	1
+292	SF3	LDC	org:subsidiaries	LTW_ENG_20081125.0103.LDC2009T13	6994	7010	Salomon Brothers	Salomon Brothers	292	1
+293	SF3	LDC	org:top_members/employees	LTW_ENG_20081125.0103.LDC2009T13	6721	6735	Charles Prince	Charles Prince	293	1
+294	SF3	LDC	org:alternate_names	LTW_ENG_20081125.0103.LDC2009T13	3305	3341	First National City Bank of New York	First National City Bank of New York	294	1
+295	SF3	LDC	org:alternate_names	LTW_ENG_20081125.0103.LDC2009T13	3775	3779	Citi	Citi	295	1
+296	SF3	LDC	org:subsidiaries	AFP_ENG_20070409.0042.LDC2009T13	525	558	Citibank Overseas Investment Corp	Citibank Overseas Investment Corp	296	1
+297	SF3	LDC	org:parents	LTW_ENG_20081125.0103.LDC2009T13	4186	4194	Citicorp	Citicorp	297	1
+298	SF3	LDC	org:subsidiaries	AFP_ENG_20070409.0073.LDC2009T13	325	365	Taiwan's Bank of Overseas Chinese (BOOC)	Taiwan's Bank of Overseas Chinese (BOOC)	298	1
+299	SF3	LDC	org:top_members/employees	NYT_ENG_20070326.0035.LDC2009T13	3262	3271	John Reid	John Reid	299	1
+300	SF3	LDC	org:top_members/employees	LTW_ENG_20081125.0103.LDC2009T13	3512	3526	Walter Wriston	Walter Wriston	300	1
+301	SF3	LDC	org:alternate_names	LTW_ENG_20081125.0103.LDC2009T13	1924	1937	National City	National City	301	1
+302	SF3	LDC	org:top_members/employees	LTW_ENG_20081125.0103.LDC2009T13	1947	1964	Charles Mitchell 	Charles Mitchell 	302	1
+303	SF3	LDC	org:shareholders	APW_ENG_20071211.1546.LDC2009T13	6107	6119	Barton Biggs	Barton Biggs	303	1
+304	SF3	LDC	org:subsidiaries	AFP_ENG_20080711.0439.LDC2009T13	1583	1599	Citibank Germany	Citibank Germany	304	1
+305	SF43	LDC	org:alternate_names	XIN_ENG_20071128.0268.LDC2009T13	289	312	Shenyang Aircraft Corp.	Shenyang Aircraft Corp.	305	1
+306	SF43	LDC	org:country_of_headquarters	XIN_ENG_20071128.0268.LDC2009T13	281	288	China's	China	306	1
+307	SF43	LDC	org:city_of_headquarters	XIN_ENG_20071128.0268.LDC2009T13	1805	1813	Shenyang	Shenyang	307	1
+308	SF43	LDC	org:number_of_employees/members	APW_ENG_20071129.0173.LDC2009T13	2419	2425	16,000	16,000	308	1
+309	SF43	LDC	org:top_members/employees	XIN_ENG_20070311.0287.LDC2009T13	1105	1116	Li Fangyong	Li Fangyong	309	1
+310	SF43	LDC	org:stateorprovince_of_headquarters	XIN_ENG_20070608.0226.LDC2009T13	867	884	Liaoning Province	Liaoning Province	310	1
+311	SF43	LDC	org:founded	APW_ENG_20071128.1235.LDC2009T13	2369	2373	1951	1951	311	1
+312	SF43	LDC	org:top_members/employees	APW_ENG_20071128.1235.LDC2009T13	2688	2696	Luo Yang	Luo Yang	312	1
+313	SF43	LDC	org:parents	APW_ENG_20071128.1235.LDC2009T13	2787	2818	China Aviation Industry Corp. I	China Aviation Industry Corp. I	313	1
+314	SF20	LDC	org:country_of_headquarters	AFP_ENG_20080125.0572.LDC2009T13	262	268	Taiwan	Taiwan	314	1
+315	SF20	LDC	org:top_members/employees	AFP_ENG_20070501.0164.LDC2009T13	653	663	Hochen Tan	Hochen Tan	315	1
+316	SF20	LDC	org:top_members/employees	APW_ENG_20070103.0444.LDC2009T13	1814	1831	Chang Feng-Hsiung	Chang Feng-Hsiung	316	1
+317	SF20	LDC	org:alternate_names	CNA_ENG_20070610.0015.LDC2009T13	317	320	CTC	CTC	317	1
+318	SF20	LDC	org:shareholders	CNA_ENG_20070411.0009.LDC2009T13	682	734	Ministry of Transportation and Communications (MOTC)	Ministry of Transportation and Communications (MOTC)	318	1
+319	SF20	LDC	org:alternate_names	CNA_ENG_20080311.0040.LDC2009T13	337	340	CHT	CHT	319	1
+320	SF20	LDC	org:member_of	CNA_ENG_20070117.0008.LDC2009T13	379	405	World Economic Forum (WEF)	World Economic Forum (WEF)	320	1
+321	SF20	LDC	org:top_members/employees	CNA_ENG_20070117.0008.LDC2009T13	1613	1626	Lu Hsueh-chin	Lu Hsueh-chin	321	1
+322	SF20	LDC	org:member_of	CNA_ENG_20071223.0013.LDC2009T13	468	508	National Communications Commission (NCC)	National Communications Commission (NCC)	322	1
+323	SF20	LDC	org:city_of_headquarters	CNA_ENG_20070330.0031.LDC2009T13	2329	2335	Taipei	Taipei	323	1
+324	SF20	LDC	org:top_members/employees	CNA_ENG_20081209.0013.LDC2009T13	367	378	Mao Chi-kuo	Mao Chi-kuo	324	1
+325	SF20	LDC	org:top_members/employees	CNA_ENG_20080919.0014.LDC2009T13	520	532	Leng Tai-fen	Leng Tai-fen	325	1
+326	SF20	LDC	org:subsidiaries	CNA_ENG_20080214.0037.LDC2009T13	1083	1110	Chunghwa System Integration	Chunghwa System Integration	326	1
+327	SF20	LDC	org:alternate_names	CNA_ENG_20081226.0007.LDC2009T13	720	747	Chunghwa Telecom Co., Ltd. 	Chunghwa Telecom Co., Ltd. 	327	1
+328	SF20	LDC	org:subsidiaries	CNA_ENG_20080214.0037.LDC2009T13	1206	1227	Investment Department	Investment Department	328	1
+329	SF52	LDC	org:alternate_names	XIN_ENG_20080331.0248.LDC2009T13	275	302	Mexican Football Federation	Mexican Football Federation	329	1
+330	SF52	LDC	org:top_members/employees	XIN_ENG_20080331.0248.LDC2009T13	548	562	Decio de Maria	Decio de Maria	330	1
+331	SF52	LDC	org:top_members/employees	XIN_ENG_20080331.0248.LDC2009T13	648	663	Justino Compean	Justino Compean	331	1
+332	SF52	LDC	org:alternate_names	XIN_ENG_20070827.0350.LDC2009T13	722	761	Mexican Association Football Federation	Mexican Association Football Federation	332	1
+333	SF52	LDC	org:alternate_names	XIN_ENG_20080731.0215.LDC2009T13	1293	1323	Mexican Federation of Football	Mexican Federation of Football	333	1
+334	SF52	LDC	org:alternate_names	AFP_ENG_20070920.0036.LDC2009T13	804	829	Mexican Soccer Federation	Mexican Soccer Federation	334	1
+335	SF52	LDC	org:alternate_names	AFP_ENG_20080525.0038.LDC2009T13	668	678	Mexican FA	Mexican FA	335	1
+336	SF52	LDC	org:alternate_names	APW_ENG_20080804.0071.LDC2009T13	621	639	Mexican Federation	Mexican Federation	336	1
