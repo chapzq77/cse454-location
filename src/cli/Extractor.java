@@ -6,6 +6,7 @@ import tackbp.KbpConstants;
 import sf.SFConstants;
 import sf.SFEntity;
 import sf.SFEntity.SingleAnswer;
+import sf.eval.MistakeBreakdown;
 import sf.eval.SFScore;
 import sf.filler.Filler;
 
@@ -171,6 +172,24 @@ public class Extractor {
 			SFScore.main(new String[] { predictedAnnotationPath,
 										goldAnnotationPath,
 										"anydoc" });
+		}
+		
+		if (args.breakdown) {
+			String goldAnnotationPath =
+					new File( args.testSet, "annotations.gold" ).getPath();
+			String predictedAnnotationPath =
+					new File( args.testSet, "annotations.pred" ).getPath();
+			String queryFilePath = 
+					new File( args.testSet, "queries.xml" ).getPath();
+			String sentMetaPath = 
+					new File( args.corpus, "sentences.meta" ).getPath();
+			String sentTextPath = 
+					new File( args.corpus, "sentences.text" ).getPath();
+			MistakeBreakdown.main(new String[] { predictedAnnotationPath,
+												 goldAnnotationPath,
+												 queryFilePath,
+												 sentMetaPath,
+												 sentTextPath });
 		}
 	}
 }

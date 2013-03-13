@@ -7,6 +7,7 @@ Colorado
 Connecticut
 Delaware
 District Of Columbia
+D.C.
 Florida
 Georgia
 Hawaii
@@ -28,18 +29,26 @@ Montana
 Nebraska
 Nevada
 New Hampshire
+N.H.
 New Jersey
+N.J.
 New Mexico
+N.M.
 New York
+N.Y.
 North Carolina
+N.C.
 North Dakota
+N.D.
 Ohio
 Oklahoma
 Oregon
 Pennsylvania
 Rhode Island
 South Carolina
+S.C.
 South Dakota
+S.D.
 Tennessee
 Texas
 Utah
@@ -47,5 +56,57 @@ Vermont
 Virginia
 Washington
 West Virginia
+W.V.
 Wisconsin
 Wyoming
+AL
+AK
+AZ
+AR
+CA
+CO
+CT
+DE
+DC
+FL
+GA
+HI
+ID
+IL
+IN
+IA
+KS
+KY
+LA
+ME
+MD
+MA
+MI
+MN
+MS
+MO
+MT
+NE
+NV
+NH
+NJ
+NM
+NY
+NC
+ND
+OH
+OK
+OR
+PA
+RI
+SC
+SD
+TN
+TX
+UT
+VT
+VA
+WA
+WV
+WI
+WY

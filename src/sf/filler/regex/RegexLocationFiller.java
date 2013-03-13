@@ -31,7 +31,7 @@ public class RegexLocationFiller extends Filler {
 
 		// check if the name is mentioned.
 		String tokens = annotations.get(SFConstants.TOKENS);
-		if ((per && containsName(mention, tokens, sentenceCoref) == null) ||
+		if ((per && !containsPerName(mention, tokens)) ||//, sentenceCoref) == null) ||
 				(org && !containsOrg(mention, tokens)))
 			return;
 		
@@ -48,7 +48,7 @@ public class RegexLocationFiller extends Filler {
 					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[0]))
 						mention.addAnswer(SFConstants.slotNames[0], location, filename);
 					else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[1]))
-						mention.addAnswer(SFConstants.slotNames[1], location, filename);
+						mention.addAnswer(SFConstants.slotNames[1], stateFromAbbr(location), filename);
 					else if (!mention.ignoredSlots.contains(SFConstants.slotNames[2]))
 						mention.addAnswer(SFConstants.slotNames[2], location, filename);
 				}
@@ -59,7 +59,7 @@ public class RegexLocationFiller extends Filler {
 					if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[3]))
 						mention.addAnswer(SFConstants.slotNames[3], location, filename);
 					else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[4]))
-						mention.addAnswer(SFConstants.slotNames[4], location, filename);
+						mention.addAnswer(SFConstants.slotNames[4], stateFromAbbr(location), filename);
 					else if (!mention.ignoredSlots.contains(SFConstants.slotNames[5]))
 						mention.addAnswer(SFConstants.slotNames[5], location, filename);
 				}
@@ -75,13 +75,15 @@ public class RegexLocationFiller extends Filler {
 				for (String location : locations) {
 					String locRegex = "(?i)" + location + " 's .*" + orgName + "|" +
 							"(" + orgName + "|organization|company).{0,30} in .{0,20}" + location + "|" +
+							orgName + ".{0,20} at .{0,25} in " + location + "|" +
+							location + " (organization|company|business) " + orgName + "|" + 
 							"^\\d*\\sin " + location;
 					if (hqReg || mentionsRegex(tokens, locRegex)) {
 						int conf = (tokens.contains(location + "-based")) ? 2 : 1;
 						if (isCountry(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[6]))
 							mention.addAnswer(SFConstants.slotNames[6], location, filename, conf);
 						else if (isStateProv(location.toLowerCase()) && !mention.ignoredSlots.contains(SFConstants.slotNames[7]))
-							mention.addAnswer(SFConstants.slotNames[7], location, filename, conf);
+							mention.addAnswer(SFConstants.slotNames[7], stateFromAbbr(location), filename, conf);
 						else if (!mention.ignoredSlots.contains(SFConstants.slotNames[8]))
 							mention.addAnswer(SFConstants.slotNames[8], location, filename, conf);
 					}

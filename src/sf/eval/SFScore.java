@@ -134,7 +134,7 @@ public class SFScore {
 		continue;
 	    if (anydoc)
 		doc_id = "*";
-	    String answerString = fields[8];
+	    String answerString = fields[8].trim();
 	    if (nocase)
 		answerString = answerString.toLowerCase();
 	    int jment = 0;
@@ -196,7 +196,7 @@ public class SFScore {
 		doc_id = "*";
 	    String answer_string = "";
 	    if (fields.length == 5)
-		answer_string = ":" + fields[4];
+		answer_string = ":" + fields[4].trim();
 	    if (nocase)
 		answer_string = answer_string.toLowerCase();
 	    if (response.get(query_id) == null)

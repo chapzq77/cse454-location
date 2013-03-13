@@ -27,10 +27,11 @@ public class SFConstants {
 	public static final String COUNTRIES_FILE = DATA_DIR + "countries.txt";
 	public static final String STATES_FILE = DATA_DIR + "states.txt";
 	public static final String PROVINCES_FILE = DATA_DIR + "provinces.txt";
+	public static final String STATE_ABBREVS_FILE = DATA_DIR + "stateAbbrevs.txt";
 	
-	public static final String BIRTH_REGEX = "(?i)born|originally from";
+	public static final String BIRTH_REGEX = "(?i)born|originally from|adopt";
 	public static final String DEATH_REGEX = "(?i)death|died|dead |passed away|assassinated|killed|murdered";
-	public static final String HQ_REGEX = "(?i)headquarter|located|based";
+	public static final String HQ_REGEX = "(?i)headquarter|located|based|think tank";
 	
 	public static final String[] slotNames = {"per:country_of_birth","per:stateorprovince_of_birth","per:city_of_birth",
 											"per:country_of_death","per:stateorprovince_of_death","per:city_of_death",

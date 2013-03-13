@@ -2,6 +2,7 @@ package sf.filler;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
@@ -43,32 +44,48 @@ public abstract class Filler {
 			}
 		}
 		return tokens.contains(mention.mentionString) ? mention.mentionString : null;
-		/*
+	}
+	
+	protected boolean containsPerName(SFEntity mention, String tokens) {
 		String[] names = mention.mentionString.split(" ");
 		String lastName = names[names.length - 1];
 		// do case-insensitive match only if name is long
 		// (otherwise White and white, Rose and rose, etc match)
 		String regex = (lastName.length() > 5 ? "(?i)" : "") + "\\b" + lastName + "\\b";
-		return mentionsRegex(tokens, regex);*/
+		return mentionsRegex(tokens, regex);	
 	}
 	
 	protected boolean containsOrg(SFEntity mention, String tokens) {
-		String name = mention.mentionString;
+		String name = mention.mentionString.replaceAll("-", " ");
 		if (name.length() > 20)
 			name = name.substring(0, 20);
-		return tokens.toLowerCase().contains(name.toLowerCase());
+		return tokens.toLowerCase().replaceAll("-", " ").contains(name.toLowerCase());
 	}
 	
 	protected List<String> extractLocations(Map<String, String> annotations, String tokens) {
 		List<String> locs = new ArrayList<String>();
-		String[] namedEnts = annotations.get(SFConstants.STANFORDNER).split("\\s+"); // splitting by \t wasnt working...
+		String[] namedEnts = annotations.get(SFConstants.STANFORDNER).split("\\s+");
 		String[] tokensArr = tokens.split("\\s+");
 
 		for (int i = 0; i < namedEnts.length; i++) {
 			if (namedEnts[i].equals("LOCATION")) {
 				String location = tokensArr[i];
-				while (++i < namedEnts.length && namedEnts[i].equals("LOCATION")) { // Ex, "United States" -> "LOCATION LOCATION"
-					location += " " + tokensArr[i];
+				while ((++i < namedEnts.length && namedEnts[i].equals("LOCATION")) || 
+						(i+1 < namedEnts.length && tokensArr[i].equals(",") && 
+								namedEnts[i+1].equals("LOCATION") &&
+								(tokensArr[i+1].length() == 2 || tokensArr[i+1].endsWith(".")))) {
+					if (namedEnts[i].equals("LOCATION")) {
+						location += " " + tokensArr[i];
+					} else {
+						String state = tokensArr[i+1];
+						if (state.length() == 3 && state.endsWith("."))
+							state = state.substring(0,2);
+						location += ", " + state;
+						if (!state.endsWith(".") || (state.length() == 4 && state.charAt(1) == '.'))
+							locs.add(state);
+						i++;
+						break;
+					}	
 				}
 				locs.add(location);
 			}
@@ -77,10 +94,17 @@ public abstract class Filler {
 		// bug in NER, doesn't understand "Tokyo-based" as a location
 		for (int i = 0; i < tokensArr.length; i++) {
 			if (tokensArr[i].contains("-based")) {
-				locs.add(tokensArr[i].substring(0, tokensArr[i].length() - 6));
+				String loc = tokensArr[i].substring(0, tokensArr[i].length() - 6);
+				if (loc.length() <= 4 && i > 1 && 
+						namedEnts[i-2].equals("LOCATION") && tokensArr[i-1].equals(",")) {
+					if (loc.length() == 3 && loc.endsWith("."))
+						loc = loc.substring(0,2);
+					locs.add(tokensArr[i-2] + ", " + loc);
+				}
+				locs.add(loc);
 			}
 		}
-
+		
 		return locs;
 	}
 	
@@ -138,5 +162,22 @@ public abstract class Filler {
 			throw new RuntimeException(e);
 		}
 		return provinces.contains(location.toLowerCase());
+	}
+	
+	protected String stateFromAbbr(String abbr) {
+		if (abbr.length() > 2) 
+			return abbr;
+		Map<String, String> states = new HashMap<String, String>();
+		try {
+			String line;
+			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATE_ABBREVS_FILE));
+			while ((line = br.readLine()) != null) {
+				String[] parts = line.split("\\s+", 2);
+				states.put(parts[0].toLowerCase(), parts[1]);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return states.get(abbr.toLowerCase());
 	}
 }

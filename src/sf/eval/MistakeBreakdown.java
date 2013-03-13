@@ -15,14 +15,6 @@ import java.util.Set;
 import sf.SFEntity;
 
 public class MistakeBreakdown {
-
-	public static final String TEST_DATA_PATH = "test-data/training-2010/";
-	public static final String KEY_FILE = TEST_DATA_PATH + "annotations.gold";
-	public static final String PRED_FILE = TEST_DATA_PATH + "annotations.pred";
-	public static final String QUERY_FILE = TEST_DATA_PATH + "queries.xml";
-	public static final String CORPUS_PATH = "corpus-samples/only-answers/";
-	public static final String META_FILE = CORPUS_PATH + "sentences.meta";
-	public static final String TEXT_FILE = CORPUS_PATH + "sentences.text";
 	
 	// from key:	query:slot:answer --> trigger:doc
 	static Map<String, String> keyAnswers = new HashMap<String, String>();
@@ -50,7 +42,23 @@ public class MistakeBreakdown {
 	
 	public static void main(String[] args) throws IOException {
 		
-		queryReader.readFrom(QUERY_FILE);
+		System.out.println("\n");
+		System.out.println("**** MISTAKE BREAKDOWN BELOW ****");
+		System.out.println("\n");
+		
+		if (args.length != 5) {
+		    System.out.println("MistakeBreakdown must be invoked with 4 arguments:");
+		    System.out.println("\t<response file>  <key file>  <query file>  " + 
+		    		"<corpus meta file>  <corpus text file>");
+		    System.exit(1);
+		}
+		String predFile = args[0];
+		String keyFile = args[1];
+		String queryFile = args[2];
+		String metaFile = args[3];
+		String textFile = args[4];
+		
+		queryReader.readFrom(queryFile);
 		for (SFEntity query : queryReader.queryList) {
 			queryName.put(query.queryId, query.mentionString);
 		}
@@ -58,7 +66,7 @@ public class MistakeBreakdown {
 		// Read in key judgements
 		BufferedReader keyReader = null;
 		try {
-		    keyReader = new BufferedReader(new FileReader(new File(KEY_FILE)));
+		    keyReader = new BufferedReader(new FileReader(keyFile));
 		} catch (FileNotFoundException e) {
 		    System.out.println ("Unable to open key file");
 		    System.exit (1);
@@ -77,7 +85,7 @@ public class MistakeBreakdown {
 		    String queryId = fields[1];
 		    String slotName = fields[3];
 		    String docId = fields[4];
-		    String answer = fields[8];
+		    String answer = fields[8].trim();
 		    String trigger = fields[7];
 		    
 		    String key = queryId + ":" + slotName + ":" + answer;
@@ -88,7 +96,7 @@ public class MistakeBreakdown {
 		// Read in predictions
 		BufferedReader predReader = null;
 		try {
-		    predReader = new BufferedReader(new FileReader(new File(PRED_FILE)));
+		    predReader = new BufferedReader(new FileReader(predFile));
 		} catch (FileNotFoundException e) {
 		    System.out.println ("Unable to open prediction file");
 		    System.exit (1);
@@ -105,7 +113,7 @@ public class MistakeBreakdown {
 		    	continue;
 		    String queryId = fields[0];
 		    String slotName = fields[1];
-		    String answer = fields.length == 5? fields[4] : "NIL";
+		    String answer = fields.length == 5? fields[4].trim() : "NIL";
 		    
 		    String key = queryId + ":" + slotName + ":" + answer;
 		    if (keyAnswers.containsKey(key))
@@ -141,7 +149,7 @@ public class MistakeBreakdown {
 		// determine relevant sentences
 		BufferedReader metaReader = null;
 		try {
-		    metaReader = new BufferedReader(new FileReader(new File(META_FILE)));
+		    metaReader = new BufferedReader(new FileReader(metaFile));
 		} catch (FileNotFoundException e) {
 		    System.out.println ("Unable to open sentences.meta file");
 		    System.exit (1);
@@ -175,7 +183,7 @@ public class MistakeBreakdown {
 		// Collect relevant sentences
 		BufferedReader textReader = null;
 		try {
-		    textReader = new BufferedReader(new FileReader(new File(TEXT_FILE)));
+		    textReader = new BufferedReader(new FileReader(textFile));
 		} catch (FileNotFoundException e) {
 		    System.out.println ("Unable to open sentences.text file");
 		    System.exit (1);

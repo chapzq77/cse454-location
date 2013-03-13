@@ -35,6 +35,7 @@ probably look like this:
 	run          - Run the evaluator.
 	eval         - Evaluate the results.
 	-v           - Print verbose output.
+	-m			 - Print mistake breakdown.
 	-limit n     - Limit to n sentences. If n == 0, the number of sentences is not limited.
 	
 	-corpus x    - Use data source x, which is the path to the folder containing

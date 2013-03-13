@@ -31,7 +31,7 @@ public class Args {
 		FILLER_ABBREVS.put("tr-homes", TregexPerPlacesOfResidenceFiller.class );
 	}
 	
-	public boolean run, eval, verbose;
+	public boolean run, eval, verbose, breakdown;
 	public long limit;
 	public Set<Class<? extends Filler>> fillers;
 	private PrintStream out;
@@ -45,6 +45,7 @@ public class Args {
 				    "run          - Run the evaluator.\n" +
 	                "eval         - Evaluate the results.\n" +
 				    "-v           - Print verbose output.\n" +
+	                "-m			  - Print mistake breakdown.\n" +
 				    "-limit n     - Limit to n sentences. If n == 0, " + 
 	                    "the number of sentences is not limited.\n");
 		
@@ -100,6 +101,8 @@ public class Args {
 					fillers.addAll( FILLER_ABBREVS.values() );
 				else if ( arg.equals("-v") )
 					verbose = true;
+				else if ( arg.equals("-m") )
+					breakdown = true;
 				else if ( arg.equals("-limit") ) {
 					idx++;
 					try {
