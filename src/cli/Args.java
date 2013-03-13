@@ -37,6 +37,7 @@ public class Args {
 	private PrintStream out;
 	public File corpus;
 	public File testSet;
+	public long skip;
 	
 	public void usage() {
 		// Display initial arguments.
@@ -46,8 +47,9 @@ public class Args {
 	                "eval         - Evaluate the results.\n" +
 				    "-v           - Print verbose output.\n" +
 	                "-m			  - Print mistake breakdown.\n" +
-				    "-limit n     - Limit to n sentences. If n == 0, " + 
-	                    "the number of sentences is not limited.\n");
+				    "-limit n     - Limit to n sentences. If n == 0, " +
+	                    "the number of sentences is not limited.\n" +
+				    "-skip n      - Skip n sentences.\n");
 		
 		// Display corpus samples.
 		out.println("-corpus x    - Use data source x, which is " +
@@ -82,6 +84,24 @@ public class Args {
 			out.println( "               * " + child.getName() );
 		}
 	}
+
+	private long checkLong( String[] args, int idx, String paramTitle ) {
+		long limit;
+		try {
+			limit = Long.parseLong( args[idx] );
+			if ( limit < 0 ) {
+				throw new IllegalArgumentException(
+						"The " + paramTitle + " must be positive.");
+			}
+		} catch( NumberFormatException ex ) {
+			throw new IllegalArgumentException(
+					"The " + paramTitle + " must be an integer.");
+		} catch( ArrayIndexOutOfBoundsException ex ) {
+			throw new IllegalArgumentException(
+					"Missing the value for the " + paramTitle + ".");
+		}
+		return limit;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public Args( String[] args, PrintStream out ) {
@@ -103,21 +123,12 @@ public class Args {
 					verbose = true;
 				else if ( arg.equals("-m") )
 					breakdown = true;
-				else if ( arg.equals("-limit") ) {
+				else if ( arg.equals("-skip") ) {
 					idx++;
-					try {
-						limit = Long.parseLong( args[idx] );
-						if ( limit < 0 ) {
-							throw new IllegalArgumentException(
-									"Sentence limit must be positive.");
-						}
-					} catch( NumberFormatException ex ) {
-						throw new IllegalArgumentException(
-								"Sentence limit must be an integer.");
-					} catch( ArrayIndexOutOfBoundsException ex ) {
-						throw new IllegalArgumentException(
-								"Missing number of sentences to limit to.");
-					}
+					skip = checkLong( args, idx, "sentences to skip" );
+				} else if ( arg.equals("-limit") ) {
+					idx++;
+					limit = checkLong( args, idx, "sentence limit" );
 				}
 				
 				// Pick the corpus
@@ -196,8 +207,13 @@ public class Args {
 
 	@Override
 	public String toString() {
-		return "run=" + run + "\neval=" + eval +
-			   "\nlimit=" + limit + "\nfillers=" + fillers +
-			   "\ncorpus=" + corpus + "\ntest-set" + testSet;
+		return "run: "       + run       + "\n"
+			 + "eval: "      + eval      + "\n"
+			 + "skip: "      + skip      + "\n"
+			 + "limit: "     + limit     + "\n"
+			 + "fillers: "   + fillers   + "\n"
+			 + "corpus: "    + corpus    + "\n"
+			 + "test-set: "  + testSet   + "\n"
+			 + "breakdown: " + breakdown + "\n";
 	}
 }

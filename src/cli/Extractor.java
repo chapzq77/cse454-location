@@ -38,6 +38,24 @@ import util.FileUtil;
  */
 
 public class Extractor {
+	// TODO: actually calculate number of sentences in a corpus.
+	protected static long ESTIMATED_SENTENCE_COUNT = 27000000;
+
+	protected static String formatTime(long nanoseconds) {
+		double seconds = nanoseconds / 1000000000.;
+
+		int minutes = (int)(seconds / 60);
+		seconds -= minutes * 60;
+
+		int hours = minutes / 60;
+		minutes -= hours * 60;
+
+		int days = hours / 24;
+		hours -= days * 24;
+
+		return String.format("%d:%02d:%02d:%02.3f", days, hours, minutes, seconds);
+	}
+
 	public static void run(Args args) throws InstantiationException, IllegalAccessException {
 		// read the queries
 		sf.query.QueryReader queryReader = new sf.query.QueryReader();
@@ -58,6 +76,7 @@ public class Extractor {
 		// initialize the corpus
 		// FIXME replace the list by a generic class with an input of slot
 		// name and an output of all the relevant files from the answer file
+		long startTime = System.nanoTime();
 		try( ProcessedCorpus corpus = new ProcessedCorpus( basePath );
 		     CorefIndex corefIndex = new CorefIndex( basePath ) ) {
 			
@@ -67,8 +86,22 @@ public class Extractor {
 			while (corpus.hasNext()) {
 				// Get next annotation
 				annotations = corpus.next();
-				if (++c % 1000 == 0) {
-					System.out.println("finished reading " + c + " lines");
+				c++;
+				if ( c < args.skip ) {
+					if ( c % 100000 == 0 ) {
+						System.out.println("Skipped " + c + " sentences.");
+					}
+					continue;
+				}
+
+				// Report status
+				if (c % 1000 == 0) {
+					long elapsed = System.nanoTime() - startTime;
+					long estTime = (long)( elapsed *
+							(double) ESTIMATED_SENTENCE_COUNT / c );
+					System.out.println("===== Read " + c + " lines in " +
+							formatTime(elapsed) + ", remaining time " +
+							formatTime(estTime));
 				}
 				
 				String[] sentenceArticle = annotations.get(
@@ -82,6 +115,8 @@ public class Extractor {
 				long sentenceId = Long.parseLong( sentenceArticle[0] );
 				CorefProvider sentenceCoref =
 						corefIndex.getSentenceProvider( sentenceId );
+
+				// Report coreference information
 				if ( args.verbose && c % 1000 == 0 ) {
 					System.out.println("Sentence " + sentenceId + ": " +
 							annotations.get( SFConstants.TEXT ) );
