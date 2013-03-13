@@ -46,15 +46,15 @@ public class Args {
 				    "run          - Run the evaluator.\n" +
 	                "eval         - Evaluate the results.\n" +
 				    "-v           - Print verbose output.\n" +
-	                "-m			  - Print mistake breakdown.\n" +
+	                "-m           - Print mistake breakdown.\n" +
 				    "-limit n     - Limit to n sentences. If n == 0, " +
 	                    "the number of sentences is not limited.\n" +
 				    "-skip n      - Skip n sentences.\n");
 		
 		// Display corpus samples.
-		out.println("-corpus x    - Use data source x, which is " +
+		out.println("-corpus x    - Use data source x, which is\n" +
 		            "               the path to the folder containing\n" +
-				    "               sentences.txt files. This path may be \n" +
+				    "               sentences.txt files. This path may be\n" +
 		            "               relative to the corpus-samples/ \n" +
 				    "               directory in your repository, which\n" +
 		            "               includes the following:");
@@ -63,6 +63,7 @@ public class Args {
 			if ( !child.isDirectory() ) continue;
 			out.println( "               * " + child.getName() );
 		}
+		out.println();
 		
 		// Display filler names.
 		for ( Map.Entry<String, Class<? extends Filler>> entry :
@@ -71,10 +72,11 @@ public class Args {
 		}
 		out.println("(class name) - Use the filler with the given class name.");
 		out.println("all-fillers  - Use all fillers in filterAbbrevs.");
+		out.println();
 		
 		// Display test sets.
-		out.println("-test-set x  - Use the queries and annotations in the " +
-		            "               given directory x. This path may be \n" +
+		out.println("-test-set x  - Use the queries and annotations in the\n" +
+		            "               given directory x. This path may be\n" +
 		            "               relative to the test-data/ \n" +
 				    "               directory in your repository, which\n" +
 		            "               includes the following:");
