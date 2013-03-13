@@ -49,6 +49,7 @@ public class TregexPerPlaceOfBirthFiller extends BaseTregexFiller {
 		// TODO also check for LOCATION tags
 		//System.out.println(places);
 		for(String placeName : places) {
+			if ( placeName == null ) continue;
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfBirth)) {
 					mention.addAnswer(countryOfBirth, placeName, filename);

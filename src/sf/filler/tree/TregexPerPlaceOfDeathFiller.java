@@ -48,6 +48,7 @@ public class TregexPerPlaceOfDeathFiller extends BaseTregexFiller {
 		// TODO not very good, need a way to combine multiple word place names
 		// TODO also check for LOCATION tags
 		for(String placeName : places) {
+			if ( placeName == null ) continue;
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfDeath)) {
 					mention.addAnswer(countryOfDeath, placeName, filename);

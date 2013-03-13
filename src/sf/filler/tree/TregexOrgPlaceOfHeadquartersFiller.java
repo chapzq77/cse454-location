@@ -76,6 +76,8 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 		
 		System.out.println(mention.mentionString + " " + places);
 		for(String placeName : places) {
+			if ( placeName == null ) continue;
+
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {
 					mention.addAnswer(countryOfHeadquarters, placeName, filename);
