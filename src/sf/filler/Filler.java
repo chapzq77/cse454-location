@@ -118,8 +118,9 @@ public abstract class Filler {
 		return pat.matcher(tokens).find();
 	}
 	
-	protected boolean isCountry(String location) {
-		Set<String> countries = new HashSet<String>();
+	protected static Set<String> countries;
+	protected void loadCountries() {
+		countries = new HashSet<String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.COUNTRIES_FILE));
@@ -129,6 +130,10 @@ public abstract class Filler {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected boolean isCountry(String location) {
+		if ( countries == null ) loadCountries();
 		return countries.contains(location.toLowerCase());
 	}
 	
@@ -136,8 +141,9 @@ public abstract class Filler {
 		return isUSState(location) || isCanadianProvince(location);
 	}
 	
-	protected boolean isUSState(String location) {
-		Set<String> states = new HashSet<String>();
+	protected static Set<String> states;
+	protected void loadStates() {
+		states = new HashSet<String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATES_FILE));
@@ -147,11 +153,16 @@ public abstract class Filler {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected boolean isUSState(String location) {
+		if ( states == null ) loadStates();
 		return states.contains(location.toLowerCase());
 	}
 	
-	protected boolean isCanadianProvince(String location) {
-		Set<String> provinces = new HashSet<String>();
+	protected static Set<String> provinces;
+	protected void loadProvinces() {
+		provinces = new HashSet<String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.PROVINCES_FILE));
@@ -161,23 +172,32 @@ public abstract class Filler {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected boolean isCanadianProvince(String location) {
+		if ( provinces == null ) loadProvinces();
 		return provinces.contains(location.toLowerCase());
 	}
 	
-	protected String stateFromAbbr(String abbr) {
-		if (abbr.length() > 2) 
-			return abbr;
-		Map<String, String> states = new HashMap<String, String>();
+	protected static Map<String, String> stateAbbrevs;
+	protected void loadStateAbbrevs() {
+		stateAbbrevs = new HashMap<String, String>();
 		try {
 			String line;
 			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATE_ABBREVS_FILE));
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split("\\s+", 2);
-				states.put(parts[0].toLowerCase(), parts[1]);
+				stateAbbrevs.put(parts[0].toLowerCase(), parts[1]);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return states.get(abbr.toLowerCase());
+	}
+
+	protected String stateFromAbbr(String abbr) {
+		if (abbr.length() > 2) 
+			return abbr;
+		if ( stateAbbrevs == null ) loadStateAbbrevs();
+		return stateAbbrevs.get(abbr.toLowerCase());
 	}
 }
