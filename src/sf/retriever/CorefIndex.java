@@ -69,7 +69,11 @@ public class CorefIndex implements AutoCloseable {
 			nextDocId = -1;
 		} else {
 			nextLine = line.split("\t");
-			nextDocId = Long.parseLong( nextLine[0] );
+			if ( nextLine.length > 0 ) {
+				nextDocId = Long.parseLong( nextLine[0] );
+			} else {
+				nextDocId = -1;
+			}
 		}
 	}
 	
@@ -114,42 +118,45 @@ public class CorefIndex implements AutoCloseable {
 		while ( nextDocId == docId ) {
 			// TODO: factor this out:
 			String[] tokens = nextLine;
-			
-			// Create a coreference mention object.
-			CorefMention mention = new CorefMention();
-			mention.id    = Long.parseLong( tokens[2] );
-			mention.start = Integer.parseInt( tokens[5] ) - 1;
-			mention.end   = Integer.parseInt( tokens[6] ) - 2; // TODO: check
-			mention.head  = Integer.parseInt( tokens[7] ) - 1;
-			mention.mentionSpan = tokens[9];
-			mention.type = Type.valueOf( tokens[10] );
-			mention.number = Plurality.valueOf( tokens[11] );
-			mention.gender = Gender.valueOf( tokens[12] );
-			mention.animacy = Animacy.valueOf( tokens[13] );
-			
-			// Add to cluster
-			long clusterId = Long.parseLong( tokens[1] );
-			CorefEntity entity = entitiesMap.get( clusterId );
-			if ( entity == null ) {
-				entity = new CorefEntity();
-				entity.id = clusterId;
-				entitiesMap.put( clusterId, entity );
+
+			// Make sure the line contains all the entries we'll want.
+			if ( tokens.length > 14 ) {
+				// Create a coreference mention object.
+				CorefMention mention = new CorefMention();
+				mention.id           = Long.parseLong( tokens[2] );
+				mention.start        = Integer.parseInt( tokens[5] ) - 1;
+				mention.end          = Integer.parseInt( tokens[6] ) - 2; // TODO: check
+				mention.head         = Integer.parseInt( tokens[7] ) - 1;
+				mention.mentionSpan  = tokens[9];
+				mention.type         = Type.valueOf( tokens[10] );
+				mention.number       = Plurality.valueOf( tokens[11] );
+				mention.gender       = Gender.valueOf( tokens[12] );
+				mention.animacy      = Animacy.valueOf( tokens[13] );
+				
+				// Add to cluster
+				long clusterId = Long.parseLong( tokens[1] );
+				CorefEntity entity = entitiesMap.get( clusterId );
+				if ( entity == null ) {
+					entity = new CorefEntity();
+					entity.id = clusterId;
+					entitiesMap.put( clusterId, entity );
+				}
+				entity.mentions.add( mention );
+				mention.entity = entity;
+				if ( tokens[14].equals("true") ) {
+					entity.repMention = mention;
+				}
+				
+				// Add to sentences map
+				long sentenceId = Long.parseLong( tokens[3] );
+				List<CorefMention> sentenceMentions =
+						sentencesMap.get( sentenceId );
+				if ( sentenceMentions == null ) {
+					sentenceMentions = new ArrayList<CorefMention>();
+					sentencesMap.put( sentenceId, sentenceMentions );
+				}
+				sentenceMentions.add( mention );
 			}
-			entity.mentions.add( mention );
-			mention.entity = entity;
-			if ( tokens[14].equals("true") ) {
-				entity.repMention = mention;
-			}
-			
-			// Add to sentences map
-			long sentenceId = Long.parseLong( tokens[3] );
-			List<CorefMention> sentenceMentions =
-					sentencesMap.get( sentenceId );
-			if ( sentenceMentions == null ) {
-				sentenceMentions = new ArrayList<CorefMention>();
-				sentencesMap.put( sentenceId, sentenceMentions );
-			}
-			sentenceMentions.add( mention );
 			
 			getNextLine();
 		}
@@ -170,10 +177,17 @@ public class CorefIndex implements AutoCloseable {
 		
 		// Now, attempt to extract wiki and NER data for the entities by
 		// reading the data in the corpus.
+		boolean first = true;
 		while ( nextAnnotation != null ) {
+			// Get the next annotation if needed.
+			if ( !first ) nextAnnotation = corpus.hasNext() ? corpus.next() : null;
+			first = false;
+
 			// Skip irrelevant entries
 			String[] sentenceArticle = nextAnnotation.get(
 					SFConstants.ARTICLE_IDS ).split("\t");
+			if ( sentenceArticle.length < 2 )
+				continue;
 			long sentenceDocId = Long.parseLong( sentenceArticle[1] );
 			long sentenceId = Long.parseLong( sentenceArticle[0] );
 			if ( sentenceDocId < docId )
@@ -213,7 +227,7 @@ public class CorefIndex implements AutoCloseable {
 				
 				// Use the NER type of the "head" token in the sentence to
 				// determine the entity type.
-				{
+				if ( mention.head >= 0 && mention.head < nerEntries.length ) {
 					NerType headNer = nerEntries[ mention.head ];
 					Map<NerType, Double> possibleNers =
 							chosenNer.get( entity );
@@ -222,8 +236,6 @@ public class CorefIndex implements AutoCloseable {
 					possibleNers.put( headNer, vote + 1 );
 				}
 			}
-			
-			nextAnnotation = corpus.hasNext() ? corpus.next() : null;
 		}
 		
 		// Finish filling in the info for each entity.
@@ -234,7 +246,7 @@ public class CorefIndex implements AutoCloseable {
 					chosenWiki.get( entity );
 			for ( Map.Entry<String, Double> entry :
 				possibleArticles.entrySet() ) {
-				double score = entry.getValue(); 
+				double score = entry.getValue();
 				if ( score > bestScore ) {
 					bestScore = score;
 					entity.wikiId = entry.getKey();
@@ -244,7 +256,7 @@ public class CorefIndex implements AutoCloseable {
 			
 			// Update NER info.
 			bestScore = 0;
-			Map<NerType, Double> possibleNers =	chosenNer.get( entity );
+			Map<NerType, Double> possibleNers = chosenNer.get( entity );
 			for ( Map.Entry<NerType, Double> entry : possibleNers.entrySet() ) {
 				double score = entry.getValue(); 
 				if ( score > bestScore ) {
