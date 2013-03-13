@@ -6,11 +6,11 @@ import sf.retriever.CorefIndex;
 
 /*
 Coreference data format, from the documentation:
-1. docID as the second field in “sentences.articleIDs” (scope: dataset)
+1. docID as the second field in 'sentences.articleIDs' (scope: dataset)
 2. mention.corefClusterID: the cluster id for the mention (scope: document)
 3. mention.mentionID: the mention id (scope: document)
-4. global sentenceID as the first field in “sentences.articleIDs” and other
-   “sentences.*”
+4. global sentenceID as the first field in 'sentences.articleIDs' and other
+   'sentences.*'
 5. local sentenceID (index from 1, scope: document)
 6. mention.startIndex (token, index from 1, scope: sentence)
 7. mention.endIndex (token, index from 1, scope: sentence)
