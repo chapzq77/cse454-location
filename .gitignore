@@ -11,3 +11,5 @@
 /data
 /corpus-samples/large-corpus
 /corpus-samples/unfiltered-corpus
+*-docs.txt
+*-docs-uniq.txt
