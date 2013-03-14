@@ -116,47 +116,16 @@ public class CorefIndex implements AutoCloseable {
 		Map<Long, CorefEntity> entitiesMap = new HashMap<Long, CorefEntity>();
 		
 		while ( nextDocId == docId ) {
-			// TODO: factor this out:
-			String[] tokens = nextLine;
-
-			// Make sure the line contains all the entries we'll want.
-			if ( tokens.length > 14 ) {
-				// Create a coreference mention object.
-				CorefMention mention = new CorefMention();
-				mention.id           = Long.parseLong( tokens[2] );
-				mention.start        = Integer.parseInt( tokens[5] ) - 1;
-				mention.end          = Integer.parseInt( tokens[6] ) - 2; // TODO: check
-				mention.head         = Integer.parseInt( tokens[7] ) - 1;
-				mention.mentionSpan  = tokens[9];
-				mention.type         = Type.valueOf( tokens[10] );
-				mention.number       = Plurality.valueOf( tokens[11] );
-				mention.gender       = Gender.valueOf( tokens[12] );
-				mention.animacy      = Animacy.valueOf( tokens[13] );
+			CorefMention mention = new CorefMention( nextLine, entitiesMap );
 				
-				// Add to cluster
-				long clusterId = Long.parseLong( tokens[1] );
-				CorefEntity entity = entitiesMap.get( clusterId );
-				if ( entity == null ) {
-					entity = new CorefEntity();
-					entity.id = clusterId;
-					entitiesMap.put( clusterId, entity );
-				}
-				entity.mentions.add( mention );
-				mention.entity = entity;
-				if ( tokens[14].equals("true") ) {
-					entity.repMention = mention;
-				}
-				
-				// Add to sentences map
-				long sentenceId = Long.parseLong( tokens[3] );
-				List<CorefMention> sentenceMentions =
-						sentencesMap.get( sentenceId );
-				if ( sentenceMentions == null ) {
-					sentenceMentions = new ArrayList<CorefMention>();
-					sentencesMap.put( sentenceId, sentenceMentions );
-				}
-				sentenceMentions.add( mention );
+			// Add to sentences map
+			List<CorefMention> sentenceMentions =
+					sentencesMap.get( mention.sentenceId );
+			if ( sentenceMentions == null ) {
+				sentenceMentions = new ArrayList<CorefMention>();
+				sentencesMap.put( mention.sentenceId, sentenceMentions );
 			}
+			sentenceMentions.add( mention );
 			
 			getNextLine();
 		}

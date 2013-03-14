@@ -27,10 +27,18 @@ public class DocumentGrouper {
 		public void map(LongWritable key, Text value, Context context)
 				throws IOException, InterruptedException {
 			// Unpack document tokens
+			
+			// TODO: need to fix the dirty data that causes this...
+			String[] s = value.toString().split("\t", 2);
+			if ( s.length < 2 || s[1].length() == 0 )
+				return;
+			
 			SentenceAnnotations sa = new SentenceAnnotations( value );
 			
 			// Get article ID
 			long articleId = Long.parseLong( sa.get( "articleIDs" ) );
+			
+			System.out.println("Mapping key " + key);
 			
 			context.write( new LongWritable( articleId ), value );
 	    }
@@ -41,8 +49,9 @@ public class DocumentGrouper {
 		@Override
 		public void reduce(LongWritable key, Iterable<Text> values, Context context) 
 			      throws IOException, InterruptedException {
-			// Concatenate documents, with an index at the beginning to
-			// locate each document's corresponding string.
+			System.out.println("Reducing key " + key);
+			
+			// Concatenate documents
 			List<String> sentences = new ArrayList<String>();
 			for ( Text value : values ) {
 				sentences.add( value.toString() );
@@ -62,11 +71,11 @@ public class DocumentGrouper {
 	public static void main( String[] args ) throws Exception {
 	    Configuration conf = new Configuration();
 
-	    Job job = new Job(conf, "wordcount");
+	    Job job = new Job(conf, "DocumentGrouper");
 	    job.setJarByClass(SentenceGrouper.class);
 
-	    job.setOutputKeyClass(Text.class);
-	    job.setOutputValueClass(IntWritable.class);
+	    job.setOutputKeyClass(LongWritable.class);
+	    job.setOutputValueClass(Text.class);
 
 	    job.setMapperClass(Map.class);
 	    job.setReducerClass(Reduce.class);

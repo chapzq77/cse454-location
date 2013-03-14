@@ -1,5 +1,9 @@
 package sf.retriever;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Represents a *mention* of an entity which has coreferences.
  * 
@@ -16,6 +20,9 @@ public class CorefMention {
 	
 	/** ID number for this mention (scope: document). */
 	public long id;
+	
+	/** Global sentence ID. */
+	public long sentenceId;
 	
 	/** Entity being referred to in this mention. */
 	public CorefEntity entity;
@@ -59,6 +66,39 @@ public class CorefMention {
 	 * Animacy
 	 */
 	public Animacy animacy;
+	
+	public CorefMention() {}
+	
+	public CorefMention( String[] tokens, Map<Long, CorefEntity> entitiesMap ) {
+		if ( tokens.length <= 14 )
+			throw new IllegalArgumentException("Can't create CorefMention " +
+					"with only " + tokens.length + " tokens.");
+		
+		id           = Long.parseLong( tokens[2] );
+		start        = Integer.parseInt( tokens[5] ) - 1;
+		end          = Integer.parseInt( tokens[6] ) - 2; // TODO: check
+		head         = Integer.parseInt( tokens[7] ) - 1;
+		mentionSpan  = tokens[9];
+		type         = Type.valueOf( tokens[10] );
+		number       = Plurality.valueOf( tokens[11] );
+		gender       = Gender.valueOf( tokens[12] );
+		animacy      = Animacy.valueOf( tokens[13] );
+		sentenceId   = Long.parseLong( tokens[3] );
+		
+		// Add to cluster
+		long clusterId = Long.parseLong( tokens[1] );
+		CorefEntity entity = entitiesMap.get( clusterId );
+		if ( entity == null ) {
+			entity = new CorefEntity();
+			entity.id = clusterId;
+			entitiesMap.put( clusterId, entity );
+		}
+		entity.mentions.add( this );
+		this.entity = entity;
+		if ( tokens[14].equals("true") ) {
+			entity.repMention = this;
+		}
+	}
 	
 	/**
 	 * Determines if a token overlaps the tokens in this mention. 

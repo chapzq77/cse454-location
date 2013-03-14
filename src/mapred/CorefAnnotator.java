@@ -1,6 +1,11 @@
 package mapred;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -16,6 +21,13 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+
+import sf.SFConstants;
+import sf.retriever.CorefEntity;
+import sf.retriever.CorefMention;
+import sf.retriever.NerType;
+import sf.retriever.Util;
+import sf.retriever.WikiEntry;
 
 /**
  * Joins document coreference data with the sentences in the document.
@@ -40,7 +52,8 @@ public class CorefAnnotator {
 			
 			// Determine type of data
 			FileSplit split = (FileSplit)context.getInputSplit();
-			String type = split.getPath().getName().split("\\.")[1];
+			String type = split.getPath().getName().indexOf("coref") >= 0
+					? "coref" : "article";
 			
 			// Send things along for annotation
 			context.write( new LongWritable( articleId ),
@@ -50,18 +63,116 @@ public class CorefAnnotator {
 	
 	public static class Reduce extends
 		Reducer<LongWritable, Text, LongWritable, Text> {
-		public void reduce(Text key, Iterable<IntWritable> values, Context context) 
+		
+		protected static class SentenceData {
+			public SentenceAnnotations sa;
+			public WikiEntry[] wikiEntries;
+			public NerType[] nerEntries;
+			
+			public SentenceData( String line ) {
+				sa = new SentenceAnnotations( line.split("\t") );
+
+				// Get wiki data
+				String wikiLine = sa.get( SFConstants.WIKI );
+				wikiEntries = Util.parseWiki( wikiLine );
+				
+				// Get NER data
+				String nerLine = sa.get( SFConstants.STANFORDNER );
+				nerEntries = Util.parseNer( nerLine );
+			}
+		}
+		
+		@Override
+		public void reduce(LongWritable key, Iterable<Text> values, Context context) 
 			      throws IOException, InterruptedException {
-			// Match up sentences to coreference items
+			// Load sentences and coref mentions
+			java.util.Map<Long, SentenceData> sentences =
+					new HashMap<Long, SentenceData>();
+			List<CorefMention> mentions = new ArrayList<CorefMention>();
+			java.util.Map<Long, CorefEntity> entitiesMap =
+					new HashMap<Long, CorefEntity>();
 			
-			// Iterate over sentences, looking at mentions for each sentence
-			// to guess the wiki and NER types.
+			for ( Text value : values ) {
+				String[] parts = value.toString().split("\t", 2);
+				if ( parts[0].equals("article") ) {
+					// Load all the sentences
+					// TODO: better error handling...
+					String data = parts[1];
+					int start = data.indexOf("\t");
+					int count = Integer.parseInt( data.substring( 0, start ) );
+					start += 1;
+					for ( int i = 0; i < count; i++ ) {
+						int delim = data.indexOf("\t", start);
+						int len = Integer.parseInt( data.substring( start, delim ) );
+						start = delim + 1;
+						String annot = data.substring( start, start + len );
+						start += len;
+						
+						SentenceData sd = new SentenceData( annot );
+						sentences.put( sd.sa.sentenceId, sd );
+					}
+				} else {
+					// Load the coref mention
+					String[] tokens = parts[1].split("\t");
+					mentions.add( new CorefMention( tokens, entitiesMap ) );
+				}
+			}
 			
-			// Unpack sentences from document group, and write each sentence
-			// out with coreference annotations.
-			// Each annotation contains:
-			//  - all coreference mentions for the sentence. The mentions
-			//    include 
+			// For each coref entity, find the wiki and NER types
+			for ( CorefEntity entity : entitiesMap.values() ) {
+				java.util.Map<String, Double> possibleArticles =
+						new HashMap<String, Double>();
+				java.util.Map<NerType, Double> possibleNers =
+						new HashMap<NerType, Double>();
+				
+				for ( CorefMention mention : entity.mentions ) {
+					SentenceData sd = sentences.get( mention.sentenceId );
+					if ( sd == null ) continue;
+					
+					// See if wiki entries match this entity
+					for ( WikiEntry entry : sd.wikiEntries ) {
+						if ( !mention.overlaps( entry.start, entry.end ) )
+							continue;
+						Double voteObj = possibleArticles.get( entry.articleName );
+						double vote = voteObj == null ? 0 : voteObj;
+						possibleArticles.put( entry.articleName,
+								vote + entry.confidence );
+					}
+					
+					// Use the NER type of the "head" token in the sentence to
+					// determine the entity type.
+					if ( mention.head >= 0 && mention.head <
+							sd.nerEntries.length ) {
+						NerType headNer = sd.nerEntries[ mention.head ];
+						Double voteObj = possibleNers.get( headNer );
+						double vote = voteObj == null ? 0 : voteObj;
+						possibleNers.put( headNer, vote + 1 );
+					}
+				}
+				
+				// Update wiki info.
+				double bestScore = 0;
+				for ( java.util.Map.Entry<String, Double> entry :
+					possibleArticles.entrySet() ) {
+					double score = entry.getValue();
+					if ( score > bestScore ) {
+						bestScore = score;
+						entity.wikiId = entry.getKey();
+						entity.fullName = entity.wikiId.replace('_', ' ');
+					}
+				}
+				
+				// Update NER info.
+				bestScore = 0;
+				for ( java.util.Map.Entry<NerType, Double> entry :
+					possibleNers.entrySet() ) {
+					double score = entry.getValue(); 
+					if ( score > bestScore ) {
+						bestScore = score;
+						entity.nerType = entry.getKey();
+					}
+				}
+			}			
 	    }
 	}
 	

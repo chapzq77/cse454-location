@@ -39,3 +39,8 @@ NNPS|NNP >> (NP > (PP < (IN < /^in$/) > (VP < (VBD|VBN < /grew/))))
 
 // headquarters
 NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP)
+
+How tregex works
+The tree slot filling approach works by searching through the annotated parse trees. We take advantage of the Stanford Tregex library, which is a Java implementation of Tgrep. Tregex uses a specialized regex-like syntax to allow you to match against tree shaped structures. To develop the search strings, I used the Tregex gui to load the sentences.cj file and try out promising searches until I got something that produced accurate results most of the time. The Tregex searches find likely location names, and then the filler further checks this result against a list of countries, states, and cities to see if it can be used in a slot.
+
+Examples:
