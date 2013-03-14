@@ -178,9 +178,11 @@ public class CorefIndex implements AutoCloseable {
 		// Now, attempt to extract wiki and NER data for the entities by
 		// reading the data in the corpus.
 		boolean first = true;
-		while ( nextAnnotation != null ) {
+		while ( true ) {
 			// Get the next annotation if needed.
+			// TODO: clean this up...
 			if ( !first ) nextAnnotation = corpus.hasNext() ? corpus.next() : null;
+			if ( nextAnnotation == null ) break;
 			first = false;
 
 			// Skip irrelevant entries
