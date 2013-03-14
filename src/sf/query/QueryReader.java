@@ -2,6 +2,7 @@ package sf.query;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,42 +28,58 @@ public class QueryReader {
 	}
 
 	public List<SFEntity> queryList = null;
+	
+	public void readFrom( Document doc ) {
+		NodeList nodeList = doc.getElementsByTagName("query");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			SFEntity mention = new SFEntity();
+			mention.queryId = node.getAttributes().item(0).getNodeValue();
+			NodeList children = node.getChildNodes();
+			for (int j = 0; j < children.getLength(); ++j) {
+				if (children.item(j).getNodeName().equals("name")) {
+					mention.mentionString = children.item(j)
+							.getTextContent();
+				} else if (children.item(j).getNodeName().equals("docid")) {
+					mention.mentionDoc = children.item(j).getTextContent();
+				} else if (children.item(j).getNodeName().equals("enttype")) {
+					mention.entityType = KbEntity.EntityType
+							.valueOf(children.item(j).getTextContent());
+				} else if (children.item(j).getNodeName().equals("nodeid")) {
+					mention.entityId = children.item(j).getTextContent();
+				} else if (children.item(j).getNodeName().equals("ignore")) {
+					for (String slot : children.item(j).getTextContent()
+							.split(" ")) {
+						mention.ignoredSlots.add(slot);
+					}
+				}
+			}
+			queryList.add(mention);
+		}
+	}
+	
+	public void readFrom(InputStream stream) {
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			factory.setIgnoringElementContentWhitespace(true);
+			readFrom( factory.newDocumentBuilder().parse( stream ) );
+		} catch (Exception e) {
+			// TODO: should do something more intelligent...
+			throw new RuntimeException(e);
+		}
+	}
 
 	public void readFrom(String filename) {
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
 			factory.setIgnoringElementContentWhitespace(true);
-			Document doc = factory.newDocumentBuilder().parse(
-					new File(filename));
-			NodeList nodeList = doc.getElementsByTagName("query");
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				Node node = nodeList.item(i);
-				SFEntity mention = new SFEntity();
-				mention.queryId = node.getAttributes().item(0).getNodeValue();
-				NodeList children = node.getChildNodes();
-				for (int j = 0; j < children.getLength(); ++j) {
-					if (children.item(j).getNodeName().equals("name")) {
-						mention.mentionString = children.item(j)
-								.getTextContent();
-					} else if (children.item(j).getNodeName().equals("docid")) {
-						mention.mentionDoc = children.item(j).getTextContent();
-					} else if (children.item(j).getNodeName().equals("enttype")) {
-						mention.entityType = KbEntity.EntityType
-								.valueOf(children.item(j).getTextContent());
-					} else if (children.item(j).getNodeName().equals("nodeid")) {
-						mention.entityId = children.item(j).getTextContent();
-					} else if (children.item(j).getNodeName().equals("ignore")) {
-						for (String slot : children.item(j).getTextContent()
-								.split(" ")) {
-							mention.ignoredSlots.add(slot);
-						}
-					}
-				}
-				queryList.add(mention);
-			}
-		} catch (SAXException | IOException | ParserConfigurationException e) {
-			e.printStackTrace();
+			readFrom( factory.newDocumentBuilder().parse(
+					new File(filename)) );
+		} catch (Exception e) {
+			// TODO: should do something more intelligent...
+			throw new RuntimeException(e);
 		}
 	}
 }
