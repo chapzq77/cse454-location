@@ -82,8 +82,10 @@ public class ProcessedCorpus implements Iterator<Map<String, String>>, AutoClose
 					throw new Exception("The data type [" + dataType
 							+ "] does not exist. filename = "+filename);
 				}
-			} catch (UnsupportedEncodingException | FileNotFoundException e) {
+			} catch (Exception e) {
+				// TODO: do something more intelligent...
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 	}

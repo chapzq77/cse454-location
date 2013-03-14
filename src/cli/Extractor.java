@@ -77,8 +77,11 @@ public class Extractor {
 		// FIXME replace the list by a generic class with an input of slot
 		// name and an output of all the relevant files from the answer file
 		long startTime = System.nanoTime();
-		try( ProcessedCorpus corpus = new ProcessedCorpus( basePath );
-		     CorefIndex corefIndex = new CorefIndex( basePath ) ) {
+		ProcessedCorpus corpus = null;
+		CorefIndex corefIndex = null;
+		try {
+			corpus = new ProcessedCorpus( basePath );
+			corefIndex = new CorefIndex( basePath );
 			
 			// Predict annotations
 			Map<String, String> annotations = null;
@@ -174,6 +177,14 @@ public class Extractor {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			// TODO: handle errors more intelligently:
+			try {
+				if ( corpus != null ) corpus.close();
+				if ( corefIndex != null ) corefIndex.close();
+			} catch ( IOException e ) {
+				throw new RuntimeException(e);
+			}
 		}
 		
 		FileUtil.writeTextToFile(answersString.toString(),

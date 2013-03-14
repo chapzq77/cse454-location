@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import sf.SFConstants;
+import sf.retriever.CorefIndex;
 import sf.retriever.ProcessedCorpus;
 
 /**
@@ -87,8 +88,12 @@ public class SentenceFinder {
 			}
 		}
 
-		try( ProcessedCorpus corpus = new ProcessedCorpus();
-			 CorpusWriter corpusWriter = new CorpusWriter() ) {
+		ProcessedCorpus corpus = null;
+		CorpusWriter corpusWriter = null;
+		try {
+			corpus = new ProcessedCorpus();
+			corpusWriter = new CorpusWriter();
+
 			Map<String, String> annotations = null;
 			int c = 0;
 			int validSentences = 0;
@@ -117,6 +122,14 @@ public class SentenceFinder {
 			}
 		} catch ( Exception e ) {
 			e.printStackTrace();
+		} finally {
+			// TODO: handle errors more intelligently
+			try {
+				if ( corpus != null ) corpus.close();
+				if ( corpusWriter != null ) corpusWriter.close();
+			} catch( IOException e ) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 }

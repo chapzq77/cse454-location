@@ -53,8 +53,10 @@ public class KB {
 				}
 				entityMap.put(entity.name,entity);
 			}
-		} catch (SAXException | IOException | ParserConfigurationException e) {
+		} catch (Exception e) {
+			// TODO: do something more intelligent...
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}
