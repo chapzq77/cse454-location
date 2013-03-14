@@ -3,8 +3,10 @@ package sf.filler.tree;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.tregex.TregexMatcher;
@@ -24,7 +26,7 @@ public abstract class BaseTregexFiller extends Filler {
 		TregexMatcher m = p.matcher(t);
 
 		List<String> tokens = Arrays.asList(annotations.get(SFConstants.TOKENS).split(" "));
-		List<Integer> places = new ArrayList<Integer>();
+		Set<Integer> places = new HashSet<Integer>();
 		while(m.find()) {
 			Tree match = m.getMatch();
 			for(Tree node : match.getLeaves()) {
@@ -33,26 +35,28 @@ public abstract class BaseTregexFiller extends Filler {
 			}
 		}
 		
-		ArrayList<String> retPlaces = new ArrayList<String>();
+		HashSet<String> placesSet = new HashSet<String>();
 		for(Integer placeIndex : places) {
 			if(placeIndex >= 0) {
 				String place = tokens.get(placeIndex);
 				if(annotations.get(SFConstants.STANFORDNER).split(" ")[placeIndex].equals("LOCATION"))
-					retPlaces.add(place);
+					placesSet.add(place);
 				Collection<CorefMention> corefs = coref.inRange(placeIndex, placeIndex);
 				if(corefs.size() > 0) {
 					CorefEntity entity = corefs.iterator().next().entity;
 					if(entity.nerType == NerType.LOCATION)
-						retPlaces.add(entity.repMention.entity.fullName);
+						placesSet.add(entity.repMention.entity.fullName);
 					else if(place.contains("-based")) {
 						place = place.replace("-based", "");
-						retPlaces.add(place);
+						placesSet.add(place);
 					}
 				}
 			}
 		}
 		
-		return retPlaces;
+		ArrayList<String> retList = new ArrayList<String>();
+		retList.addAll(placesSet);
+		return retList;
 	}
 	
 }

@@ -53,19 +53,21 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 			mentionNP += " << /(" + mentionToken + ")|(" + mentionToken.toLowerCase() + ")/";
 		}
 		mentionNP += ")";
-		
+
 		// Try to match for Place's Mention
 		//String actualMention = "(NP < /" + tokens.split(" ")[mentionIndex] + "/)";
 		places.addAll(getMatchNames("NP < (NNP > (NP < POS) >> " + mentionNP + ")", t, annotations, sentenceCoref));
 		
 		// Try to match Place-based Mention
-		places.addAll(getMatchNames("ADJP << /based/", t, annotations, sentenceCoref));
-		
+		places.addAll(getMatchNames("ADJP < /based/", t, annotations, sentenceCoref));
+
 		// Try to match adjective phrases
 		places.addAll(getMatchNames("JJ > " + mentionNP, t, annotations, sentenceCoref));
-		
+
 		// Try to match verbed in Place
-		places.addAll(getMatchNames("NP >> (PP < (IN < /^in$/) > (VP < (VBN < /^((based)|(located)|(headquartered)|(centered)|(active))$/)))", t, annotations, sentenceCoref));
+		places.addAll(getMatchNames("NP > (PP < (IN < /^in$/) > (VP < (VBN < /^((based)|(located)|(headquartered)|(centered)|(active))$/)))", t, annotations, sentenceCoref));
+
+		// These don't work so well. (Matches other arbitrary information, doesn't match locations, etc.)
 		
 		//places.addAll(getMatchNames("NP >> (PP < (IN < /^in$/) $-- " + mentionNP + ")", t, annotations, sentenceCoref));
 		
@@ -74,7 +76,7 @@ public class TregexOrgPlaceOfHeadquartersFiller extends BaseTregexFiller {
 		
 		//places.addAll(getMatchNames("NP < (NNPS|NNP >> (NP << /headquarters/ < PP) > (NP > PP))", t, annotations, sentenceCoref));
 		
-		System.out.println(mention.mentionString + " " + places);
+		
 		for(String placeName : places) {
 			if(isCountry(placeName)) {
 				if(!mention.ignoredSlots.contains(countryOfHeadquarters)) {
