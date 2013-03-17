@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.Reader;
 
 import sf.SFConstants;
 import sf.SFEntity;
@@ -123,7 +124,7 @@ public abstract class Filler {
 		countries = new HashSet<String>();
 		try {
 			String line;
-			BufferedReader br = new BufferedReader(new FileReader(SFConstants.COUNTRIES_FILE));
+			BufferedReader br = fs.open(SFConstants.COUNTRIES_FILE);
 			while ((line = br.readLine()) != null) {
 				countries.add(line.toLowerCase());
 			}
@@ -146,7 +147,7 @@ public abstract class Filler {
 		states = new HashSet<String>();
 		try {
 			String line;
-			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATES_FILE));
+			BufferedReader br = fs.open(SFConstants.STATES_FILE);
 			while ((line = br.readLine()) != null) {
 				states.add(line.toLowerCase());
 			}
@@ -165,7 +166,7 @@ public abstract class Filler {
 		provinces = new HashSet<String>();
 		try {
 			String line;
-			BufferedReader br = new BufferedReader(new FileReader(SFConstants.PROVINCES_FILE));
+			BufferedReader br = fs.open(SFConstants.PROVINCES_FILE);
 			while ((line = br.readLine()) != null) {
 				provinces.add(line.toLowerCase());
 			}
@@ -179,12 +180,27 @@ public abstract class Filler {
 		return provinces.contains(location.toLowerCase());
 	}
 	
+	// TODO: HACK...
+	public static interface SimpleFileSystem {
+		public BufferedReader open( String file ) throws Exception;
+	}
+	public static SimpleFileSystem fs;
+	static {
+		// By default, use the local file system.
+		fs = new SimpleFileSystem() {
+			@Override
+			public BufferedReader open(String file) throws Exception {
+				return new BufferedReader( new FileReader( file ) );
+			}
+		};
+	}
+	
 	protected static Map<String, String> stateAbbrevs;
 	protected void loadStateAbbrevs() {
 		stateAbbrevs = new HashMap<String, String>();
 		try {
 			String line;
-			BufferedReader br = new BufferedReader(new FileReader(SFConstants.STATE_ABBREVS_FILE));
+			BufferedReader br = fs.open(SFConstants.STATE_ABBREVS_FILE);
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split("\\s+", 2);
 				stateAbbrevs.put(parts[0].toLowerCase(), parts[1]);

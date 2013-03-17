@@ -18,6 +18,12 @@ public class CorefMention {
 	public static enum Plurality { SINGULAR, PLURAL, UNKNOWN }
 	public static enum Gender { FEMALE, UNKNOWN, MALE, NEUTRAL }
 	
+	/**
+	 * The number of string tokens used to represent a CorefMention in
+	 * documents.coref.
+	 */
+	public static final int NUM_TOKENS = 15;
+	
 	/** ID number for this mention (scope: document). */
 	public long id;
 	
@@ -69,6 +75,89 @@ public class CorefMention {
 	
 	public CorefMention() {}
 	
+	/**
+	 * Unpacks this mention from a list of tokens.
+	 * 
+	 * @param tokens Tokens to unpack from.
+	 * @param entitesMap Maps entity IDs to already-created entities.
+	 * 
+	 * @return the index of the token following the last token unpacked.
+	 */
+	public int unpack( String[] tokens, int offset,
+			Map<Long, CorefEntity> entitiesMap ) {
+		int i = offset;
+		id           = Long.parseLong( tokens[i++] );
+		start        = Integer.parseInt( tokens[i++] );
+		end          = Integer.parseInt( tokens[i++] );
+		head         = Integer.parseInt( tokens[i++] );
+		mentionSpan  = tokens[i++];
+		type         = Type.valueOf( tokens[i++] );
+		number       = Plurality.valueOf( tokens[i++] );
+		gender       = Gender.valueOf( tokens[i++] );
+		animacy      = Animacy.valueOf( tokens[i++] );
+		sentenceId   = Long.parseLong( tokens[i++] );
+		long clusterId = Long.parseLong( tokens[i++] );
+		boolean repMention = Boolean.parseBoolean( tokens[i++] );
+		addCorefEntity( entitiesMap, clusterId, repMention );
+		return i;
+	}
+	
+	/**
+	 * Packs this mention into a list of tokens.
+	 * @return the packed list of tokens.
+	 */
+	public String[] pack() {
+		return new String[] {
+			"" + id,
+			"" + start,
+			"" + end,
+			"" + head,
+			mentionSpan,
+			"" + type,
+			"" + number,
+			"" + gender,
+			"" + animacy,
+			"" + sentenceId,
+			"" + ( entity == null ? -1 : entity.id ),
+			"" + ( entity != null && entity.repMention == this )
+		};
+	}
+	
+	/**
+	 * Adds to, or retrieves this mention's coref entity in, the given entities
+	 * map; then adds this mention to the located coref entity.
+	 * 
+	 * @param entitiesMap Maps entity cluster IDs to entities.
+	 * @param clusterId The ID of the cluster; should be >= 0.
+	 * @param repMention If true, the entity will make this mention its
+	 *                   representative mention.
+	 */
+	protected void addCorefEntity( Map<Long, CorefEntity> entitiesMap,
+			long clusterId, boolean repMention ) {
+		if ( clusterId < 0 ) return;
+		CorefEntity entity = entitiesMap.get( clusterId );
+		if ( entity == null ) {
+			entity = new CorefEntity();
+			entity.id = clusterId;
+			entitiesMap.put( clusterId, entity );
+		}
+		entity.mentions.add( this );
+		this.entity = entity;
+		if ( repMention ) {
+			entity.repMention = this;
+		}
+	}
+	
+	/**
+	 * Creates a new CorefMention.
+	 * 
+	 * @param tokens A sequence of at least 15 String tokens read from
+	 *               a line of documents.coref.
+	 * @param entitiesMap Maps entity IDs to CorefEntity objects. CorefMention
+	 *                    uses this map to find the value for its entity field.
+	 *                    If that value doesn't exist, it is created and added
+	 *                    to the map.
+	 */
 	public CorefMention( String[] tokens, Map<Long, CorefEntity> entitiesMap ) {
 		if ( tokens.length <= 14 )
 			throw new IllegalArgumentException("Can't create CorefMention " +
@@ -85,19 +174,9 @@ public class CorefMention {
 		animacy      = Animacy.valueOf( tokens[13] );
 		sentenceId   = Long.parseLong( tokens[3] );
 		
-		// Add to cluster
 		long clusterId = Long.parseLong( tokens[1] );
-		CorefEntity entity = entitiesMap.get( clusterId );
-		if ( entity == null ) {
-			entity = new CorefEntity();
-			entity.id = clusterId;
-			entitiesMap.put( clusterId, entity );
-		}
-		entity.mentions.add( this );
-		this.entity = entity;
-		if ( tokens[14].equals("true") ) {
-			entity.repMention = this;
-		}
+		boolean repMention = tokens[14].equals("true");
+		addCorefEntity( entitiesMap, clusterId, repMention );
 	}
 	
 	/**
@@ -123,19 +202,7 @@ public class CorefMention {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int)id;
-		result = prime * result + ((animacy == null) ? 0 : animacy.hashCode());
-		result = prime * result + end;
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + head;
-		result = prime * result
-				+ ((mentionSpan == null) ? 0 : mentionSpan.hashCode());
-		result = prime * result + ((number == null) ? 0 : number.hashCode());
-		result = prime * result + start;
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
+		return (int) id;
 	}
 
 	@Override
@@ -148,25 +215,6 @@ public class CorefMention {
 			return false;
 		CorefMention other = (CorefMention) obj;
 		if (id != other.id)
-			return false;
-		if (animacy != other.animacy)
-			return false;
-		if (end != other.end)
-			return false;
-		if (gender != other.gender)
-			return false;
-		if (head != other.head)
-			return false;
-		if (mentionSpan == null) {
-			if (other.mentionSpan != null)
-				return false;
-		} else if (!mentionSpan.equals(other.mentionSpan))
-			return false;
-		if (number != other.number)
-			return false;
-		if (start != other.start)
-			return false;
-		if (type != other.type)
 			return false;
 		return true;
 	}

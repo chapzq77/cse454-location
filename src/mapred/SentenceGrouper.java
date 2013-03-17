@@ -67,7 +67,7 @@ public class SentenceGrouper {
 				annotations.put( tokensWithId[0], tokensWithId[1] );
 			}
 			
-			context.write(key, annotations.toText( false ) );
+			context.write(key, annotations.toText( false, false ) );
 	    }
 	}
 	

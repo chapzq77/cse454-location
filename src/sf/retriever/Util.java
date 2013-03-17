@@ -10,6 +10,8 @@ public class Util {
 	 * @return The wiki entries. 
 	 */
 	public static WikiEntry[] parseWiki( String line ) {
+		if ( line == null || line.length() == 0 )
+			return new WikiEntry[0];
 		String[] entries = line.split("\t");
 		WikiEntry[] result = new WikiEntry[entries.length - 1];
 		for ( int i = 1; i < entries.length; i++ ) {
@@ -30,6 +32,8 @@ public class Util {
 	 * @return The NER entries.
 	 */
 	public static NerType[] parseNer( String line ) {
+		if ( line == null || line.length() == 0 )
+			return new NerType[0];
 		String[] entries = line.split("\t");
 		if ( entries.length < 2 ) {
 			return new NerType[0];

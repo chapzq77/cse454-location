@@ -27,7 +27,7 @@ public abstract class BaseTregexFiller extends Filler {
 
 		List<String> tokens = Arrays.asList(annotations.get(SFConstants.TOKENS).split(" "));
 		Set<Integer> places = new HashSet<Integer>();
-		while(m.find()) {
+		FIND: while(m.find()) {
 			Tree match = m.getMatch();
 			for(Tree node : match.getLeaves()) {
 				String name = node.value();

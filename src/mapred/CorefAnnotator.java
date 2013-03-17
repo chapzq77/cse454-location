@@ -52,8 +52,8 @@ public class CorefAnnotator {
 			
 			// Determine type of data
 			FileSplit split = (FileSplit)context.getInputSplit();
-			String type = split.getPath().getName().indexOf("coref") >= 0
-					? "coref" : "article";
+			boolean isCoref = split.getPath().getName().indexOf("coref") >= 0; 
+			String type = isCoref ? "coref" : "article";
 			
 			// Send things along for annotation
 			context.write( new LongWritable( articleId ),
@@ -68,6 +68,7 @@ public class CorefAnnotator {
 			public SentenceAnnotations sa;
 			public WikiEntry[] wikiEntries;
 			public NerType[] nerEntries;
+			public List<CorefMention> mentions;
 			
 			public SentenceData( String line ) {
 				sa = new SentenceAnnotations( line.split("\t") );
@@ -106,14 +107,14 @@ public class CorefAnnotator {
 						int len = Integer.parseInt( data.substring( start, delim ) );
 						start = delim + 1;
 						String annot = data.substring( start, start + len );
-						start += len;
+						start += len + 1;
 						
 						SentenceData sd = new SentenceData( annot );
 						sentences.put( sd.sa.sentenceId, sd );
 					}
 				} else {
 					// Load the coref mention
-					String[] tokens = parts[1].split("\t");
+					String[] tokens = (key + "\t" + parts[1]).split("\t");
 					mentions.add( new CorefMention( tokens, entitiesMap ) );
 				}
 			}
@@ -127,7 +128,10 @@ public class CorefAnnotator {
 				
 				for ( CorefMention mention : entity.mentions ) {
 					SentenceData sd = sentences.get( mention.sentenceId );
-					if ( sd == null ) continue;
+					if ( sd == null ) {
+						System.err.println("Missing sentence " + mention.sentenceId);
+					}
+					sd.sa.mentions.add( mention );
 					
 					// See if wiki entries match this entity
 					for ( WikiEntry entry : sd.wikiEntries ) {
@@ -172,7 +176,15 @@ public class CorefAnnotator {
 						entity.nerType = entry.getKey();
 					}
 				}
-			}			
+			}
+			
+			// And, at last, output the sentence annotations using the
+			// sentence ID as the key.
+			for ( java.util.Map.Entry<Long, SentenceData> sentence :
+				sentences.entrySet() ) {
+				context.write( new LongWritable( sentence.getKey() ),
+						sentence.getValue().sa.toText( false, true ) );
+			}
 	    }
 	}
 	
@@ -182,8 +194,8 @@ public class CorefAnnotator {
 	    Job job = new Job(conf, "wordcount");
 	    job.setJarByClass(SentenceGrouper.class);
 	
-	    job.setOutputKeyClass(Text.class);
-	    job.setOutputValueClass(IntWritable.class);
+	    job.setOutputKeyClass(LongWritable.class);
+	    job.setOutputValueClass(Text.class);
 	
 	    job.setMapperClass(Map.class);
 	    job.setReducerClass(Reduce.class);
@@ -192,7 +204,8 @@ public class CorefAnnotator {
 	    job.setOutputFormatClass(TextOutputFormat.class);
 	
 	    FileInputFormat.addInputPath(job, new Path(args[0]));
-	    FileOutputFormat.setOutputPath(job, new Path(args[1]));
+	    FileInputFormat.addInputPath(job, new Path(args[1]));
+	    FileOutputFormat.setOutputPath(job, new Path(args[2]));
 	
 	    job.waitForCompletion(true);
 	}

@@ -46,6 +46,25 @@ public class CorefEntity {
 	public CorefEntity() {
 		mentions = new ArrayList<CorefMention>();
 	}
+	
+	public int unpack( String[] tokens, int offset ) {
+		int i = offset;
+		id = Long.parseLong( tokens[i++] );
+		// TODO: comparing to null is hacky...
+		wikiId = tokens[i++]; if ( wikiId.equals("null") ) wikiId = null;
+		nerType = NerType.valueOf(tokens[i++]);
+		fullName = tokens[i++]; if ( fullName.equals("null") ) fullName = null;
+		return i;
+	}
+	
+	public String[] pack() {
+		return new String[] {
+			id + "",
+			wikiId,
+			nerType + "",
+			fullName
+		};
+	}
 
 	@Override
 	public int hashCode() {
@@ -62,23 +81,6 @@ public class CorefEntity {
 			return false;
 		CorefEntity other = (CorefEntity) obj;
 		if (id != other.id)
-			return false;
-		if (fullName == null) {
-			if (other.fullName != null)
-				return false;
-		} else if (!fullName.equals(other.fullName))
-			return false;
-		if (nerType != other.nerType)
-			return false;
-		if (repMention == null) {
-			if (other.repMention != null)
-				return false;
-		} else if (!repMention.equals(other.repMention))
-			return false;
-		if (wikiId == null) {
-			if (other.wikiId != null)
-				return false;
-		} else if (!wikiId.equals(other.wikiId))
 			return false;
 		return true;
 	}

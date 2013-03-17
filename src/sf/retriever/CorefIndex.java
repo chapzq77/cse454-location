@@ -249,36 +249,6 @@ public class CorefIndex implements AutoCloseable {
 	public long getDocId() { return docId; }
 	
 	/**
-	 * Provide coreference information for a single sentence.
-	 * 
-	 * @author Jeffrey Booth
-	 */
-	private class SentenceProvider implements CorefProvider {
-		Collection<CorefMention> mentions;
-		
-		public SentenceProvider( Collection<CorefMention> mentions ) {
-			if ( mentions == null )
-				mentions = Collections.emptyList();
-			this.mentions = mentions;
-		}
-
-		@Override
-		public Collection<CorefMention> inRange(int rangeStart, int rangeEnd) {
-			List<CorefMention> results = new ArrayList<CorefMention>();
-			for ( CorefMention mention : mentions ) {
-				if ( mention.end >= rangeStart && mention.start <= rangeEnd )
-					results.add( mention );
-			}
-			return results;
-		}
-
-		@Override
-		public Collection<CorefMention> all() {
-			return mentions;
-		}		
-	}
-	
-	/**
 	 * Returns an interface for a single sentence.
 	 */
 	public CorefProvider getSentenceProvider( long sentenceId ) {
