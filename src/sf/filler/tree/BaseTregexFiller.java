@@ -27,17 +27,22 @@ public abstract class BaseTregexFiller extends Filler {
 
 		List<String> tokens = Arrays.asList(annotations.get(SFConstants.TOKENS).split(" "));
 		Set<Integer> places = new HashSet<Integer>();
+		int numLoops = 100;
 		FIND: while(m.find()) {
 			Tree match = m.getMatch();
+			int numInnerLoops = 100;
 			for(Tree node : match.getLeaves()) {
 				String name = node.value();
 				places.add(tokens.indexOf(name));
 				
 				// For some reason, we are getting an infinite loop on
 				// sentence ID 8299442. For now, just limit the number of
-				// places to something reasonable.
-				if (places.size() > 100) break FIND;
+				// loops to something reasonable.
+				numInnerLoops--;
+				if ( numInnerLoops == 0 ) break;
 			}
+			numLoops--;
+			if ( numLoops == 0 ) break;
 		}
 		
 		HashSet<String> placesSet = new HashSet<String>();
