@@ -39,10 +39,12 @@ import util.FileUtil;
 
 public class Extractor {
 	// TODO: actually calculate number of sentences in a corpus.
-	protected static long ESTIMATED_SENTENCE_COUNT = 27000000;
+	protected static long ESTIMATED_SENTENCE_COUNT = 27350000;
 
 	protected static String formatTime(long nanoseconds) {
 		double seconds = nanoseconds / 1000000000.;
+		boolean negative = seconds < 0;
+		if ( negative ) seconds *= -1;
 
 		int minutes = (int)(seconds / 60);
 		seconds -= minutes * 60;
@@ -53,7 +55,8 @@ public class Extractor {
 		int days = hours / 24;
 		hours -= days * 24;
 
-		return String.format("%d:%02d:%02d:%02.3f", days, hours, minutes, seconds);
+		return String.format("%s%d:%02d:%02d:%02.3f", negative ? "-" : "",
+			days, hours, minutes, seconds);
 	}
 
 	public static void run(Args args) throws InstantiationException, IllegalAccessException {
@@ -101,7 +104,7 @@ public class Extractor {
 				if (c % 1000 == 0) {
 					long elapsed = System.nanoTime() - startTime;
 					long estTime = (long)( elapsed *
-							(double) ESTIMATED_SENTENCE_COUNT / c );
+							(double) ( ESTIMATED_SENTENCE_COUNT / c - 1 ));
 					System.out.println("===== Read " + c + " lines in " +
 							formatTime(elapsed) + ", remaining time " +
 							formatTime(estTime));

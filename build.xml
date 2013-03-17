@@ -20,7 +20,7 @@
           depends="init"
           description="Compile the source code.">
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac includeantruntime="false" debug="on" nowarn="on" srcdir="${src}" classpath="bin:libs/stanford-tregex.jar:libs/junit-4.10.jar" destdir="${build}" failonerror="false">
+    <javac includeantruntime="false" debug="on" nowarn="on" srcdir="${src}" classpath="bin:libs/stanford-tregex.jar:libs/junit-4.10.jar:libs/hadoop-core-1.0.4.jar" destdir="${build}" failonerror="false">
     </javac>
   </target>
 
