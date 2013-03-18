@@ -1,5 +1,7 @@
 package el;
 
+import sf.retriever.CorefEntity;
+
 /**
  * Query Entity, used for EL.
  * The <code>entityId</code> will be used as the answer for EL.
@@ -36,5 +38,24 @@ public class EntityMention {
 		} else {
 			return "Uninitialized entity mention.";
 		}
+	}
+	
+	@Override
+	public int hashCode() {
+		return queryId.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EntityMention other = (EntityMention) obj;
+		if (!queryId.equals(other.queryId))
+			return false;
+		return true;
 	}
 }
