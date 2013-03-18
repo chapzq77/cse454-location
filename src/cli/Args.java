@@ -38,6 +38,7 @@ public class Args {
 	public File corpus;
 	public File testSet;
 	public long skip;
+	public String fillGroup;
 	
 	public void usage() {
 		// Display initial arguments.
@@ -49,7 +50,10 @@ public class Args {
 	                "-m           - Print mistake breakdown.\n" +
 				    "-limit n     - Limit to n sentences. If n == 0, " +
 	                    "the number of sentences is not limited.\n" +
-				    "-skip n      - Skip n sentences.\n");
+				    "-skip n      - Skip n sentences.\n" +
+	                "-fillgroup n - For evaluation, use the given group of fillers:\n" +
+				    "               reg means the regex filler, tree means the TRegex fillers," +
+	                "               and nothing means all fillers will be evaluated.");
 		
 		// Display corpus samples.
 		out.println("-corpus x    - Use data source x, which is\n" +
@@ -131,6 +135,14 @@ public class Args {
 				} else if ( arg.equals("-limit") ) {
 					idx++;
 					limit = checkLong( args, idx, "sentence limit" );
+				} else if ( arg.equals("-fillgroup") ) {
+					idx++;
+					if ( idx < args.length ) {
+						fillGroup = args[idx];
+					} else {
+						throw new IllegalArgumentException(
+								"Missing fill group." );
+					}
 				}
 				
 				// Pick the corpus

@@ -16,6 +16,7 @@ import java.io.Reader;
 
 import sf.SFConstants;
 import sf.SFEntity;
+import sf.retriever.CorefEntity;
 import sf.retriever.CorefMention;
 import sf.retriever.CorefProvider;
 import tackbp.KbEntity.EntityType;
@@ -215,5 +216,30 @@ public abstract class Filler {
 			return abbr;
 		if ( stateAbbrevs == null ) loadStateAbbrevs();
 		return stateAbbrevs.get(abbr.toLowerCase());
+	}
+	
+	/**
+	 * Returns the hash of the class of this filler.
+	 * @return
+	 */
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
+	
+	/**
+	 * Returns true if the class of this filler equals another filler's class. 
+	 * @param obj
+	 * @return
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		return true;
 	}
 }
