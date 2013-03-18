@@ -104,7 +104,7 @@ public class Extractor {
 				if (c % 1000 == 0) {
 					long elapsed = System.nanoTime() - startTime;
 					long estTime = (long)( elapsed *
-							(double) ( ESTIMATED_SENTENCE_COUNT / c - 1 ));
+							(double) ( ESTIMATED_SENTENCE_COUNT / (double) c - 1 ));
 					System.out.println("===== Read " + c + " lines in " +
 							formatTime(elapsed) + ", remaining time " +
 							formatTime(estTime));
